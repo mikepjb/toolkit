@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+
+export PLATFORM=$(uname -s)
+
+if [[ ! -d ~/code/vim ]];then
+    git clone https://github.com/vim/vim.git ~/code/vim
+    cd ~/code/vim
+else
+    cd ~/code/vim
+    git pull --ff-only
+fi
+
+cd ~/code/vim
+make distclean
+
+if [ "$PLATFORM" == Darwin ]; then
+    ./configure --with-features=huge \
+        --enable-pythoninterp=yes
+else
+    ./configure --with-features=huge \
+        --enable-pythoninterp=yes \
+        --enable-xterm-clipboard=yes \
+        --with-x \
+        --enable-gui
+fi
+
+sudo make install
+sudo cp $(which vim) /usr/local/bin/vi

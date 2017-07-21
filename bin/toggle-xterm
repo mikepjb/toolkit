@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+# only intended for single term window use
+
+all_xterm_window_ids=`xdotool search --classname xterm`
+
+for id in $all_xterm_window_ids; do
+    if [[ `xdotool getwindowfocus` == $id ]]; then
+        xdotool windowminimize $id
+    else
+        xdotool windowactivate $id
+    fi
+done
+

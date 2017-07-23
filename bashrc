@@ -1,9 +1,6 @@
 # bashrc for OSX/Arch Linux
 
 export PLATFORM=$(uname -s)
-[ -f /etc/bashrc ] && . /etc/bashrc
-[ -f /etc/bash_completion ] && . /etc/bash_completion
-
 shopt -s histappend # Append to the history file
 shopt -s checkwinsize # Check the window size after each command
 shopt -s nocaseglob #case insensitive completion

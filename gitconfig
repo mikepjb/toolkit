@@ -1,0 +1,68 @@
+[user]
+  name = Michael Bruce
+  email = mike@bearmetalcoding.com
+[color]
+  ui = auto
+[color "status"]
+  changed = blue
+  added = blue
+  untracked = magenta
+[core]
+  editor = vim
+[push]
+  default = matching
+[alias]
+  listall = ls-tree --full-tree -r HEAD
+  br = branch
+  st = status
+  ti = tag -a
+  ci = commit --verbose
+  co = checkout
+  di = diff
+  dc = diff --cached
+  amend = commit --amend
+  aa = add --all
+  ff = pull --ff-only
+  up = pull --ff-only
+  b = branch
+  ds = diff --stat=160,120
+  l = "!. ~/.githelpers && pretty_git_log"
+  lcom = "!. ~/.githelpers && commit_only"
+  la = !git l --all
+  cf = clean -f
+  cp = cherry-pick
+  count = shortlog -sn
+  uncommit = reset --soft HEAD~1
+  re = reset HEAD
+  rehard = reset HEAD --hard
+  r = !GIT_NO_PAGER=1 git l -30
+  ra = !git r --all
+  test = log --abbrev-commit --pretty=format:'\
+    %C(yellow)%h%Creset -%C(blue)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  rb = ls-remote --heads origin
+  rc = !git r --all
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+[credential]
+  helper = cache --timeout=3600
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+[mergetool]
+  prompt = false
+  path = nvim
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
+[diff "gpg"]
+  textconv = gpg -qd --no-tty
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true

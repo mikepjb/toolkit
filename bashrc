@@ -1,19 +1,17 @@
-# bashrc for OSX/Arch Linux
-
-export PLATFORM=$(uname -s)
 shopt -s histappend # Append to the history file
 shopt -s checkwinsize # Check the window size after each command
 shopt -s nocaseglob #case insensitive completion
 [[ $- =~ i ]] && stty -ixoff -ixon # Disable CTRL-S and CTRL-Q
 
-bind '"\C-g":" nvim $(find ~/notes/* -type f | selecta)\n"'
+bind '"\C-g":" vim $(find ~/notes/* -type f | selecta)\n"'
 bind '"\C-q":" cd ~/code/$(find ~/code/* -maxdepth 0 -printf \"%f\n\"| selecta)\n"'
 
 export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=
 export HISTFILESIZE=
-export EDITOR=nvim
+export EDITOR=vim
+export PLATFORM=$(uname -s)
 export SB_ROOT=~/code
 
 [ -z "$TMPDIR" ] && TMPDIR=/tmp
@@ -23,7 +21,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     join_by() { local IFS="$1"; shift; echo "$*"; }
 
     binary_directories=(
-    ~/tools/bin
+    ~/trove/bin
     /opt/bin
     $HOME/.cargo/bin
     /usr/local/bin
@@ -44,7 +42,6 @@ chruby 2.3.1
 [ -f /usr/share/nvm/init-nvm.sh ] && . /usr/share/nvm/init-nvm.sh
 # Do I want fzf in bash? [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-alias em='emacs -nw'
 alias tags='ctags -R $(git rev-parse --show-toplevel || echo ".")'
 alias space='df -h'
 alias .space='du -h'
@@ -63,11 +60,6 @@ alias ..='cd ..'
 alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
 alias json='python -m json.tool'
-alias vimdiff='nvim -d'
-
-# Ice dev
-alias ice='cd ~/.config/nvim/plugged/ice.nvim'
-export NVIM_RUBY_LOG_FILE=~/helpful.log
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib

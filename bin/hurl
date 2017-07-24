@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+# vim: set ft=ruby:
+
+# This file executes as a bash script, which turns around and executes Ruby via
+# the line below. The -x argument to Ruby makes it discard everything before
+# the second "!ruby" shebang. This allows us to work on Linux, where the
+# shebang can only have one argument so we can't directly say
+# "#!/usr/bin/env ruby --disable-gems". Thanks for that, Linux.
+#
+# If this seems confusing, don't worry. You can treat it as a normal Ruby file
+# starting with the "!ruby" shebang below.
+
+exec /usr/bin/env ruby --disable-gems -x "$0" $*
+#!ruby
+
+if RUBY_VERSION < '1.9.3'
+  abort "error: Hurl requires Ruby 1.9.3 or higher."
+end
+
+require 'socket'
+
+module Bencode
+  def self.extract_next_keypair(output, response)
+    # 7:session36:b9336d5c-abde-4dc3-b555-86628e3d26d6e
+    remaining = response
+    length, remaining = remaining.split(':', 2)
+    length = length.to_i
+    key, remaining = [remaining[0..(length-1)], remaining[length..-1]]
+    length, remaining = remaining.split(':', 2)
+    if length[0] == 'l' # is value a list?
+      length = length[1..-1].to_i
+      value, remaining = [remaining[0..(length-1)], remaining[length..-2]]
+    else
+      length = length.to_i
+      value, remaining = [remaining[0..(length-1)], remaining[length..-1]]
+    end
+    output[key] = value
+    [output, remaining]
+  end
+
+  def self.decode(response)
+    output = {}
+    current, remaining = [response[0], response[1..-1]]
+    if current == 'd' # we are dealing with a dictionary
+      while remaining != 'e' && remaining.include?(':') # !remaining.empty? # remaining = 'e' # !remaining.empty?
+        output, remaining = extract_next_keypair(output, remaining)
+      end
+      output
+    end
+  end
+
+  def self.decode_all(response)
+    # Sometimes nrepl will pass multiple dictionaries in the same message
+    # This should not take single messages, no_colon_decode does that the
+    # reason for this is that this method does funky stuff fixing dict
+    # format for bencode decoding before delegating to no_colon_decode
+    response[0..-1].
+      split(/(^|e)d2:/).
+      reject { |x| x.empty? || x == 'e' }.
+      map.with_index { |x, index| "d2:#{x}#{'e' if index == 0 }" }.
+      map { |x| decode(x) }
+  end
+
+  def self.encode(message)
+    encoded_message = 'd'
+    message.to_a.flatten.each do |message_part|
+      encoded_message << "#{message_part.length}:#{message_part}"
+    end
+    encoded_message + 'e'
+  end
+end
+
+module NreplClient
+  def self.session(socket, log=[])
+    socket.sendmsg 'd2:op5:clonee'
+    response = socket.recvmsg.first
+    decoded = Bencode::decode(response)
+    log << decoded
+    decoded["new-session"]
+  end
+
+  def self.message(id, session, code)
+    "d4:code#{code.length}:#{code}"\
+    "2:id#{id.length}:#{id}"\
+    "2:op4:eval7:session#{session.length}:#{session}e"
+  end
+
+  def self.send(code, log=[])
+    begin
+      socket = TCPSocket.open('127.0.0.1', 9999)
+      socket.sendmsg message('ice', session(socket, log), code)
+    rescue Errno::ECONNREFUSED
+      puts "There is no nREPL to connect to on port 9999"
+    end
+
+    catch (:complete) do
+      while true
+        message = socket.recvmsg.first
+        Bencode::decode_all(message).each do |dict|
+          log << dict
+          throw :complete if dict['status'] == 'done'
+        end
+      end
+    end
+  end
+
+  def self.run_tests(log=[])
+    send("(clojure.test/run-tests)", log)
+  end
+end
+
+# XXX used for including namespace, relies on filename
+module Message
+  def self.prefix_namespace(filename, code)
+    if filename =~ /.?(src|test)\/.*/
+      namespace = filename.
+        split(/(src|test)\//).
+        last.
+        gsub('_', '-').
+        gsub(/^clj(s|x|c)?\//, '').
+        gsub(/.cljs?$/, '').
+        gsub('/','.')
+      "(ns #{namespace})\n\n#{code}"
+    else
+      code
+    end
+  end
+end
+
+log = []
+all_args_string = ARGV.join(" ")
+code_with_ns = all_args_string
+
+NreplClient::send(code_with_ns, log)
+puts log

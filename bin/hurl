@@ -23,7 +23,7 @@ require 'socket'
 
 module Bencode
   def self.extract_next_keypair(output, response)
-    # 7:session36:b9336d5c-abde-4dc3-b555-86628e3d26d6e
+    puts output
     remaining = response
     length, remaining = remaining.split(':', 2)
     length = length.to_i

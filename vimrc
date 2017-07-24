@@ -27,6 +27,10 @@ let mapleader= ' '
 let r_indent_align_args = 0
 let r_indent_ess_compatible = 0
 
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <C-a> <Home>
+
 map Q @q
 map Y y$
 map <C-h> <C-w><C-h>
@@ -74,4 +78,10 @@ function! AlignLine(line, sep, maxpos, extra)
   endif
   let spaces = repeat(' ', a:maxpos - strlen(m[1]) + a:extra)
   return m[1] . spaces . m[2]
+endfunction
+
+command! Load call LoadClojureFile()
+function! LoadClojureFile()
+  update
+  !hurl "(load-file \"%:p\")"
 endfunction

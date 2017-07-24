@@ -35,18 +35,12 @@
   uncommit = reset --soft HEAD~1
   re = reset HEAD
   rehard = reset HEAD --hard
-  r = !GIT_NO_PAGER=1 git l -30
-  ra = !git r --all
-  test = log --abbrev-commit --pretty=format:'\
-    %C(yellow)%h%Creset -%C(blue)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-  rb = ls-remote --heads origin
-  rc = !git r --all
+  ra = \
+    log --abbrev-commit \
+    --pretty=format:'%C(yellow)%h%C(blue)%d %Cgreen(%cr) %C(bold cyan)<%an>%Creset %s'
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path = 
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
 [credential]
   helper = cache --timeout=3600
 [merge]

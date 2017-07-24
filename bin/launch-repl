@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+tmux attach -t repl && exit || echo 'no existing repl, creating a new one...'
+
+if [ -e "project.clj" ]; then
+    tmux new -s repl "lein repl :start :port 9999"
+else
+    tmux new -s repl "boot repl -p 9999"
+fi

@@ -13,8 +13,11 @@ set shortmess=aIT
 set noswapfile nobackup nowritebackup
 set clipboard=unnamed,unnamedplus
 set ignorecase smartcase
+set incsearch
 set list
 set listchars="tab:·,trail:·"
+set wildmenu
+set nojoinspaces
 filetype indent on
 
 colorscheme night

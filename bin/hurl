@@ -13,6 +13,8 @@
 exec /usr/bin/env ruby --disable-gems -x "$0" $*
 #!ruby
 
+# Resource for async: http://andrewvos.com/writing-async-jobs-in-vim-8
+
 if RUBY_VERSION < '1.9.3'
   abort "error: Hurl requires Ruby 1.9.3 or higher."
 end
@@ -42,7 +44,7 @@ module Bencode
     output = {}
     current, remaining = [response[0], response[1..-1]]
     if current == 'd' # we are dealing with a dictionary
-      while remaining != 'e' && remaining.include?(':') # !remaining.empty? # remaining = 'e' # !remaining.empty?
+      while remaining != 'e' && remaining.include?(':')
         output, remaining = extract_next_keypair(output, remaining)
       end
       output
@@ -88,7 +90,7 @@ module NreplClient
   def self.send(code, log=[])
     begin
       socket = TCPSocket.open('127.0.0.1', 9999)
-      socket.sendmsg message('ice', session(socket, log), code)
+      socket.sendmsg message('hurl', session(socket, log), code)
     rescue Errno::ECONNREFUSED
       puts "There is no nREPL to connect to on port 9999"
     end

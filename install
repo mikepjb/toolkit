@@ -5,7 +5,7 @@ BASE=$(pwd)
 
 
 for rc in *rc; do
-  ln -sfv $BASE/vimrc ~/.vimrc
+  ln -sfv $BASE/$rc ~/.$rc
 done
 
 mkdir -p $HOME/.vim/colors

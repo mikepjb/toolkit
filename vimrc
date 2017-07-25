@@ -31,6 +31,9 @@ cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 cnoremap <C-a> <Home>
 
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+
 map Q @q
 map Y y$
 map <C-h> <C-w><C-h>

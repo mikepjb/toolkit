@@ -37,7 +37,7 @@
   rehard = reset HEAD --hard
   ra = \
     log --abbrev-commit \
-    --pretty=format:'%C(yellow)%h%C(blue)%d %Cgreen(%cr) %C(bold cyan)<%an>%Creset %s'
+    --pretty=format:'%C(yellow)%h%C(red)%d %Cgreen(%cr) %C(bold cyan)<%an>%Creset %s'
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path = 

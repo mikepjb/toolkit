@@ -16,6 +16,7 @@ set ignorecase smartcase
 set incsearch
 set list
 set listchars="tab:·,trail:·"
+set gdefault
 set wildmenu
 set nojoinspaces
 filetype indent on

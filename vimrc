@@ -15,10 +15,11 @@ set clipboard=unnamed,unnamedplus
 set ignorecase smartcase
 set incsearch
 set list
-set listchars="tab:·,trail:·"
-set gdefault
+let &listchars = "tab:\u21e5\u00b7,trail:\u2423"
 set wildmenu
 set nojoinspaces
+set autoread
+set gdefault
 filetype indent on
 
 colorscheme night
@@ -89,3 +90,10 @@ function! LoadClojureFile()
   update
   !hurl "(load-file \"%:p\")"
 endfunction
+
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Ag<SPACE>
+endif

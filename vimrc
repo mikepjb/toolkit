@@ -99,3 +99,5 @@ if executable('ag')
 endif
 
 command! TrimWhitespace :%s/\s\+$//e
+
+command! Format execute ":silent !gofmt -w %" | execute "redraw!"

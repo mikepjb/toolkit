@@ -37,7 +37,7 @@ fi
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-chruby 2.3.1
+chruby 2.4.1
 
 [ -f /usr/share/nvm/init-nvm.sh ] && . /usr/share/nvm/init-nvm.sh
 # Do I want fzf in bash? [ -f ~/.fzf.bash ] && source ~/.fzf.bash

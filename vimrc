@@ -20,22 +20,19 @@ set wildmenu
 set nojoinspaces
 set autoread
 set gdefault
+set isk+=-
 filetype indent on
 
 colorscheme night
 
 let mapleader= ' '
-
-let r_indent_align_args = 0
-let r_indent_ess_compatible = 0
-
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 cnoremap <C-a> <Home>
-
+inoremap <C-a> <C-o>0
+inoremap <C-e> <C-o>$
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
-
 map Q @q
 map Y y$
 map <C-h> <C-w><C-h>
@@ -111,28 +108,32 @@ endfunction
 call MapCR()
 
 function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
 
-    " Are we in a test file?
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|test_.*\.py\|_test.py\)$') != -1
+  " Are we in a test file?
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|test_.*\.py\|_test.py\)$') != -1
 
-    " Run the tests for the previously-marked file (or the current file if
-    " it's a test).
+  " Run the tests for the previously-marked file (or the current file if
+  " it's a test).
+  if &filetype == 'clojure'
+    exec ":Load"
+  else
     if in_test_file
-        call SetTestFile(command_suffix)
+      call SetTestFile(command_suffix)
     elseif !exists("t:grb_test_file")
-        return
+      return
     end
     call RunTests(t:grb_test_file)
+  endif
 endfunction
 
 function! SetTestFile(command_suffix)
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@% . a:command_suffix
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@% . a:command_suffix
 endfunction
 
 function! RunTests(filename)
@@ -140,8 +141,9 @@ function! RunTests(filename)
     if expand("%") != ""
       :w
     end
+
     if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
+      exec ":!script/features " . a:filename
     else
         " First choice: project-specific test script
         if filereadable("script/test")
@@ -168,3 +170,46 @@ function! RunTests(filename)
         end
     end
 endfunction
+
+function! OpenPair(left, right)
+  return a:left . a:right . "\<Left>"
+endfunction
+
+function! ClosePair(left, right)
+    let current_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
+    if current_char == a:right
+        return "\<Right>"
+    else
+        return a:right
+    endif
+endfunction
+
+function! DeletePair()
+    let previous_char = matchstr(getline('.'), '\%' . (col('.')-1) . 'c.')
+    let current_char = matchstr(getline('.'), '\%' . col('.') . 'c.')
+    if (current_char == ")" && previous_char == "(") ||
+                \ (current_char == "]" && previous_char == "[") ||
+                \ (current_char == "}" && previous_char == "{") ||
+                \ (current_char == "\"" && previous_char == "\"")
+        return "\<Left>\<C-o>2s"
+    elseif previous_char == ")"
+        return "\<Left>"
+    else
+        return "\<BS>"
+    endif
+endfunction
+
+inoremap <expr> ( OpenPair("(",")")
+inoremap <expr> [ OpenPair("[","]")
+inoremap <expr> { OpenPair("{","}")
+inoremap <expr> ) ClosePair("(",")")
+inoremap <expr> ] ClosePair("[","]")
+inoremap <expr> } ClosePair("{","}")
+inoremap <expr>  DeletePair()
+
+let r_indent_align_args = 0
+let r_indent_ess_compatible = 0
+
+augroup custom
+  autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
+augroup END

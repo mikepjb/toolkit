@@ -44,7 +44,7 @@ chruby 2.4.1
 
 alias tags='ctags -R $(git rev-parse --show-toplevel || echo ".")'
 alias space='df -h'
-alias .space='du -h'
+alias .space='du -sh * | sort -h'
 alias l='ls -alF'
 alias pgstart='sudo systemctl start postgresql'
 alias brd='nohup boot repl -p 9999 -s wait &> /dev/null &'

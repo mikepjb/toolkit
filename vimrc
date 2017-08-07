@@ -33,6 +33,7 @@ inoremap <C-a> <C-o>0
 inoremap <C-e> <C-o>$
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
+inoremap <C-d> <Delete>
 map Q @q
 map Y y$
 map <C-h> <C-w><C-h>

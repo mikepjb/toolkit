@@ -66,7 +66,7 @@ if [ "$PLATFORM" == Darwin ]; then
     export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home'
     export COPYFILE_DISABLE=true
     alias ls='ls -G'
-    export LSCOLORS="dxgxcxdxexegedabagacad"
+    export LSCOLORS="dxgxcxdxexfafafafagaba"
     alias acpi="pmset -g batt"
     alias ctags="`brew --prefix`/bin/ctags"
     alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
@@ -76,7 +76,7 @@ else
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
     alias screenshot=xscrot
-    export LS_COLORS='di=33:ln=36:so=32:pi=33:ex=34:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+    export LS_COLORS='di=33:ln=36:so=32:pi=33:ex=34:bd=35;40:cd=35;40:su=35;40:sg=35;40:tw=36;40:ow=31;40'
 fi
 
 RED="\[\e[0;31m\]"

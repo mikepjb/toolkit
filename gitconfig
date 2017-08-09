@@ -23,7 +23,6 @@
   amend = commit --amend
   aa = add --all
   ff = pull --ff-only
-  up = pull --ff-only
   b = branch
   ds = diff --stat=160,120
   l = "!. ~/.githelpers && pretty_git_log"

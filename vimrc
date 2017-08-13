@@ -100,8 +100,11 @@ command! Format execute ":silent !gofmt -w %" | execute "redraw!"
 
 " Leave the return key alone when in command line windows, since it's used
 " to run commands there.
-autocmd! CmdwinEnter * :unmap <cr>
-autocmd! CmdwinLeave * :call MapCR()
+augroup enter
+  autocmd! CmdwinEnter * :unmap <cr>
+  autocmd! CmdwinLeave * :call MapCR()
+  autocmd! BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+augroup END
 
 function! MapCR()
   nnoremap <cr> :call RunTestFile()<cr>
@@ -122,6 +125,8 @@ function! RunTestFile(...)
   " it's a test).
   if &filetype == 'clojure'
     exec ":Load"
+  elseif &filetype == 'scheme'
+    exec ":!csi -s %"
   else
     if in_test_file
       call SetTestFile(command_suffix)
@@ -211,6 +216,19 @@ inoremap <expr>  DeletePair()
 let r_indent_align_args = 0
 let r_indent_ess_compatible = 0
 
+" Clojure additions
+" - get indent working for ns & other exceptions
+" - highlight :keywords
+
+" - indenting
+"
+" if no previous lines - 0
+"
+" if first paren is not matched on the same line (closing or opening) + 2 of
+" previous
+
 augroup custom
+  au!
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
 augroup END
+

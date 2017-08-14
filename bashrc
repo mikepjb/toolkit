@@ -71,6 +71,7 @@ if [ "$PLATFORM" == Darwin ]; then
     alias ctags="`brew --prefix`/bin/ctags"
     alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
     alias find='gfind'
+    alias sort='gsort'
 else
     eval "`dircolors -b`"
     alias ls='ls --color=auto'

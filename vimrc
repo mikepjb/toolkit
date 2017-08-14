@@ -227,8 +227,10 @@ let r_indent_ess_compatible = 0
 " if first paren is not matched on the same line (closing or opening) + 2 of
 " previous
 
-augroup custom
+augroup lisp
   au!
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
+  autocmd Filetype clojure,scheme,lisp set lisp
+  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-
 augroup END
 

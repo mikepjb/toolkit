@@ -124,7 +124,7 @@ exec 'hi rnowebDelimiter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rnow
 exec 'hi texDocZone ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:texdoczone
 exec 'hi texPartZone ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:text
 " exec 'hi Visual ' . s:display . 'bg=' . s:visual . ' ' . s:display . 'fg=NONE'
-exec 'hi Visual ' . s:display . 'bg=1 ' . s:display . 'fg=7'
+exec 'hi Visual ' . s:display . 'bg=89 ' . s:display . 'fg=7'
 exec 'hi String ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:string
 " ruby class, instance & block variables
 exec 'hi Identifier ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:identifier

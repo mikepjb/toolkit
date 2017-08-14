@@ -20,6 +20,7 @@ set wildmenu
 set nojoinspaces
 set autoread
 set gdefault
+set t_ti= t_te=
 set isk+=-
 filetype indent on
 

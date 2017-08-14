@@ -216,21 +216,9 @@ inoremap <expr>  DeletePair()
 let r_indent_align_args = 0
 let r_indent_ess_compatible = 0
 
-" Clojure additions
-" - get indent working for ns & other exceptions
-" - highlight :keywords
-
-" - indenting
-"
-" if no previous lines - 0
-"
-" if first paren is not matched on the same line (closing or opening) + 2 of
-" previous
-
 augroup lisp
   au!
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
   autocmd Filetype clojure,scheme,lisp set lisp
-  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-
+  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-,fn
 augroup END
-

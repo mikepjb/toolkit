@@ -60,6 +60,7 @@ alias ..='cd ..'
 alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
 alias json='python -m json.tool'
+alias be='bundle exec'
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib

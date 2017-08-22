@@ -1,4 +1,5 @@
 syntax on
+filetype plugin indent on
 
 set encoding=utf-8
 set hidden
@@ -22,11 +23,11 @@ set autoread
 set gdefault
 set t_ti= t_te=
 set isk+=-
-filetype indent on
 
 colorscheme night
 
 let mapleader= ' '
+map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 cnoremap <C-a> <Home>

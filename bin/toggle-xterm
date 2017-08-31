@@ -1,16 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# vim: set ft=ruby:
 
-set -e
+exec /usr/bin/env ruby --disable-gems -x "$0" $*
+#!ruby
 
-# only intended for single term window use
+@all_xterm_ids = `xdotool search --classname xterm`.to_s.split("\n")
 
-all_xterm_window_ids=`xdotool search --classname xterm`
+@current_window_id = `xdotool getwindowfocus`.chomp
 
-for id in $all_xterm_window_ids; do
-    if [[ `xdotool getwindowfocus` == $id ]]; then
-        xdotool windowminimize $id
-    else
-        xdotool windowactivate $id
-    fi
-done
+open("/home/mikepjb/xterm.log", "a") {|f|
+  f.puts "XXX"
+  f.puts '-----'
+  f.puts @all_xterm_ids.count
+  f.puts '-----'
+  f.puts @current_window_id
+  f.puts '-----'
+  f.puts @all_xterm_ids.any? {|id| id == @current_window_id }
+  f.puts '-----'
+}
 
+if @all_xterm_ids.count == 0
+  `xterm`
+elsif @all_xterm_ids.any? {|id| id == @current_window_id }
+  @all_xterm_ids.each do |id|
+    `xdotool windowminimize #{id}`
+  end
+else
+  @all_xterm_ids.each do |id|
+    `xdotool windowactivate #{id}`
+  end
+end

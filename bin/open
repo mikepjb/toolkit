@@ -11,9 +11,17 @@ def open_with(command, argument)
   `(#{command} #{argument} &> /dev/null &)`
 end
 
-case argument
-when /pdf$/
-  open_with('evince', argument)
-when /html$/
-  open_with('google-chrome-stable', argument)
+def is_osx?
+  `uname -s`.chomp == "Darwin"
+end
+
+if is_osx?
+  `/usr/bin/open #{argument}`
+else
+  case argument
+  when /pdf$/
+    open_with('evince', argument)
+  when /html$/
+    open_with('google-chrome-stable', argument)
+  end
 end

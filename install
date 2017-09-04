@@ -4,7 +4,7 @@ cd $(dirname $BASH_SOURCE)
 BASE=$(pwd)
 
 
-for rc in *rc gitconfig; do
+for rc in *rc gitconfig Xresources Xmodmap gitconfig tmux.conf; do
   ln -sfv $BASE/$rc ~/.$rc
 done
 

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# vim: set ft=ruby:
+exec /usr/bin/env ruby --disable-gems -x "$0" $*
+#!ruby
+
+raise "Use one argument only (given #{ARGV.count})" if ARGV.count != 1
+
+argument = ARGV[0]
+
+def open_with(command, argument)
+  `(#{command} #{argument} &> /dev/null &)`
+end
+
+case argument
+when /pdf$/
+  open_with('evince', argument)
+when /html$/
+  open_with('google-chrome-stable', argument)
+end

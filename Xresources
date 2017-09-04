@@ -1,0 +1,80 @@
+! Create the window with the specified X window geometry [default
+XTerm*geometry: 100x40
+XTerm*termName: xterm-256color
+
+! Disable alternate screen
+XTerm*titeInhibit: true
+
+! True: specify that jump scrolling should be used. When receiving
+! allow multiple lines per refresh
+URxvt*jumpScroll: True
+URxvt*skipScroll: True
+
+Xft.dpi: 60
+XTerm*renderFont: True
+xterm*faceName: xft:inconsolatag:bold:size=16
+xURxvt.letterSpace: -1
+! Set window title string, the default title is the command-line
+URxvt*title: mikepjb
+! True: enable the scrollbar [default]; option -sb. False: disable
+URxvt*scrollBar: false
+! Specifies number of lines (pixel height) to insert between each row
+URxvt*lineSpace: 0
+! Set the key to be interpreted as the Meta key to: alt, meta, hyper,
+XTerm*eightBitInput:   false
+XTerm*eightBitOutput:  true
+XTerm*metaSendsEscape: True
+
+! Fix for Ctrl+h calling backspace
+
+xterm.*backarrowKey: false
+*ttyModes:         erase ^?
+*VT100.Translations: \
+        #override <Key>BackSpace: string(0x7f) \n\
+                  <Key>Delete:    string(0x1b) string("[3~")
+
+! Includes copy paste
+
+xterm*VT100.Translations: #override \
+                Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+                Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
+
+! vim:set ft=xdefaults:
+! Lucid Black Colorscheme
+
+*xterm*background: #1b1d1e
+*xterm*foreground: #f8f8f2
+*xterm*cursorColor: #f8f8f2
+
+! Black/grey
+*xterm*color0: #1b1d1e
+*xterm*color8: #7c7c7c
+
+! Red
+*xterm*color1: #f62d71
+*xterm*color9: #b9075d
+
+! Green
+*xterm*color2: #a7e040
+*xterm*color10: #afffaf
+
+! Yellow
+*xterm*color3: #e6da7b
+*xterm*color11: #fc9620
+
+! Blue
+*xterm*color4: #6bb0ed
+*xterm*color12: #6bb0ed
+
+! Magenta (Purple in this time)
+*xterm*color5: #ab83f8
+*xterm*color13: #996cda
+
+! Cyan (Light Pink in this theme)
+*xterm*color6: #6bd9ed
+*xterm*color14: #13a1e7
+
+! White
+*xterm*color7: #f8f8f2
+*xterm*color15: #f8f8f2
+

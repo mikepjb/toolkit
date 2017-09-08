@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+if [ "$1" == "db" ]; then
+  sudo -u postgres bash -c \
+    "initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'"
+elif [ "$1" == "user" ]; then
+  sudo -u postgres psql -c \
+    "CREATE ROLE $2 WITH LOGIN PASSWORD '$3' superuser"
+fi

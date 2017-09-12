@@ -222,5 +222,5 @@ augroup lisp
   au!
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
   autocmd Filetype clojure,scheme,lisp set lisp
-  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-,fn
+  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-,fn,deftask
 augroup END

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+export PLATFORM=$(uname -s)
+
+if [[ ! -d ~/code/neovim ]];then
+    git clone https://github.com/neovim/neovim.git ~/code/neovim
+    cd ~/code/neovim
+else
+    cd ~/code/neovim
+    git pull --ff-only
+fi
+
+cd ~/code/neovim
+sudo make distclean
+
+sudo CMAKE_BUILD_TYPE=Release make install
+sudo cp $(which nvim) /usr/local/bin/vi

@@ -8,5 +8,9 @@ for rc in *rc gitconfig Xresources Xmodmap gitconfig tmux.conf; do
   ln -sfv $BASE/$rc ~/.$rc
 done
 
+mkdir -p $HOME/.config/nvim
+ln -sfv $BASE/vimrc ~/.config/nvim/init.vim
+
 mkdir -p $HOME/.vim/colors
-ln -sfv $BASE/night.vim ~/.vim/colors/night.vim
+mkdir -p $HOME/.config/nvim//colors
+ln -sfv $BASE/night.vim ~/.config/nvim//colors/night.vim

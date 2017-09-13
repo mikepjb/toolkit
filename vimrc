@@ -44,18 +44,46 @@ map <C-k> <C-w><C-k>
 map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
 
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-  catch /Vim:Interrupt/
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
-endfunction
 
-nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
+if has('nvim')
+  function! Selecta() abort
+    let g:selecta_original_window = win_getid()
+    belowright split
+    enew
+    let options = { 'buf': bufnr('') }
+
+    function! options.on_stdout(job_id, data, event)
+      let g:selecta_output = substitute(join(a:data), "", "", "g")
+    endfunction
+
+    function! options.on_exit(id, code, _event)
+      execute 'bd!' self.buf
+      if g:selecta_output !~ "Interrupt" && g:selecta_output != " "
+        call win_gotoid(g:selecta_original_window)
+        execute 'e ' . g:selecta_output
+      endif
+    endfunction
+
+    call termopen("echo -ne $(find ./* -path ./target -prune -o -type f -print | selecta)", options)
+    startinsert
+  endfunction
+
+  command! Selecta call Selecta()
+  nnoremap <leader>f :Selecta<CR>
+else
+  function! SelectaCommand(choice_command, selecta_args, vim_command)
+    try
+      let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+    catch /Vim:Interrupt/
+      redraw!
+      return
+    endtry
+    redraw!
+    exec a:vim_command . " " . selection
+  endfunction
+
+  nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
+endif
 
 command! -nargs=? -range Align <line1>,<line2>call AlignSection('<args>')
 vnoremap <silent> <Leader>a :Align<CR>

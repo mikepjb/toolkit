@@ -19,6 +19,7 @@ set list
 let &listchars = "tab:\u21e5\u00b7,trail:\u2423"
 set wildmenu
 set nojoinspaces
+set laststatus=1
 set autoread
 set gdefault
 set t_ti= t_te=

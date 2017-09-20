@@ -54,7 +54,7 @@ let s:rubysymbol = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:rubyexception = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
 let s:rubydefine = ["1", "3", "#a71d5d", "#DDDDDD"][s:offset]
 let s:rubycontrol = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
-let s:rnowebchunk = ["6", "23", "#ff0087", "#DDDDDD"][s:offset]
+let s:rnowebchunk = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:texdoczone = ["6", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:cinclude = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:function = ["6", "22", "#87dfff", "#DDDDDD"][s:offset]
@@ -119,6 +119,7 @@ exec 'hi shConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shcond
 exec 'hi rConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
 exec 'hi rRegion ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
 exec 'hi rRepeat ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi rmdChunkDelim ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rnowebchunk
 exec 'hi rnowebChunk ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rnowebchunk
 exec 'hi rnowebDelimiter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rnowebchunk
 exec 'hi texDocZone ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:texdoczone

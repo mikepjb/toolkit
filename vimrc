@@ -244,6 +244,15 @@ inoremap <expr> ] ClosePair("[","]")
 inoremap <expr> } ClosePair("{","}")
 inoremap <expr>  DeletePair()
 
+function! SyntaxStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+command! SyntaxStack :call SyntaxStack()
+
 let r_indent_align_args = 0
 let r_indent_ess_compatible = 0
 
@@ -251,5 +260,5 @@ augroup lisp
   au!
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
   autocmd Filetype clojure,scheme,lisp set lisp
-  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-,fn,deftask
+  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-,fn,deftask,defroutes
 augroup END

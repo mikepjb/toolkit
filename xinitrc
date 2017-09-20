@@ -12,6 +12,10 @@ LANG="en_GB.UTF-8"
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
+if [[ `uname -n` -eq 'mikepjb-laptop' ]]; then
+  xrdb -merge <<< 'xterm*faceName: xft:inconsolatag:bold:size=20'
+fi
+
 xmodmap ~/.Xmodmap
 
 xset r rate 200 25

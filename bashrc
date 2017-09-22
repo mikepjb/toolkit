@@ -61,6 +61,8 @@ alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
 alias json='python -m json.tool'
 alias be='bundle exec'
+alias atom='atom --force-device-scale-factor=1'
+
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
@@ -108,10 +110,10 @@ git_state() {
 }
 
 is_job_active_prompt() {
-    if [[ $(jobs -p) -eq "" ]]; then
-        color=$CYAN
-    else
+    if [[ -n $(jobs -p) ]]; then
         color=$YELLOW
+    else
+        color=$CYAN
     fi
     echo -ne "${color}\$${NORMAL}"
 }
@@ -125,3 +127,6 @@ viw() {
 cs() {
     cd *$1*
 }
+
+# export NVM_DIR="/home/mikepjb/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

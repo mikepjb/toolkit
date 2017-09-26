@@ -23,7 +23,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     binary_directories=(
     ~/trove/bin
     /opt/bin
-    $HOME/.cargo/bin
+    $HOME/.npm-global/bin
     /usr/local/bin
     /usr/local/share/python
     /usr/local/opt/go/libexec/bin
@@ -127,6 +127,3 @@ viw() {
 cs() {
     cd *$1*
 }
-
-# export NVM_DIR="/home/mikepjb/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -262,3 +262,8 @@ augroup lisp
   autocmd Filetype clojure,scheme,lisp set lisp
   autocmd Filetype clojure set lispwords+=ns,def,defn,defn-,fn,deftask,defroutes
 augroup END
+
+augroup node
+  au!
+  autocmd BufNewFile,BufReadPost *.ejs set filetype=html
+augroup END

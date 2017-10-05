@@ -259,9 +259,12 @@ let r_indent_ess_compatible = 0
 augroup lisp
   au!
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
-  autocmd Filetype clojure,scheme,lisp set lisp
-  autocmd Filetype clojure set lispwords+=ns,def,defn,defn-,fn,deftask,defroutes
 augroup END
+
+let g:clojure_align_subforms = 0
+let g:clojure_fuzzy_indent = 1
+let g:clojure_align_multiline_strings = 1
+let g:clojure_fuzzy_indent_patterns = ['^ns', '^def', '^fn', 'let$']
 
 augroup node
   au!

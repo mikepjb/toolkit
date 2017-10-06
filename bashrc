@@ -61,8 +61,7 @@ alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
 alias json='python -m json.tool'
 alias be='bundle exec'
-alias atom='atom --force-device-scale-factor=1'
-
+alias de='export $(egrep -v "^#" .env | xargs)'
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib

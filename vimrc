@@ -129,6 +129,10 @@ command! TrimWhitespace :%s/\s\+$//e
 
 command! Format execute ":silent !gofmt -w %" | execute "redraw!"
 
+augroup go
+  autocmd! FileType go set expandtab | retab
+augroup END
+
 " Leave the return key alone when in command line windows, since it's used
 " to run commands there.
 augroup enter

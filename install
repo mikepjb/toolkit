@@ -18,3 +18,8 @@ configure_npm_directory() {
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'
 }
+
+setup_go_tools() {
+  go get golang.org/x/tools/cmd/godoc
+  go install # golang.org/x/tools/cmd/godoc
+}

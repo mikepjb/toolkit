@@ -13,6 +13,8 @@ export HISTFILESIZE=
 export EDITOR=vim
 export PLATFORM=$(uname -s)
 export SB_ROOT=~/code
+export GOPATH=~/gosrc
+mkdir -p $GOPATH
 
 [ -z "$TMPDIR" ] && TMPDIR=/tmp
 
@@ -23,6 +25,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     binary_directories=(
     ~/trove/bin
     /opt/bin
+    $GOPATH/bin
     $HOME/.npm-global/bin
     /usr/local/bin
     /usr/local/share/python

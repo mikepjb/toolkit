@@ -22,4 +22,6 @@ configure_npm_directory() {
 setup_go_tools() {
   go get golang.org/x/tools/cmd/godoc
   go install # golang.org/x/tools/cmd/godoc
+
+  go get golang.org/x/mobile/cmd/gomobile
 }

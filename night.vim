@@ -50,7 +50,6 @@ let s:rubyclass = ["1", "23", "#ff0087", "#DDDDDD"][s:offset] " ruby section
 let s:rubyinstancevariable = ["2", "23", "#ff0087", "#DDDDDD"][s:offset] " ruby section
 let s:rubyinclude = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:rubyconstant = ["6", "23", "#ff0087", "#DDDDDD"][s:offset]
-let s:rubysymbol = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:rubyexception = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
 let s:rubydefine = ["1", "3", "#a71d5d", "#DDDDDD"][s:offset]
 let s:rubycontrol = ["1", "3", "#df5f87", "#DDDDDD"][s:offset]
@@ -79,6 +78,10 @@ let s:shconditional = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:diffadded = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:diffremoved = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
 
+" Let's start grouping colours by their syntactic meaning
+let s:import_statement = ["1"][s:offset]
+let s:symbol = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
+
 hi pythonSpaceError ctermbg=red guibg=red
 
 exec 'hi Normal ' . s:display . 'bg=' . s:background . ' ' . s:display . 'fg=' . s:text
@@ -99,7 +102,7 @@ exec 'hi rubyClass ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubyclass
 exec 'hi rubyInstanceVariable ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubyinstancevariable
 exec 'hi rubyInclude ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubyinclude
 exec 'hi rubyConstant ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubyconstant
-exec 'hi rubySymbol ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubysymbol
+exec 'hi rubySymbol ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:symbol
 exec 'hi rubyException ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubyexception
 exec 'hi rubyControl ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubycontrol
 exec 'hi rubyDefine ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubydefine
@@ -140,6 +143,27 @@ exec 'hi ErrorMsg ' . s:display . 'fg=' . s:errormsg . ' ' . s:display . 'bg=NON
 exec 'hi WarningMsg ' . s:display . 'fg=' . s:warningmsg . ' ' . s:display . 'bg=NONE'
 " this is what apex strings are syntaxed as under java
 exec 'hi javaSpecialCharError ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:string
+
+exec 'hi cssIncludeKeyword ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:import_statement
+exec 'hi cssBraces ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:text
+exec 'hi cssTagName ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:function
+exec 'hi cssDefinition ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:symbol
+exec 'hi cssColor ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi cssFontAttr ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi cssBorderAttr ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi cssPositioningAttr ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+
+exec 'hi htmlTag ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:text
+exec 'hi htmlEndTag ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:text
+exec 'hi htmlTagName ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:operator
+exec 'hi htmlArg ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:symbol
+exec 'hi htmlTitle ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi htmlH1 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi htmlH2 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi htmlH3 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi htmlH4 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi htmlH5 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi htmlH6 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
 
 hi SpellBad         guifg=white       guibg=#FF6C60     gui=BOLD      ctermfg=16         ctermbg=160    cterm=NONE
 " NonText include tilde ~ colour

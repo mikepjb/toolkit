@@ -65,13 +65,12 @@ let s:warning = ["124", "87", "#ff0087", "#DDDDDD"][s:offset]
 let s:error = ["44", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:nontext = ["6", "20", "#ff0087", "#DDDDDD"][s:offset]
 let s:delimiter = ["7", "87", "#5fafdf", "#DDDDDD"][s:offset]
-let s:clojureparen = ["6", "87", "#5fafdf", "#DDDDDD"][s:offset]
+let s:clojureparen = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojurecond = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojureconstant = ["6", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojurefunc = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojuremacro = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojuredefine = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
-let s:clojurekeyword = ["6", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:shderefvar = ["6", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:shvariable = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:shconditional = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
@@ -88,7 +87,7 @@ exec 'hi Normal ' . s:display . 'bg=' . s:background . ' ' . s:display . 'fg=' .
 exec 'hi StatusLine ' . s:display . 'bg=' . s:background . ' ' . s:display . 'fg=' . s:text . ' ' . s:display . '=NONE'
 exec 'hi StatusLineNC ' . s:display . 'bg=' . s:background . ' ' . s:display . 'fg=' . s:greybackground . ' ' . s:display . '=NONE'
 exec 'hi VertSplit ' . s:display . 'bg=' . s:text . ' ' . s:display . 'fg=' . s:background
-exec 'hi Search ' . s:display . 'bg=' . s:search . ' ' . s:display . 'fg=NONE cterm=underline gui=underline'
+exec 'hi Search ' . s:display . 'bg=' . s:search . ' ' . s:display . 'fg=2 cterm=underline gui=underline'
 hi LineNr ctermfg=darkgray
 exec 'hi Search ' . s:display . 'bg=' . s:search . ' ' . s:display . 'fg=NONE cterm=NONE gui=NONE'
 exec 'hi CursorLine ' . s:display . 'bg=' . s:cursorline . ' ' . s:display . 'fg=NONE cterm=NONE'
@@ -107,13 +106,15 @@ exec 'hi rubyException ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubyex
 exec 'hi rubyControl ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubycontrol
 exec 'hi rubyDefine ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:rubydefine
 exec 'hi rubyConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+
 exec 'hi clojureParen ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojureparen
 exec 'hi clojureCond ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojurecond
 exec 'hi clojureConstant ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojureconstant
 exec 'hi clojureFunc ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojurefunc
 exec 'hi clojureMacro ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojuremacro
 exec 'hi clojureDefine ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojuredefine
-exec 'hi clojureKeyword ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:clojurekeyword
+exec 'hi clojureKeyword ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:symbol
+
 exec 'hi cInclude ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:cinclude
 exec 'hi cCharacter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:string
 exec 'hi shDerefVar ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:shderefvar

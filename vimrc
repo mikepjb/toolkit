@@ -263,6 +263,7 @@ let r_indent_ess_compatible = 0
 augroup lisp
   au!
   autocmd BufNewFile,BufReadPost *.boot set filetype=clojure
+  autocmd Syntax clojure match clojureConstant "defn \zs\(\w\|-\)*"
 augroup END
 
 let g:clojure_align_subforms = 0

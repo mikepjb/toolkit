@@ -166,6 +166,12 @@ exec 'hi htmlH4 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
 exec 'hi htmlH5 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
 exec 'hi htmlH6 ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
 
+exec 'hi goDirective ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi goBlock ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi goConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi goDeclaration ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
+exec 'hi goType ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+
 hi SpellBad         guifg=white       guibg=#FF6C60     gui=BOLD      ctermfg=16         ctermbg=160    cterm=NONE
 " NonText include tilde ~ colour
 exec 'hi NonText ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:nontext . ' ' . s:display . '=NONE'

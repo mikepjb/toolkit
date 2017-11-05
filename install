@@ -11,8 +11,8 @@ mkdir -p $HOME/.config/nvim
 ln -sfv $BASE/vimrc ~/.config/nvim/init.vim
 
 mkdir -p $HOME/.vim/colors
-mkdir -p $HOME/.config/nvim//colors
-ln -sfv $BASE/night.vim ~/.config/nvim//colors/night.vim
+mkdir -p $HOME/.config/nvim/colors
+ln -sfv $BASE/night.vim ~/.config/nvim/colors/night.vim
 
 configure_npm_directory() {
   mkdir -p ~/.npm-global

@@ -44,7 +44,40 @@ map <C-j> <C-w><C-j>
 map <C-k> <C-w><C-k>
 map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
+imap <C-c> <esc>
 
+if has('nvim')
+  function! s:get_visual_selection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+      return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+  endfunction
+
+  function! SendToRepl() abort
+    let s:repl_selection = s:get_visual_selection()
+    execute "normal! \<C-w>\<C-w>:put =s:repl_selection\<CR>"
+  endfunction
+
+  function! Switch() abort
+    execute "normal! \<C-w>\<C-w>"
+    if expand('%') =~ 'term'
+      normal A
+    end
+  endfunction
+
+  tmap <C-c> <C-\><C-n>
+  tmap <silent> <M-o> <C-\><C-n>:call Switch()<CR>
+  imap <silent> <M-o> <C-o>:call Switch()<CR>
+  xmap <CR> :call SendToRepl()<CR>
+  map <silent> <M-o> :call Switch()<CR>
+  map <leader>t :below split \| term<CR>A
+endif
 
 if has('nvim')
   function! Selecta() abort
@@ -248,6 +281,16 @@ inoremap <expr> ] ClosePair("[","]")
 inoremap <expr> } ClosePair("{","}")
 inoremap <expr>  DeletePair()
 
+if has('nvim')
+  tnoremap <expr> ( OpenPair("(",")")
+  tnoremap <expr> [ OpenPair("[","]")
+  tnoremap <expr> { OpenPair("{","}")
+  tnoremap <expr> ) ClosePair("(",")")
+  tnoremap <expr> ] ClosePair("[","]")
+  tnoremap <expr> } ClosePair("{","}")
+  tnoremap <expr>  DeletePair()
+endif
+
 function! SyntaxStack()
   if !exists("*synstack")
     return
@@ -271,7 +314,21 @@ let g:clojure_fuzzy_indent = 1
 let g:clojure_align_multiline_strings = 1
 let g:clojure_fuzzy_indent_patterns = ['^ns', '^def', '^fn', 'let$']
 
+augroup go
+  au!
+  autocmd Syntax go match goAssignment ":="
+augroup END
+
 augroup node
   au!
   autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 augroup END
+
+command! -bang -nargs=? -bar RainbowParentheses
+  \  if empty('<bang>')
+  \|   call rainbow_parentheses#activate()
+  \| elseif <q-args> == '!'
+  \|   call rainbow_parentheses#toggle()
+  \| else
+  \|   call rainbow_parentheses#deactivate()
+  \| endif

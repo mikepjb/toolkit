@@ -33,7 +33,7 @@ let s:search = ["NONE", "224", "NONE", "#ffdfdf"][s:offset]
 let s:visual = ["254", "224", "#5f005f", "#DDDDDD"][s:offset]
 let s:errormsg = ["168", "3", "#df5f87", "#DDDDDD"][s:offset]
 let s:warningmsg = ["39", "3", "#df5f87", "#DDDDDD"][s:offset]
-let s:matchparen = ["6", "3", "#ff0087", "#DDDDDD"][s:offset]
+let s:matchparen = ["1", "3", "#ff0087", "#DDDDDD"][s:offset]
 let s:statustitle = ["2", "124", "#a7d42c", "#DDDDDD"][s:offset]
 let s:menu = ["249", "75", "#eeeeee", "#eeeeee"][s:offset]
 let s:comment = ["11", "243", "#878787", "#DDDDDD"][s:offset]
@@ -64,8 +64,8 @@ let s:question = ["124", "28", "#ff0087", "#DDDDDD"][s:offset]
 let s:warning = ["124", "87", "#ff0087", "#DDDDDD"][s:offset]
 let s:error = ["44", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:nontext = ["6", "20", "#ff0087", "#DDDDDD"][s:offset]
-let s:delimiter = ["7", "87", "#5fafdf", "#DDDDDD"][s:offset]
-let s:clojureparen = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
+let s:delimiter = ["6", "87", "#5fafdf", "#DDDDDD"][s:offset]
+let s:clojureparen = ["6", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojurecond = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojureconstant = ["6", "87", "#5fafdf", "#DDDDDD"][s:offset]
 let s:clojurefunc = ["1", "87", "#5fafdf", "#DDDDDD"][s:offset]
@@ -171,12 +171,14 @@ exec 'hi goBlock ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
 exec 'hi goConditional ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
 exec 'hi goDeclaration ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
 exec 'hi goType ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:constant
+exec 'hi goAssignment ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:symbol
+exec 'hi goRepeat ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:conditional
 
 hi SpellBad         guifg=white       guibg=#FF6C60     gui=BOLD      ctermfg=16         ctermbg=160    cterm=NONE
 " NonText include tilde ~ colour
 exec 'hi NonText ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:nontext . ' ' . s:display . '=NONE'
 exec 'hi Delimiter ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:delimiter . ' ' . s:display . '=NONE'
-exec 'hi MatchParen ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:matchparen
+exec 'hi MatchParen ' . s:display . 'bg=' . s:matchparen . ' ' . s:display . 'fg=7'
 
 " ir_black doesn't highlight operators for some reason
 exec 'hi Operator ' . s:display . 'bg=NONE ' . s:display . 'fg=' . s:operator

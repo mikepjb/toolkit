@@ -160,7 +160,12 @@ endif
 
 command! TrimWhitespace :%s/\s\+$//e
 
-command! Format execute ":silent !gofmt -w %" | execute "redraw!"
+function! Format()
+  execute ":silent !gofmt -w %"
+  execute ":e!"
+  execute ":retab"
+endfunction
+command! Format call Format()
 
 augroup go
   autocmd! FileType go set expandtab | retab

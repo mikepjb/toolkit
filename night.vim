@@ -81,9 +81,23 @@ let s:diffremoved = ["1", "23", "#ff0087", "#DDDDDD"][s:offset]
 let s:import_statement = ["1"][s:offset]
 let s:symbol = ["2", "23", "#ff0087", "#DDDDDD"][s:offset]
 
-hi pythonSpaceError ctermbg=red guibg=red
+function! s:setHighlight(name, fg, bg, display)
+  exec 'hi ' . a:name . ' ' .
+        \ a:display . 'bg=' . a:bg . ' ' .
+        \ a:display . 'fg=' . a:fg
+endfunction
 
-exec 'hi Normal ' . s:display . 'bg=' . s:background . ' ' . s:display . 'fg=' . s:text
+let s:highlights =
+      \ [[ "CursorLine", "2", "13" ]]
+
+for rule in s:highlights
+  call s:setHighlight(rule[0], rule[1], rule[2], s:display)
+endfor
+
+call s:setHighlight('Normal', s:text, s:background, s:display)
+call s:setHighlight('pythonSpaceError', s:text, 'red', s:display)
+call s:setHighlight('StatusLine', s:text, s:background, s:display)
+
 exec 'hi StatusLine ' . s:display . 'bg=' . s:background . ' ' . s:display . 'fg=' . s:text . ' ' . s:display . '=NONE'
 exec 'hi StatusLineNC ' . s:display . 'bg=' . s:background . ' ' . s:display . 'fg=' . s:greybackground . ' ' . s:display . '=NONE'
 exec 'hi VertSplit ' . s:display . 'bg=' . s:text . ' ' . s:display . 'fg=' . s:background

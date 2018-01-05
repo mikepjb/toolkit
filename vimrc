@@ -46,79 +46,6 @@ map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
 imap <C-c> <esc>
 
-if has('nvim')
-  function! s:get_visual_selection()
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-      return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
-  endfunction
-
-  function! SendToRepl() abort
-    let s:repl_selection = s:get_visual_selection()
-    execute "normal! \<C-w>\<C-w>:put =s:repl_selection\<CR>"
-  endfunction
-
-  function! Switch() abort
-    execute "normal! \<C-w>\<C-w>"
-    if expand('%') =~ 'term'
-      normal A
-    end
-  endfunction
-
-  tmap <C-c> <C-\><C-n>
-  tmap <silent> <M-o> <C-\><C-n>:call Switch()<CR>
-  imap <silent> <M-o> <C-o>:call Switch()<CR>
-  xmap <CR> :call SendToRepl()<CR>
-  map <silent> <M-o> :call Switch()<CR>
-  map <leader>t :below split \| term<CR>A
-endif
-
-if has('nvim')
-  function! Selecta() abort
-    let g:selecta_original_window = win_getid()
-    belowright split
-    enew
-    let options = { 'buf': bufnr('') }
-
-    function! options.on_stdout(job_id, data, event)
-      let g:selecta_output = substitute(join(a:data), "", "", "g")
-    endfunction
-
-    function! options.on_exit(id, code, _event)
-      execute 'bd!' self.buf
-      if g:selecta_output !~ "Interrupt" && g:selecta_output != " "
-        call win_gotoid(g:selecta_original_window)
-        execute 'e ' . g:selecta_output
-      endif
-    endfunction
-
-    call termopen("echo -ne $(find ./* -path ./target -prune -o -type f -print | selecta)", options)
-    startinsert
-  endfunction
-
-  command! Selecta call Selecta()
-  nnoremap <leader>f :Selecta<CR>
-else
-  function! SelectaCommand(choice_command, selecta_args, vim_command)
-    try
-      let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-    catch /Vim:Interrupt/
-      redraw!
-      return
-    endtry
-    redraw!
-    exec a:vim_command . " " . selection
-  endfunction
-
-  nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
-endif
-
 command! -nargs=? -range Align <line1>,<line2>call AlignSection('<args>')
 vnoremap <silent> <Leader>a :Align<CR>
 function! AlignSection(regex) range
@@ -200,6 +127,8 @@ function! RunTestFile(...)
     exec ":Load"
   elseif &filetype == 'scheme'
     exec ":!csi -s %"
+  elseif &filetype == 'go'
+    exec ":!go test"
   else
     if in_test_file
       call SetTestFile(command_suffix)
@@ -285,16 +214,6 @@ inoremap <expr> ) ClosePair("(",")")
 inoremap <expr> ] ClosePair("[","]")
 inoremap <expr> } ClosePair("{","}")
 inoremap <expr>  DeletePair()
-
-if has('nvim')
-  tnoremap <expr> ( OpenPair("(",")")
-  tnoremap <expr> [ OpenPair("[","]")
-  tnoremap <expr> { OpenPair("{","}")
-  tnoremap <expr> ) ClosePair("(",")")
-  tnoremap <expr> ] ClosePair("[","]")
-  tnoremap <expr> } ClosePair("{","}")
-  tnoremap <expr>  DeletePair()
-endif
 
 function! SyntaxStack()
   if !exists("*synstack")

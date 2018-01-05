@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ "$1" == "main" ]; then
+  xrandr --output eDP1 --auto --output DP1 --off
+elif [ "$1" == "ext" ]; then
+  xrandr --output eDP1 --off --output DP1 --auto
+else
+  xrandr --output eDP1 --auto --output DP1 --auto --above eDP1
+fi
+
+# Refresh keyboard input incase you are using external hardware
+xmodmap ~/.Xmodmap
+xset r rate 200 25

@@ -13,7 +13,7 @@ export HISTFILESIZE=
 export EDITOR=vim
 export PLATFORM=$(uname -s)
 export SB_ROOT=~/code
-export GOPATH=~/gosrc
+export GOPATH=~/go
 mkdir -p $GOPATH
 
 [ -z "$TMPDIR" ] && TMPDIR=/tmp
@@ -58,11 +58,11 @@ alias lrd='$(nohup lein repl :headless :port 9999 0>&- &>/dev/null &)'
 alias lrc='lein repl :connect 9999'
 alias lrx='tear-down-repls'
 alias lra="ps ex | ag 'lein.*.repl' | grep -v 'ag lein' | cut -d ' ' -f1"
-alias ts0="printf '\e[8;50;100t'"
-alias ts1="printf '\e[8;50;160t'"
-alias ts2="printf '\e[8;20;100t'"
+alias t0="printf '\e[8;50;100t'"
+alias t1="printf '\e[8;50;160t'"
+alias t2="printf '\e[8;20;100t'"
 alias ..='cd ..'
-alias gss='cd ~/gosrc/src'
+alias gp='cd ~/go/src'
 alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
 alias json='python -m json.tool'
@@ -132,4 +132,8 @@ viw() {
 
 cs() {
     cd *$1*
+}
+
+goread() {
+  godoc -src $* | vi -c "set ft=go" -
 }

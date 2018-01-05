@@ -12,7 +12,7 @@ URxvt*skipScroll: True
 
 Xft.dpi: 60
 XTerm*renderFont: True
-xterm*faceName: xft:inconsolata:bold:size=16
+xterm*faceName: xft:inconsolata:bold:size=20
 xURxvt.letterSpace: -1
 ! Set window title string, the default title is the command-line
 URxvt*title: mikepjb

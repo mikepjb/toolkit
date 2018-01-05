@@ -90,6 +90,7 @@ module NreplClient
   def self.send(code, log=[])
     begin
       socket = TCPSocket.open('127.0.0.1', 9999)
+      puts message('hurl', session(socket, log), code)
       socket.sendmsg message('hurl', session(socket, log), code)
     rescue Errno::ECONNREFUSED
       puts "There is no nREPL to connect to on port 9999"

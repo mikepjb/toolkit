@@ -1,0 +1,5 @@
+:: vim: set ft=dosbatch:
+
+@echo off
+
+:: 1 set the PATH for user?

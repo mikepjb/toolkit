@@ -25,4 +25,5 @@ setup_go_tools() {
   go install # golang.org/x/tools/cmd/godoc
 
   go get golang.org/x/mobile/cmd/gomobile
+  go get github.com/golang/go # download go core source code
 }

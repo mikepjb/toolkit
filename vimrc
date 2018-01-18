@@ -99,6 +99,7 @@ if executable('ag')
 endif
 
 command! TrimWhitespace :%s/\s\+$//e
+command! PrettifyJSON :%!python -m json.tool
 
 function! Format()
   execute ":silent !gofmt -w %"

@@ -10,6 +10,14 @@ done
 mkdir -p $HOME/.vim/colors
 ln -sfv $BASE/night.vim ~/.vim/colors/night.vim
 
+if [ "$PLATFORM" == Darwin ]; then
+  OSX_LOCATION=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+  mkdir -p "$OSX_LOCATION"
+  ln -sfv $BASE/sublime/* "$OSX_LOCATION"
+else
+  echo "linux sublime setup not implemented"
+fi
+
 configure_npm_directory() {
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'

@@ -7,6 +7,10 @@
 	[
 		"Package Control",
 		"GitGutter",
-		"SublimeLinter"
+		"SublimeREPL",
+		"SublimeLinter",
+		"SublimeLinter-contrib-lintr",
+		"SublimeLinter-rubocop",
+		"GoSublime"
 	]
 }

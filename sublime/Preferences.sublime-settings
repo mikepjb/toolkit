@@ -1,10 +1,14 @@
 {
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
-	"ignored_packages":
-	[
-		"Vintage"
-	],
-	"save_on_focus_lost": true,
-	"tab_size": 2,
-	"translate_tabs_to_spaces": true
+  "color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+  "ignored_packages":
+  [
+    "Vintage"
+  ],
+  "save_on_focus_lost": true,
+  "tab_size": 2,
+  "auto_complete": true,
+  "word_separators": "./\\()\"'-:,.;<>~@#$%^&*|+=[]{}`~",
+  "index_files": true, // uses ctags
+  "translate_tabs_to_spaces": true,
+  "trim_trailing_white_space_on_save": true,
 }

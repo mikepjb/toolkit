@@ -11,12 +11,15 @@ mkdir -p $HOME/.vim/colors
 ln -sfv $BASE/night.vim ~/.vim/colors/night.vim
 
 if [ "$PLATFORM" == Darwin ]; then
-  OSX_LOCATION=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-  mkdir -p "$OSX_LOCATION"
-  ln -sfv $BASE/sublime/* "$OSX_LOCATION"
+  echo "OSX Detected"
+  LOCATION=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 else
-  echo "linux sublime setup not implemented"
+  echo "Linux Detected"
+  LOCATION=~/.config/sublime-text-3/Packages/User
 fi
+
+mkdir -p "$LOCATION"
+ln -sfv $BASE/sublime/* "$LOCATION"
 
 configure_npm_directory() {
   mkdir -p ~/.npm-global

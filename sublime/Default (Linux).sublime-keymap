@@ -1,3 +1,7 @@
 [
-	{"keys": ["alt+i"], "command": "reindent", "args": {"single_line": false}}
+	{"keys": ["alt+i"], "command": "reindent", "args": {"single_line": false}},
+  {"keys": ["alt+p"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
+  {"keys": ["ctrl+j"], "command": "insert", "args": {"characters": "\n"}},
+  {"keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true}},
+  {"keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false}}
 ]

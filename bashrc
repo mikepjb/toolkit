@@ -5,6 +5,7 @@ shopt -s nocaseglob #case insensitive completion
 
 bind '"\C-g":" vim $(find ~/notes/* -type f | selecta)\n"'
 bind '"\C-q":" cd ~/code/$(find ~/code/* -maxdepth 0 -printf \"%f\n\"| selecta)\n"'
+bind '"\C-x\C-i":" cd ~/go/src/$(find ~/go/src/* -maxdepth 0 -printf \"%f\n\"| selecta)\n"'
 
 export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth:erasedups
@@ -136,4 +137,8 @@ cs() {
 
 goread() {
   godoc -src $* | vi -c "set ft=go" -
+}
+
+tango() {
+  go get -u github.com/golang/dep/cmd/dep
 }

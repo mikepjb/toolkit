@@ -266,11 +266,6 @@ augroup node
   autocmd BufNewFile,BufReadPost *.ejs set filetype=html
 augroup END
 
-command! -bang -nargs=? -bar RainbowParentheses
-  \  if empty('<bang>')
-  \|   call rainbow_parentheses#activate()
-  \| elseif <q-args> == '!'
-  \|   call rainbow_parentheses#toggle()
-  \| else
-  \|   call rainbow_parentheses#deactivate()
-  \| endif
+function! Govern()
+  exec ":!govern -file " . expand("%")
+endfunction

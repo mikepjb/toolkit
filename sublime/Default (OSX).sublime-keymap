@@ -1,4 +1,9 @@
 [
 	{"keys": ["super+i"], "command": "reindent", "args": {"single_line": false}},
-	{"keys": ["ctrl+j"], "command": "insert", "args": {"characters": "\n"}}
+	{"keys": ["ctrl+j"], "command": "insert", "args": {"characters": "\n"}},
+
+  {"keys": ["alt+v"], "command": "move", "args": {"by": "pages", "forward": false}},
+
+  { "keys": ["ctrl+tab"], "command": "next_view" },
+  { "keys": ["ctrl+shift+tab"], "command": "prev_view" }
 ]

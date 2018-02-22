@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+# check lines of code
+
+# get distinct file extensions
+
+# puts `git ls-files`
+
+require 'set'
+
+def all_extensions(list_of_files)
+  unique_extensions = Set.new
+
+  list_of_files.each do |file|
+    unique_extensions << File.extname(file)
+  end
+
+  unique_extensions.reject(&:empty?)
+end
+
+all_files = `git ls-files`.split("\n")
+unique_extensions = all_extensions(all_files)
+
+unique_extensions.each do |extension|
+  puts "#{extension} " + `for x in $(git ls-files | grep #{extension}$); do cat $x; done | wc -l | tr -d ' '`
+end

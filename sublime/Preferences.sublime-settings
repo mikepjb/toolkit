@@ -1,15 +1,18 @@
 {
 	"auto_complete": true,
-	"dpi_scale": 1.00,
 	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+	"dpi_scale": 1.0,
 	"font_face": "Inconsolata",
 	"font_size": 14,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"rulers": [89],
 	"index_files": true,
+	"rulers":
+	[
+		89
+	],
 	"save_on_focus_lost": true,
 	"tab_size": 2,
 	"translate_tabs_to_spaces": true,

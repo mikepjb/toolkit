@@ -11,6 +11,7 @@
 		"SublimeLinter",
 		"SublimeLinter-contrib-lintr",
 		"SublimeLinter-rubocop",
-		"GoSublime"
+		"GoSublime",
+		"Alignment"
 	]
 }

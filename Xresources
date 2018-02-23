@@ -1,5 +1,5 @@
 ! Create the window with the specified X window geometry [default
-XTerm*geometry: 100x40
+XTerm*geometry: 160x50
 XTerm*termName: xterm-256color
 
 ! Disable alternate screen

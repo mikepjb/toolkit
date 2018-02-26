@@ -83,6 +83,7 @@ if [ "$PLATFORM" == Darwin ]; then
     alias find='gfind'
     alias sort='gsort'
     alias ldd='otool -L'
+    alias subl3="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 else
     eval "`dircolors -b`"
     alias ls='ls --color=auto'

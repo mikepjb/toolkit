@@ -3,7 +3,7 @@
 cd $(dirname $BASH_SOURCE)
 BASE=$(pwd)
 
-for rc in *rc gitconfig Xresources Xmodmap gitconfig tmux.conf; do
+for rc in *rc gitconfig Xresources Xmodmap gitconfig tmux.conf mongorc.js; do
   ln -sfv $BASE/$rc ~/.$rc
 done
 

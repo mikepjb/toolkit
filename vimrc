@@ -24,6 +24,7 @@ set autoread
 set gdefault
 set t_ti= t_te=
 set isk+=-
+runtime macros/matchit.vim
 
 colorscheme night
 
@@ -103,13 +104,14 @@ command! PrettifyJSON :%!python -m json.tool
 
 function! Format()
   execute ":silent !gofmt -w %"
-  execute ":e!"
-  execute ":retab"
+  execute ":silent e!"
 endfunction
 command! Format call Format()
 
-augroup go
-  autocmd! FileType go set expandtab | retab
+augroup golang
+  au! BufWritePost *.go :call Format()
+  au Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
+  au Filetype go setlocal listchars+=tab:\ \ ,
 augroup END
 
 " Leave the return key alone when in command line windows, since it's used

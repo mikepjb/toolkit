@@ -39,9 +39,6 @@ xterm*VT100.Translations: #override \
                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
 
-! vim:set ft=xdefaults:
-! Lucid Black Colorscheme
-
 *xterm*background: #1b1d1e
 *xterm*foreground: #f8f8f2
 *xterm*cursorColor: #f8f8f2
@@ -66,7 +63,7 @@ xterm*VT100.Translations: #override \
 *xterm*color4: #6bb0ed
 *xterm*color12: #6bb0ed
 
-! Magenta (Purple in this time)
+! Magenta (Purple in this theme)
 *xterm*color5: #ab83f8
 *xterm*color13: #996cda
 

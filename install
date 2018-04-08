@@ -8,18 +8,7 @@ for rc in *rc gitconfig Xresources Xmodmap gitconfig tmux.conf mongorc.js; do
 done
 
 mkdir -p $HOME/.vim/colors
-ln -sfv $BASE/night.vim ~/.vim/colors/night.vim
-
-if [ "$PLATFORM" == Darwin ]; then
-  echo "OSX Detected"
-  LOCATION=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-else
-  echo "Linux Detected"
-  LOCATION=~/.config/sublime-text-3/Packages/User
-fi
-
-mkdir -p "$LOCATION"
-ln -sfv $BASE/sublime/* "$LOCATION"
+ln -sfv $BASE/clean.vim ~/.vim/colors/clean.vim
 
 configure_npm_directory() {
   mkdir -p ~/.npm-global

@@ -1,4 +1,4 @@
-syntax on
+syntax off
 filetype plugin indent on
 
 set encoding=utf-8
@@ -26,7 +26,7 @@ set t_ti= t_te=
 set isk+=-
 runtime macros/matchit.vim
 
-colorscheme night
+colorscheme clean
 
 let mapleader= ' '
 map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
@@ -249,24 +249,10 @@ augroup lisp
   autocmd Syntax clojure match clojureConstant "defn \zs\(\w\|-\)*"
 augroup END
 
-augroup sublime
-  autocmd BufNewFile,BufReadPost *.sublime-settings set filetype=json
-augroup END
-
 let g:clojure_align_subforms = 0
 let g:clojure_fuzzy_indent = 1
 let g:clojure_align_multiline_strings = 1
 let g:clojure_fuzzy_indent_patterns = ['^ns', '^def', '^fn', 'let$']
-
-augroup go
-  au!
-  autocmd Syntax go match goAssignment ":="
-augroup END
-
-augroup node
-  au!
-  autocmd BufNewFile,BufReadPost *.ejs set filetype=html
-augroup END
 
 function! Govern()
   exec ":!govern -file " . expand("%")

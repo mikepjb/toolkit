@@ -26,7 +26,7 @@ set t_ti= t_te=
 set isk+=-
 runtime macros/matchit.vim
 
-colorscheme clean
+colorscheme bare
 
 let mapleader= ' '
 map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>

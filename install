@@ -8,7 +8,7 @@ for rc in *rc gitconfig Xresources Xmodmap gitconfig tmux.conf mongorc.js; do
 done
 
 mkdir -p $HOME/.vim/colors
-ln -sfv $BASE/clean.vim ~/.vim/colors/clean.vim
+ln -sfv $BASE/bare.vim ~/.vim/colors/bare.vim
 
 configure_npm_directory() {
   mkdir -p ~/.npm-global

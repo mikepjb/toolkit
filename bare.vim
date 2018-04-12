@@ -1,4 +1,4 @@
-" Clean
+" Bare
 " Author:       Michael Bruce <http://michaelbruce.online/>
 " vim:set ts=2 sts=2 sw=2 expandtab:
 
@@ -9,7 +9,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "clean"
+let g:colors_name = "bare"
 
 let s:col = {
       \ 'fg': 7,

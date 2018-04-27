@@ -49,7 +49,7 @@ xterm*VT100.Translations: #override \
 
 ! Red
 *xterm*color1: #f62d71
-*xterm*color9: #b9075d
+*xterm*color9: #e59dbe
 
 ! Green
 *xterm*color2: #a7e040

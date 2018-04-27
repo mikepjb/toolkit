@@ -25,5 +25,7 @@ else
     open_with('google-chrome-stable', argument)
   when /png$/
     open_with('feh', argument)
+  when /jpg$/
+    open_with('feh', argument)
   end
 end

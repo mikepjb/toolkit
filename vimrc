@@ -144,7 +144,11 @@ function! RunTestFile(...)
   elseif &filetype == 'scheme'
     exec ":!csi -s %"
   elseif &filetype == 'go'
-    exec ":!go test"
+    if !isdirectory("./src")
+      exec ":!go test"
+    else
+      exec ":!go test ./src"
+    endif
   else
     if in_test_file
       call SetTestFile(command_suffix)

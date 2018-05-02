@@ -145,9 +145,9 @@ function! RunTestFile(...)
     exec ":!csi -s %"
   elseif &filetype == 'go'
     if !isdirectory("./src")
-      exec ":!go test"
+      exec ":!go test -v"
     else
-      exec ":!go test ./src"
+      exec ":!go test -v ./src"
     endif
   else
     if in_test_file

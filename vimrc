@@ -103,9 +103,10 @@ command! TrimWhitespace :%s/\s\+$//e
 command! PrettifyJSON :%!python -m json.tool
 
 function! Format()
-  " execute ":!gofmt -w %"
   let out = system("gofmt -w " . expand("%"))
-  echo out
+  if strlen(out) != 0
+    echo out
+  endif
   execute ":silent e!"
 endfunction
 command! Format call Format()

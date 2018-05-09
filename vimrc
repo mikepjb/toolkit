@@ -103,15 +103,17 @@ command! TrimWhitespace :%s/\s\+$//e
 command! PrettifyJSON :%!python -m json.tool
 
 function! Format()
-  execute ":silent !gofmt -w %"
+  " execute ":!gofmt -w %"
+  let out = system("gofmt -w " . expand("%"))
+  echo out
   execute ":silent e!"
 endfunction
 command! Format call Format()
 
 augroup golang
   au! BufWritePost *.go :call Format()
-  au Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
-  au Filetype go setlocal listchars+=tab:\ \ ,
+  au! Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
+  au! Filetype go setlocal listchars+=tab:\ \ ,
 augroup END
 
 " Leave the return key alone when in command line windows, since it's used

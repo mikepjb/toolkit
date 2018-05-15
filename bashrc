@@ -60,6 +60,10 @@ if [ "$PLATFORM" == Darwin ]; then
     alias sort='gsort'
 fi
 
+viw() {
+    vi `which "$1"`
+}
+
 git_branch() {
     echo -e "$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')"
 }
@@ -73,7 +77,3 @@ git_state() {
 }
 
 PROMPT_COMMAND='PS1="\W($(git_state)) \$ "'
-
-viw() {
-    vi `which "$1"`
-}

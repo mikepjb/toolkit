@@ -48,28 +48,28 @@ xterm*VT100.Translations: #override \
 *xterm*color8: #7c7c7c
 
 ! Red
-*xterm*color1: #f62d71
-*xterm*color9: #e59dbe
+*xterm*color1: #f7cedc
+*xterm*color9: #fcedf4
 
 ! Green
-*xterm*color2: #a7e040
-*xterm*color10: #afffaf
+*xterm*color2: #ddf8ae
+*xterm*color10: #e7f6dd
 
 ! Yellow
-*xterm*color3: #e6da7b
-*xterm*color11: #fc9620
+*xterm*color3: #f3ecb2
+*xterm*color11: #f9f7df
 
 ! Blue
-*xterm*color4: #6bb0ed
-*xterm*color12: #6bb0ed
+*xterm*color4: #d1f0f6
+*xterm*color12: #d5ebf0
 
-! Magenta (Purple in this theme)
-*xterm*color5: #ab83f8
-*xterm*color13: #996cda
+! Magenta
+*xterm*color5: #f2c3ea
+*xterm*color13: #e0d4f3
 
-! Cyan (Light Pink in this theme)
-*xterm*color6: #6bd9ed
-*xterm*color14: #13a1e7
+! Cyan
+*xterm*color6: #b1f3f7
+*xterm*color14: #cff3f3
 
 ! White
 *xterm*color7: #f8f8f2

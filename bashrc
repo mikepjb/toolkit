@@ -5,7 +5,6 @@ shopt -s nocaseglob #case insensitive completion
 
 bind '"\C-g":" vim $(find ~/notes/* -type f | selecta)\n"'
 bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| selecta)\n"'
-bind '"\C-x\C-i":" cd ~/go/src/$(find ~/go/src/* -maxdepth 0 -printf \"%f\n\"| selecta)\n"'
 
 export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth:erasedups
@@ -39,7 +38,6 @@ chruby 2.4.1
 alias tags='ctags -R $(git rev-parse --show-toplevel || echo ".")'
 alias space='df -h'
 alias .space='du -sh * | sort -h'
-alias l='ls -alF'
 alias pgstart='sudo systemctl start postgresql'
 alias t0="printf '\e[8;50;100t'"
 alias t1="printf '\e[8;50;160t'"
@@ -47,30 +45,19 @@ alias t2="printf '\e[8;20;100t'"
 alias ..='cd ..'
 alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
-alias json='python -m json.tool'
 alias be='bundle exec'
 alias de='export $(egrep -v "^#" .env | xargs)'
 alias cl='for code in {0..16}; do echo -e "\e[38;05;${code}m $code: Test"; done'
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
-    export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home'
+    export JAVA_HOME=$(/usr/libexec/java_home)
     export COPYFILE_DISABLE=true
-    alias ls='ls -G'
-    export LSCOLORS="dxgxcxdxexfafafafagaba"
     alias acpi="pmset -g batt"
     alias ctags="`brew --prefix`/bin/ctags"
     alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
     alias find='gfind'
     alias sort='gsort'
-    alias ldd='otool -L'
-    alias subl3="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-else
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias screenshot=xscrot
-    export LS_COLORS='di=33:ln=36:so=32:pi=33:ex=34:bd=35;40:cd=35;40:su=35;40:sg=35;40:tw=36;40:ow=31;40'
 fi
 
 git_branch() {

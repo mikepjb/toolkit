@@ -133,14 +133,14 @@ let &t_te="\e[?1004l" . &t_te
 execute "set <f20>=\<Esc>[O"
 execute "set <f21>=\<Esc>[I"
 
-inoremap <f20> <c-\><c-o>:doautocmd <nomodeline> FocusLost %<cr>
-inoremap <f21> <c-\><c-o>:doautocmd <nomodeline> FocusGained %<cr>
-nnoremap <f20> :doautocmd <nomodeline> FocusLost %<cr>
-nnoremap <f21> :doautocmd <nomodeline> FocusGained %<cr>
-onoremap <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>
-onoremap <f21> <Esc>:doautocmd <nomodeline> FocusGained %<cr>
-vnoremap <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>gv
-vnoremap <f21> <Esc>:doautocmd <nomodeline> FocusGained %<cr>gv
+inoremap <silent> <f20> <c-\><c-o>:doautocmd <nomodeline> FocusLost %<cr>
+inoremap <f21> <c-\><c-o><NOP>
+nnoremap <silent> <f20> :doautocmd <nomodeline> FocusLost %<cr>
+nnoremap <f21> <NOP>
+onoremap <silent> <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>
+onoremap <f21> <Esc><NOP>
+vnoremap <silent> <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>gv
+vnoremap <f21> <Esc><NOP>
 
 augroup autosave
   au FocusLost * :wa

@@ -125,6 +125,27 @@ augroup enter
   autocmd! BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 augroup END
 
+" Enable focus reporting on entering Vim.
+let &t_ti.="\e[?1004h"
+" Disable focus reporting on leaving Vim.
+let &t_te="\e[?1004l" . &t_te
+
+execute "set <f20>=\<Esc>[O"
+execute "set <f21>=\<Esc>[I"
+
+inoremap <f20> <c-\><c-o>:doautocmd <nomodeline> FocusLost %<cr>
+inoremap <f21> <c-\><c-o>:doautocmd <nomodeline> FocusGained %<cr>
+nnoremap <f20> :doautocmd <nomodeline> FocusLost %<cr>
+nnoremap <f21> :doautocmd <nomodeline> FocusGained %<cr>
+onoremap <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>
+onoremap <f21> <Esc>:doautocmd <nomodeline> FocusGained %<cr>
+vnoremap <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>gv
+vnoremap <f21> <Esc>:doautocmd <nomodeline> FocusGained %<cr>gv
+
+augroup autosave
+  au FocusLost * :wa
+augroup END
+
 function! MapCR()
   nnoremap <cr> :call RunTestFile()<cr>
 endfunction

@@ -22,6 +22,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     binary_directories=(
     ~/trove/bin
     $GOPATH/bin
+    $HOME/src/go1.4/bin
     $HOME/.npm-global/bin
     /usr/local/bin
     $PATH
@@ -48,6 +49,8 @@ alias t='tmux attach -t vty || tmux new -s vty'
 alias be='bundle exec'
 alias de='export $(egrep -v "^#" .env | xargs)'
 alias cl='for code in {0..16}; do echo -e "\e[38;05;${code}m $code: Test"; done'
+alias json="python -m json.tool"
+alias csv="column -t -s, | less -S" #use with cat a.csv | csv
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib

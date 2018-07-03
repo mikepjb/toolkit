@@ -45,7 +45,7 @@ map <C-j> <C-w><C-j>
 map <C-k> <C-w><C-k>
 map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
-imap <C-c> <esc>
+imap <C-c> <esc>:w<CR>
 
 function! SelectaCommand(choice_command, selecta_args, vim_command)
   try
@@ -123,27 +123,6 @@ augroup enter
   autocmd! CmdwinEnter * :unmap <cr>
   autocmd! CmdwinLeave * :call MapCR()
   autocmd! BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-augroup END
-
-" Enable focus reporting on entering Vim.
-let &t_ti.="\e[?1004h"
-" Disable focus reporting on leaving Vim.
-let &t_te="\e[?1004l" . &t_te
-
-execute "set <f20>=\<Esc>[O"
-execute "set <f21>=\<Esc>[I"
-
-inoremap <silent> <f20> <c-\><c-o>:doautocmd <nomodeline> FocusLost %<cr>
-inoremap <f21> <c-\><c-o><NOP>
-nnoremap <silent> <f20> :doautocmd <nomodeline> FocusLost %<cr>
-nnoremap <f21> <NOP>
-onoremap <silent> <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>
-onoremap <f21> <Esc><NOP>
-vnoremap <silent> <f20> <Esc>:doautocmd <nomodeline> FocusLost %<cr>gv
-vnoremap <f21> <Esc><NOP>
-
-augroup autosave
-  au FocusLost * :wa
 augroup END
 
 function! MapCR()

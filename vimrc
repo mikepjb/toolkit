@@ -111,11 +111,18 @@ function! Format()
 endfunction
 command! Format call Format()
 
+function! GolangEnvironment()
+  setlocal tabstop=2
+        \ shiftwidth=2
+        \ softtabstop=2
+        \ noexpandtab
+        \ omnifunc=autoload#GoComplete
+        \ listchars+=tab:\ \ ,
+endfunction
+
 augroup golang
   au! BufWritePost *.go :call Format()
-  au! Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
-  au! Filetype go setlocal listchars+=tab:\ \ ,
-  au! Filetype go setlocal omnifunc=gocomplete#Complete
+  au! Filetype go :call GolangEnvironment()
 augroup END
 
 " Leave the return key alone when in command line windows, since it's used

@@ -75,7 +75,7 @@ fu! s:gocodeAutocomplete()
 	return result
 endf
 
-fu! gocomplete#Complete(findstart, base)
+fu! autoload#GoComplete(findstart, base)
 	"findstart = 1 when we need to get the text length
 	if a:findstart == 1
 		execute "silent let g:gocomplete_completions = " . s:gocodeAutocomplete()

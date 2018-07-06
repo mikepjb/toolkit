@@ -10,6 +10,9 @@ done
 mkdir -p $HOME/.vim/colors
 ln -sfv $BASE/bare.vim ~/.vim/colors/bare.vim
 
+mkdir -p $HOME/.vim/autoload
+ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
+
 configure_npm_directory() {
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'
@@ -19,6 +22,8 @@ setup_go_tools() {
   go get golang.org/x/tools/cmd/godoc
   go get -u github.com/nsf/gocode # autocomplete tool
   go install # golang.org/x/tools/cmd/godoc
+
+  go get golang.org/x/tools/cmd/goimports # gofmt w/ autoinclude imports
 
   go get golang.org/x/mobile/cmd/gomobile
   go get github.com/golang/go # download go core source code

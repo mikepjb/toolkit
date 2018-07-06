@@ -45,7 +45,7 @@ map <C-j> <C-w><C-j>
 map <C-k> <C-w><C-k>
 map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
-imap <C-c> <esc>:w<CR>
+imap <C-c> <esc>
 
 function! SelectaCommand(choice_command, selecta_args, vim_command)
   try
@@ -103,7 +103,7 @@ command! TrimWhitespace :%s/\s\+$//e
 command! PrettifyJSON :%!python -m json.tool
 
 function! Format()
-  let out = system("gofmt -w " . expand("%"))
+  let out = system("goimports -w " . expand("%"))
   if strlen(out) != 0
     echo out
   endif
@@ -115,6 +115,7 @@ augroup golang
   au! BufWritePost *.go :call Format()
   au! Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
   au! Filetype go setlocal listchars+=tab:\ \ ,
+  au! Filetype go setlocal omnifunc=gocomplete#Complete
 augroup END
 
 " Leave the return key alone when in command line windows, since it's used

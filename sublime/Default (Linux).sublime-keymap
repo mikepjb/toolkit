@@ -1,0 +1,19 @@
+[
+	{"keys": ["alt+i"], "command": "reindent", "args": {"single_line": false}},
+  {"keys": ["alt+p"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
+  {"keys": ["ctrl+j"], "command": "insert", "args": {"characters": "\n"}},
+  {"keys": ["alt+3"], "command": "insert", "args": {"characters": "£"}},
+  {"keys": ["ctrl+shift+o"], "command": "prompt_open_folder"},
+  {"keys": ["ctrl+d"], "command": "left_delete"},
+  {"keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true}},
+  {"keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false}},
+  {"keys": ["ctrl+f"], "command": "move", "args": {"by": "characters", "forward": true}},
+  {"keys": ["ctrl+b"], "command": "move", "args": {"by": "characters", "forward": false}},
+  {
+    "button": "button1",
+    "count": 1,
+    "modifiers": ["ctrl"],
+    "press_command": "drag_select",
+    "command": "goto_definition"
+  }
+]

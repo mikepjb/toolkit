@@ -13,6 +13,17 @@ ln -sfv $BASE/bare.vim ~/.vim/colors/bare.vim
 mkdir -p $HOME/.vim/autoload
 ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
 
+if [ "$PLATFORM" == Darwin ]; then
+  echo "OSX Detected"
+  LOCATION=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+else
+  echo "Linux Detected"
+  LOCATION=~/.config/sublime-text-3/Packages/User
+fi
+
+mkdir -p "$LOCATION"
+ln -sfv $BASE/sublime/* "$LOCATION"
+
 configure_npm_directory() {
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'

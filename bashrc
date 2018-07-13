@@ -36,7 +36,9 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 chruby 2.4.1
 
-alias tags='ctags -R $(git rev-parse --show-toplevel || echo ".")'
+alias git-root='git rev-parse --show-toplevel || echo "."'
+alias tags='ctags -f $(git-root)/.git/tags -R $(git-root)'
+alias gr='cd $(git-root)'
 alias space='df -h'
 alias .space='du -sh * | sort -h'
 alias pgstart='sudo systemctl start postgresql'
@@ -44,8 +46,8 @@ alias t0="printf '\e[8;50;100t'"
 alias t1="printf '\e[8;50;160t'"
 alias t2="printf '\e[8;20;100t'"
 alias ..='cd ..'
-alias gr='cd $(git rev-parse --show-toplevel || echo ".")'
 alias t='tmux attach -t vty || tmux new -s vty'
+alias y='tmux attach -t vty2 || tmux new -s vty2'
 alias be='bundle exec'
 alias de='export $(egrep -v "^#" .env | xargs)'
 alias cl='for code in {0..16}; do echo -e "\e[38;05;${code}m $code: Test"; done'

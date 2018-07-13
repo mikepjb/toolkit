@@ -26,6 +26,8 @@ set t_ti= t_te=
 set isk+=-
 runtime macros/matchit.vim
 
+set tags=.git/tags
+
 colorscheme bare
 
 let mapleader= ' '
@@ -92,12 +94,12 @@ function! LoadClojureFile()
   !hurl "(load-file \"%:p\")"
 endfunction
 
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-  command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-  nnoremap \ :Ag<SPACE>
-endif
+" if executable('ag')
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"   command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+"   nnoremap \ :Ag<SPACE>
+" endif
 
 command! TrimWhitespace :%s/\s\+$//e
 command! PrettifyJSON :%!python -m json.tool

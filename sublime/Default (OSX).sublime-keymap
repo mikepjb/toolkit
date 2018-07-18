@@ -8,6 +8,8 @@
   { "keys": ["ctrl+tab"], "command": "next_view" },
   { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
 
+  { "keys": ["super+alt+c"], "command": "copy_path" },
+
   {
       "button": "button1",
       "count": 1,

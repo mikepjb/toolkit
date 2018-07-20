@@ -109,7 +109,9 @@ function! Format()
   if strlen(out) != 0
     echo out
   endif
+  mkview
   execute ":silent e!"
+  silent loadview
 endfunction
 command! Format call Format()
 

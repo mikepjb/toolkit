@@ -15,6 +15,13 @@
 (defconst *spell-check-support-enabled* nil)
 (defconst *is-a-mac* (eq system-type 'darwin))
 
+;; deps code
+(if *is-a-mac*
+    ;; requires brew install libressl
+    (require 'gnutls)
+  (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem"))
+
+;; editor config code
 (setq backup-directory-alist
           `((".*" . ,temporary-file-directory)))
     (setq auto-save-file-name-transforms
@@ -36,7 +43,8 @@
      '(("C-w" . kill-region-or-backward-word)
        ("M-o" . other-window)
        ("C-c r" . ivy-recentf)
-       ("M-[" . isearch-forward-symbol-at-point)
+       ("M-[" . projectile-find-file)
+       ;; ("M-[" . isearch-forward-symbol-at-point)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))))
   (global-set-key (kbd (car binding)) (cdr binding)))
 
@@ -224,7 +232,7 @@ locate PACKAGE."
 ;; osx settings
 (when *is-a-mac*
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'none)
+  (setq mac-option-modifier 'meta)
   ;; Make mouse wheel / trackpad scrolling less jerky
   (setq mouse-wheel-scroll-amount '(1
                                     ((shift) . 5)

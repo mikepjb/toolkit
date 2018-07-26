@@ -24,6 +24,16 @@ fi
 mkdir -p "$LOCATION"
 ln -sfv $BASE/sublime/* "$LOCATION"
 
+symlink_emacs_configuration() {
+    mkdir -p ~/.emacs.d
+    ln -sfv $BASE/init.el ~/.emacs.d/init.el
+    [ -L ~/.emacs.d/lib ] && unlink ~/.emacs.d/lib
+    ln -sfv $BASE/lib ~/.emacs.d/lib
+}
+
+symlink_emacs_configuration
+
+
 configure_npm_directory() {
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'

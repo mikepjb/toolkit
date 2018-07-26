@@ -22,10 +22,24 @@
 
 (set-frame-font "Inconsolata 19" nil t)
 
-(global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+(defun kill-region-or-backward-word ()
+  "When region is active, yank; otherwise kill-backword-word."
+  (interactive)
+  (if mark-active
+      (kill-region (region-beginning) (region-end))
+    (if (bound-and-true-p paredit-mode)
+        (paredit-backward-kill-word)
+      (backward-kill-word 1))))
 
-;; TODO backup files in specific directory
+(dolist
+    (binding
+     '(("C-w" . kill-region-or-backward-word)
+       ("M-o" . other-window)
+       ("C-c r" . ivy-recentf)
+       ("M-[" . isearch-forward-symbol-at-point)
+       ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))))
+  (global-set-key (kbd (car binding)) (cdr binding)))
+
 ;; flyspell?!?
 
 ;;----------------------------------------------------------------------------
@@ -39,29 +53,12 @@
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
-(if (fboundp 'with-eval-after-load)
-    (defalias 'after-load 'with-eval-after-load)
-  (defmacro after-load (feature &rest body)
-    "After FEATURE is loaded, evaluate BODY."
-    (declare (indent defun))
-    `(eval-after-load ,feature
-       '(progn ,@body))))
+(defalias 'after-load 'with-eval-after-load)
 
 (defun add-auto-mode (mode &rest patterns)
   "Handy way to add modes to `auto-mode-alist' to use `MODE' for all `PATTERNS'."
   (dolist (pattern patterns)
     (add-to-list 'auto-mode-alist (cons pattern mode))))
-
-
-(defun string-all-matches (regex str &optional group)
-  "Find match for `REGEX' within `STR', returning the full match string or group `GROUP'."
-  (let ((result nil)
-        (pos 0)
-        (group (or group 0)))
-    (while (string-match regex str pos)
-      (push (match-string group str) result)
-      (setq pos (match-end group)))
-    result))
 
 (defun delete-this-file ()
   "Delete the current file, and kill the buffer."
@@ -83,8 +80,24 @@
       (browse-url (concat "file://" file-name)))))
 
 ;;; Set load path -- vendoring code
+;; look to remove - make sure you understand how site-lisp is/isn't being used.
 
-;;; Utilities for grabbing upstream libs
+(eval-when-compile (require 'cl))
+(defun sanityinc/add-subdirs-to-load-path (parent-dir)
+  "Adds every non-hidden subdir of PARENT-DIR to `load-path'."
+  (let* ((default-directory parent-dir))
+    (progn
+      (setq load-path
+            (append
+             (remove-if-not
+              (lambda (dir) (file-directory-p dir))
+              (directory-files (expand-file-name parent-dir) t "^[^\\.]"))
+             load-path)))))
+
+(sanityinc/add-subdirs-to-load-path
+ (expand-file-name "site-lisp/" user-emacs-directory))
+
+ ;;; Utilities for grabbing upstream libs
 
 (defun site-lisp-dir-for (name)
   (expand-file-name (format "site-lisp/%s" name) user-emacs-directory))
@@ -190,12 +203,9 @@ locate PACKAGE."
 
 ;; -- themes
 
-(require-package 'color-theme-sanityinc-solarized)
 (require-package 'color-theme-sanityinc-tomorrow)
-(require-package 'atom-one-dark-theme)
-
 ;; If you don't customize it, this is the theme you get.
-(setq-default custom-enabled-themes '(sanityinc-solarized-light))
+(setq-default custom-enabled-themes '(sanityinc-tomorrow-day))
 
 ;; Ensure that themes will be applied even if they have not been customized
 (defun reapply-themes ()
@@ -529,8 +539,7 @@ instead."
 
 (add-hook 'after-init-hook 'transient-mark-mode)
 
-(unless (fboundp 'display-line-numbers-mode)
-  (require-package 'nlinum))
+(require-package 'nlinum)
 
 (when (require-package 'rainbow-delimiters)
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))

@@ -39,39 +39,39 @@ xterm*VT100.Translations: #override \
                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
 
-*xterm*background: #f8f8f2
-*xterm*foreground: #1b1d1e
-*xterm*cursorColor: #1b1d1e
+*xterm*background: #eeeeee
+*xterm*foreground: #444444
+*xterm*cursorColor: #444444
 
 ! Black/grey
-*xterm*color0: #1b1d1e
+*xterm*color0: #1d1e1a
 *xterm*color8: #7c7c7c
 
 ! Red
-*xterm*color1: #f7cedc
-*xterm*color9: #fcedf4
+*xterm*color1: #f44336
+*xterm*color9: #e91e63
 
 ! Green
-*xterm*color2: #ddf8ae
-*xterm*color10: #e7f6dd
+*xterm*color2: #365d2e
+*xterm*color10: #a8c960
 
 ! Yellow
-*xterm*color3: #f3ecb2
-*xterm*color11: #f9f7df
+*xterm*color3: #ffff66
+*xterm*color11: #486ab4
 
 ! Blue
-*xterm*color4: #d1f0f6
-*xterm*color12: #d5ebf0
+*xterm*color4: #486ab4
+*xterm*color12: #4884a9
 
 ! Magenta
 *xterm*color5: #f2c3ea
 *xterm*color13: #e0d4f3
 
 ! Cyan
-*xterm*color6: #b1f3f7
-*xterm*color14: #cff3f3
+*xterm*color6: #486ab4
+*xterm*color14: #486ab4
 
 ! White
-*xterm*color7: #f8f8f2
-*xterm*color15: #f8f8f2
+*xterm*color7: #eeeeee
+*xterm*color15: #eeeeee
 

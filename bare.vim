@@ -12,8 +12,8 @@ endif
 let g:colors_name = "bare"
 
 let s:col = {
-      \ 'fg': 7,
-      \ 'bg': 0,
+      \ 'fg': 0,
+      \ 'bg': 7,
       \ 'dark': 248,
       \ 'darker': 243,
       \ 'darkest': 239,
@@ -40,7 +40,7 @@ call s:setHighlight('TODO', s:col['error'], s:col['bg'], 'NONE')
 call s:setHighlight('StatusLine', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('StatusLineNC', s:col['dark'], s:col['bg'], 'NONE')
 call s:setHighlight('VertSplit', s:col['dark'], s:col['bg'], 'NONE')
-call s:setHighlight('Search', s:col['dark'], s:col['bg'], 'NONE')
+call s:setHighlight('Search', s:col['dark'], s:col['bg'], 'underline')
 call s:setHighlight('LineNr', s:col['dark'], s:col['bg'], 'NONE')
 call s:setHighlight('CursorLine', 'NONE', s:col['darkest'], 'NONE')
 call s:setHighlight('Visual', s:col['bg'], s:col['fg'], 'NONE')

@@ -39,9 +39,9 @@ xterm*VT100.Translations: #override \
                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
 
-*xterm*background: #1b1d1e
-*xterm*foreground: #f8f8f2
-*xterm*cursorColor: #f8f8f2
+*xterm*background: #f8f8f2
+*xterm*foreground: #1b1d1e
+*xterm*cursorColor: #1b1d1e
 
 ! Black/grey
 *xterm*color0: #1b1d1e

@@ -15,11 +15,10 @@
 (defconst *spell-check-support-enabled* nil)
 (defconst *is-a-mac* (eq system-type 'darwin))
 
-;; deps code
-(if *is-a-mac*
-    ;; requires brew install libressl
-    (require 'gnutls)
-  (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem"))
+(if *is-a-mac* ;; requires brew install libressl
+    (progn
+      (require 'gnutls)
+      (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem")))
 
 ;; editor config code
 (setq backup-directory-alist
@@ -43,6 +42,8 @@
      '(("C-w" . kill-region-or-backward-word)
        ("M-o" . other-window)
        ("C-c r" . ivy-recentf)
+       ("M-k" . paredit-forward-barf-sexp)
+       ("M-l" . paredit-forward-slurp-sexp)
        ("M-[" . projectile-find-file)
        ;; ("M-[" . isearch-forward-symbol-at-point)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))))

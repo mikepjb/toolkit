@@ -17,6 +17,7 @@ let s:col = {
       \ 'dark': 248,
       \ 'darker': 243,
       \ 'darkest': 239,
+      \ 'light': 253,
       \ 'error': 1
       \ }
 
@@ -57,6 +58,8 @@ call s:setHighlight('diffRemoved', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('diffDelete', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('PMenu', s:col['dark'], s:col['darkest'], 'NONE')
 call s:setHighlight('PMenuSel', s:col['fg'], s:col['darkest'], 'NONE')
+call s:setHighlight('Folded', s:col['fg'], s:col['light'], 'NONE')
+call s:setHighlight('FoldColumn', s:col['fg'], s:col['light'], 'NONE')
 call s:setHighlight('User1', s:col['dark'], s:col['bg'], 'NONE')
 set stl=--\ %1*%F%m%r%h%w%*\ %=\ %y\ -\ [%l,%c]\ [%L,%p%%] showtabline=1
 set fillchars=stlnc:\-,stl:\-,vert:\|

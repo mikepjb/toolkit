@@ -51,3 +51,5 @@ setup_go_tools() {
 
   go get -u github.com/golang/dep/cmd/dep
 }
+
+setup_go_tools

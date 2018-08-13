@@ -404,7 +404,7 @@ class Match < Struct.new(:original_choice, :choice, :score, :matching_range)
       before = original_choice[0...matching_range.begin]
       matching = original_choice[matching_range.begin..matching_range.end]
       after = original_choice[(matching_range.end + 1)..-1]
-      Text[before, :cyan, matching, :default, after]
+      Text[before, :red, matching, :default, after]
     end
   end
 

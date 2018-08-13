@@ -22,7 +22,6 @@ if [ -z "$PATH_EXPANDED" ]; then
     binary_directories=(
     ~/trove/bin
     $GOPATH/bin
-    $HOME/src/go1.4/bin
     $HOME/.npm-global/bin
     /usr/local/bin
     $PATH

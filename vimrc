@@ -305,6 +305,13 @@ endfunc
 
 command! SyntaxStack :call SyntaxStack()
 
+function! Delete()
+  !rm %
+  bunload
+endfunc
+
+command! Delete :call Delete()
+
 let r_indent_align_args = 0
 let r_indent_ess_compatible = 0
 

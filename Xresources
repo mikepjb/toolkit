@@ -56,7 +56,7 @@ xterm*VT100.Translations: #override \
 *xterm*color10: #a8c960
 
 ! Yellow
-*xterm*color3: #ffff66
+*xterm*color3: #fbde4e
 *xterm*color11: #486ab4
 
 ! Blue

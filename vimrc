@@ -206,7 +206,7 @@ function! RunTestFile(...)
     exec ":!csi -s %"
   elseif &filetype == 'go'
     if !isdirectory("./src")
-      exec ":!go test -v"
+      exec ":!go test ./... -v"
     else
       exec ":!go test -v ./src"
     endif

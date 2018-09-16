@@ -140,6 +140,31 @@ This is intended to be called from `before-change-functions'."
           (if (not (go--buffer-narrowed-p))
               (puthash cur-line val go-dangling-cache))))))
 
+(defun go--at-function-definition ()
+  "return non-nil if point is on opening curly brace of function def"
+  (if (= (char-after) ?\{)
+      (save-excursion
+        (let ((old-point (point))
+              start-nesting)
+          (beginning-of-defun)
+          (when (looking-at "func ")
+            (setq start-nesting (go-paren-level))
+            (skip-chars-foward "^{")
+            (while (> (go-paren-level) start-nesting)
+              (forward-char)
+              (skip-chars-forward "^{") 0)
+            (if (and (= (go-paren-level) start-nesting) (= old-point (point)))
+                t))))))
+
+(defun go--indentation-for-opening-parenthesis ()
+  "return semantic indentation for current opening parens"
+  (save-excursion
+    (if (go--at-function-definition)
+        (progn
+          (beginning-of-defun)
+          (current-indentation))
+      (current-indentation))))
+
 (defun go-indentation-at-point ()
   (save-excursion
     (let (start-nesting)

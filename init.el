@@ -3,11 +3,14 @@
 (scroll-bar-mode -1)
 
 (setq debug-on-error t)
+(setq inhibit-splash-screen t)
 
 (global-font-lock-mode -1)
 (electric-pair-mode 1)
 (show-paren-mode 1)
 (ido-mode 1)
+
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (setq-default
  ido-enable-flex-matching t
@@ -18,7 +21,9 @@
  vc-follow-symlinks t
  tab-width 2
  mac-command-modifier 'meta
+ case-fold-search t
  custom-theme-load-path (list "~/.emacs.d/lib")
+ ns-use-native-fullscreen nil
  package-enable-at-startup nil)
 
 (add-to-list 'load-path "~/.emacs.d/lib")
@@ -50,6 +55,18 @@
        nil
        t)))))
 
+(defun beautify-json ()
+  (interactive)
+  (let ((b (if mark-active (min (point) (mark)) (point-min)))
+        (e (if mark-active (max (point) (mark)) (point-max))))
+    (shell-command-on-region b e
+     "python -mjson.tool" (current-buffer) t)))
+
+(defun build-tags ()
+  (interactive)
+  (shell-command
+   (concat "ctags -e -f " (git-root) "/.git/etags -R " (git-root))))
+
 (defun run-tests ()
   (interactive)
   (if (eq major-mode 'go-mode)
@@ -77,6 +94,7 @@
 (global-set-key (kbd "M-l") 'forward-right-bracket)
 (global-set-key (kbd "C-c t") 'run-tests)
 (global-set-key (kbd "C-z") 'eshell)
+(global-set-key (kbd "M-RET") 'toggle-frame-fullscreen)
 
 ;; M-s -> . searches under cursor, it would be good to bind this.
 
@@ -101,4 +119,11 @@
 (add-hook 'eshell-mode-hook
           (lambda ()
             (setenv "PAGER" "cat")
-            (setenv "EDITOR" "emacsclient")))
+            (setenv "EDITOR" "emacsclient")
+            (setenv "GOPATH" (expand-file-name "~"))))
+
+(if (eq system-type 'darwin)
+    (let ((path-from-shell
+	   (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
+      (setenv "PATH" path-from-shell)
+      (setq exec-path (split-string path-from-shell path-separator))))

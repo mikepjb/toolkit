@@ -83,18 +83,29 @@
   "select current grouping of text, a sexp, a string or extend to the parent group"
   )
 
+(defun open-shell ()
+  (interactive)
+  (if (= (count-windows) 1)
+      (progn (split-window-below)
+             (other-window 1)))
+    (eshell))
 
-(global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "M-g") 'mark-paragraph)
-(global-set-key (kbd "C-j") 'newline)
-(global-set-key (kbd "C-w") 'kill-backward-or-region)
-(global-set-key (kbd "C-;") 'hippie-expand)
-(global-set-key (kbd "C-t") 'ido-search)
-(global-set-key (kbd "M-k") 'backward-left-bracket)
-(global-set-key (kbd "M-l") 'forward-right-bracket)
-(global-set-key (kbd "C-c t") 'run-tests)
-(global-set-key (kbd "C-z") 'eshell)
-(global-set-key (kbd "M-RET") 'toggle-frame-fullscreen)
+(dolist
+    (binding
+     '(("M-o" . other-window)
+       ("M-g" . mark-paragraph)
+       ("C-c g b" . vc-annotate) ;; git blame
+       ("C-c g l" . vc-print-root-log)
+       ("C-j" . newline)
+       ("C-w" . kill-backward-or-region)
+       ("C-;" . hippie-expand)
+       ("C-t" . ido-search)
+       ("M-k" . backward-left-bracket)
+       ("M-l" . forward-right-bracket)
+       ("C-c t" . run-tests)
+       ("C-z" . open-shell)
+       ("M-RET" . toggle-frame-fullscreen)))
+  (global-set-key (kbd (car binding)) (cdr binding)))
 
 ;; M-s -> . searches under cursor, it would be good to bind this.
 
@@ -127,3 +138,5 @@
 	   (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
       (setenv "PATH" path-from-shell)
       (setq exec-path (split-string path-from-shell path-separator))))
+
+(require 'elruby)

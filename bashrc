@@ -31,9 +31,9 @@ if [ -z "$PATH_EXPANDED" ]; then
     export PATH_EXPANDED=1
 fi
 
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby 2.4.1
+# source /usr/local/share/chruby/chruby.sh
+# source /usr/local/share/chruby/auto.sh
+# chruby 2.4.1
 
 alias git-root='git rev-parse --show-toplevel || echo "."'
 alias tags='ctags -f $(git-root)/.git/tags -R $(git-root)'

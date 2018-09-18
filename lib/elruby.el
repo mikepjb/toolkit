@@ -1,4 +1,5 @@
-(require 'cl-lib)
+;; (require 'cl-lib)
+(require 'seq)
 
 ;; (defvar elruby-current-ruby-binary-path nil)
 
@@ -91,33 +92,23 @@
 ;;       (message (concat "[elruby] using " ruby-version))
 ;;     (message (concat "[elruby] couldn't find " ruby-version))))
 
-;; Copied for reference
-;; (defun elruby-change-path (new-binaries)
-;;   (let ((current-binaries-for-path
-;;          (mapconcat 'identity elruby-current-ruby-binary-path ":"))
-;;         (new-binaries-for-path (mapconcat 'identity new-binaries ":")))
-;;     (if (and elruby-current-ruby-binary-path
-;;              (not (string= (cl-first elruby-current-ruby-binary-path) "/bin")))
-;;         (progn
-;;           (setenv "PATH" (replace-regexp-in-string
-;;                           (regexp-quote current-binaries-for-path)
-;;                           new-binaries-for-path
-;;                           (getenv "PATH")))
-;;           (dolist (binary elruby-current-ruby-binary-path)
-;;             (setq exec-path (remove binary exec-path))))
-;;       (setenv "PATH" (concat new-binaries-for-path ":" (getenv "PATH"))))
-;;     (dolist (binary new-binaries)
-;;       (add-to-list 'exec-path binary))
-;;     (setq eshell-path-env (getenv "PATH"))
-;;     (setq elruby-current-ruby-binary-path new-binaries)))
-
-
 ;;;###autoload
 (defun use-latest-ruby ()
   (interactive)
   (setenv "GEM_HOME" (concat (getenv "HOME") "/.gem/ruby/2.5.0"))
   (setenv "GEM_PATH" (concat
                       (getenv "HOME") "/.gem/ruby/2.5.0:"
-                      (getenv "HOME") "/.rubies/ruby-2.5.0/lib/ruby/gems/2.5.0")))
+                      (getenv "HOME") "/.rubies/ruby-2.5.0/lib/ruby/gems/2.5.0"))
+  (let ((rubyless-path (mapconcat 'identity
+                                  (seq-filter
+                                   (lambda (x) (not (string-match-p (regexp-quote "ruby") x)))
+                                   (split-string (getenv "PATH") ":")) ":")))
+    (let ((new-path (concat
+                     (getenv "HOME") "/.gem/ruby/2.5.0/bin:"
+                     (getenv "HOME") "/.rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/bin:"
+                     (getenv "HOME") "/.rubies/ruby-2.5.0/bin:"
+                     rubyless-path)))
+      (setenv "PATH" new-path)
+      (setq eshell-path-env new-path))))
 
 (provide 'elruby)

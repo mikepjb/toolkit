@@ -90,6 +90,14 @@
              (other-window 1)))
     (eshell))
 
+(defun open-repl ()
+  (interactive)
+  (if (= (count-windows) 1)
+      (progn (split-window-below)
+             (other-window 1)))
+  (let ((default-directory (git-root)))
+    (inferior-lisp "boot dev")))
+
 (dolist
     (binding
      '(("M-o" . other-window)
@@ -104,6 +112,7 @@
        ("M-l" . forward-right-bracket)
        ("C-c t" . run-tests)
        ("C-z" . open-shell)
+       ("C-c M-j" . open-repl)
        ("M-RET" . toggle-frame-fullscreen)))
   (global-set-key (kbd (car binding)) (cdr binding)))
 
@@ -115,12 +124,24 @@
 	        (lambda ()
             (define-key ido-completion-map (kbd "C-w") 'ido-delete-backward-updir)))
 
+(add-hook 'inferior-lisp-mode-hook
+          (lambda ()
+            (setq-local electric-pair-pairs
+                        '(
+                          (?\" . ?\")
+                          (?\{ . ?\})
+                          (?\( . ?\))
+                          (?\[ . ?\])))))
+
 (set-frame-font "Inconsolata 19" nil t)
 
 (load-theme 'bare t)
 
 (autoload 'go-mode "go-mode" "golang major mode" t)
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+
+(autoload 'clojure-mode "clojure-mode" "clojure major mode" t)
+(add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
 
 (add-hook 'after-save-hook
           (lambda () (interactive) (if (eq major-mode 'go-mode)

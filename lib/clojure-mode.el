@@ -22,4 +22,14 @@
   "Major mode for editing Clojure Language files"
   (set (make-local-variable 'font-lock-defaults) '(clojure-font-lock-keywords)))
 
+
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (setq-local electric-pair-pairs
+                        '(
+                          (?\" . ?\")
+                          (?\{ . ?\})
+                          (?\( . ?\))
+                          (?\[ . ?\])))))
+
 (provide 'clojure-mode)

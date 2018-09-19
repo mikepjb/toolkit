@@ -35,6 +35,12 @@
       (kill-region (region-beginning) (region-end))
     (backward-kill-word 1)))
 
+(defun comment-line-or-region ()
+  (interactive)
+  (if mark-active
+      (comment-region (region-beginning) (region-end))
+    (comment-line 1)))
+
 (defun git-root ()
   (let ((response (shell-command-to-string
                    "echo -ne $(git rev-parse --show-toplevel || echo \".\")")))
@@ -83,6 +89,8 @@
   "select current grouping of text, a sexp, a string or extend to the parent group"
   )
 
+(defun join-below () (interactive) (next-line 1) (join-line))
+
 (defun open-shell ()
   (interactive)
   (if (= (count-windows) 1)
@@ -102,6 +110,7 @@
     (binding
      '(("M-o" . other-window)
        ("M-g" . mark-paragraph)
+       ("C-c g d" . vc-diff)
        ("C-c g b" . vc-annotate) ;; git blame
        ("C-c g l" . vc-print-root-log)
        ("C-j" . newline)
@@ -112,17 +121,32 @@
        ("M-l" . forward-right-bracket)
        ("C-c t" . run-tests)
        ("C-z" . open-shell)
+       ("M-j" . join-below)
+       ("M-/" . comment-line-or-region)
+       ("M-z" . zap-up-to-char)
        ("C-c M-j" . open-repl)
+       ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
        ("M-RET" . toggle-frame-fullscreen)))
   (global-set-key (kbd (car binding)) (cdr binding)))
 
 ;; M-s -> . searches under cursor, it would be good to bind this.
 
-(global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
-
 (add-hook 'ido-setup-hook
 	        (lambda ()
-            (define-key ido-completion-map (kbd "C-w") 'ido-delete-backward-updir)))
+            (define-key ido-completion-map (kbd "C-w") 'backward-kill-word)
+            (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)))
+
+;; M-DEL backward-kill-word (global-map) on ido-search
+;; M-DEL on find-file - ido-delete-backward-word-updir (found in ido-completion-map)
+
+;; (add-hook 'minibuffer-setup-hook
+;;           (lambda ()
+;;             (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
+;;             (define-key minibuffer-local-completion-map (kbd "C-w") 'backward-kill-word)))
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map (kbd "C-t") 'ido-search)))
 
 (add-hook 'inferior-lisp-mode-hook
           (lambda ()
@@ -144,9 +168,10 @@
 (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
 
 (add-hook 'after-save-hook
-          (lambda () (interactive) (if (eq major-mode 'go-mode)
-                                       (progn (shell-command (concat "goimports -w " (buffer-file-name)))
-                                              (revert-buffer nil t)))))
+          (lambda () (interactive)
+            (if (eq major-mode 'go-mode)
+                (progn (shell-command (concat "goimports -w " (buffer-file-name)))
+                       (revert-buffer nil t)))))
 
 (add-hook 'eshell-mode-hook
           (lambda ()

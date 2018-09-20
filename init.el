@@ -38,7 +38,7 @@
 (defun comment-line-or-region ()
   (interactive)
   (if mark-active
-      (comment-region (region-beginning) (region-end))
+      (comment-or-uncomment-region (region-beginning) (region-end))
     (comment-line 1)))
 
 (defun git-root ()
@@ -98,13 +98,19 @@
              (other-window 1)))
     (eshell))
 
+;; (eq major-mode 'go-mode)
+
 (defun open-repl ()
   (interactive)
   (if (= (count-windows) 1)
       (progn (split-window-below)
              (other-window 1)))
   (let ((default-directory (git-root)))
-    (inferior-lisp "boot dev")))
+    (pcase major-mode
+      ('clojure-mode (inferior-lisp "boot dev"))
+      ('ruby-mode (comint-run "irb"))
+      ('python-mode (comint-run "python"))
+      (_ (message "major mode has no defined repl")))))
 
 (dolist
     (binding
@@ -157,7 +163,7 @@
                           (?\( . ?\))
                           (?\[ . ?\])))))
 
-(set-frame-font "Inconsolata 19" nil t)
+(set-frame-font "Inconsolata 16" nil t)
 
 (load-theme 'bare t)
 

@@ -8,10 +8,11 @@
       (bare-yellow "#cf8f2e")
       (bare-blue "#486ab4")
       (bare-green "#365d2e")
-      (bare-magenta "#f2ce3a")
+      (bare-magenta "#e13dfc")
       (bare-purple "#8b008b")
       (bare-region "#333300"))
 
+  ;; view font-lock under cursor with C-u C-x =
   (custom-theme-set-faces
    'bare
    `(default ((,class (:foreground ,bare-grey :background ,bare-light-grey))))

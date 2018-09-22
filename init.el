@@ -28,6 +28,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/lib")
 
+(setq grep-command "grep")
+
 (defun kill-backward-or-region ()
   "kill region when mark is set, other kill previous word"
   (interactive)
@@ -90,6 +92,20 @@
   )
 
 (defun join-below () (interactive) (next-line 1) (join-line))
+
+;; last option for compiile you can specify a minor mode (to make error lines clickable)
+(defun rspec-compile ()
+  (interactive)
+  (let ((compile-target (buffer-file-name)))
+    (use-latest-ruby)
+    (let ((default-directory (git-root)))
+      (compile (concat "bundle exec rspec --no-color " compile-target) nil))))
+
+(defun kanji ()
+  (interactive)
+  (if (eq current-input-method nil)
+      (set-input-method 'japanese)
+    (deactivate-input-method)))
 
 (defun open-shell ()
   (interactive)
@@ -163,7 +179,9 @@
                           (?\( . ?\))
                           (?\[ . ?\])))))
 
-(set-frame-font "Inconsolata 16" nil t)
+(if (string-match "\\`hades-desktop" (system-name))
+    (set-frame-font "Inconsolata 19" nil t)
+  (set-frame-font "Inconsolata 16" nil t))
 
 (load-theme 'bare t)
 

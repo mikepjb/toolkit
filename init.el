@@ -101,6 +101,18 @@
     (let ((default-directory (git-root)))
       (compile (concat "bundle exec rspec --no-color " compile-target) nil))))
 
+
+(defun read-dotenv ()
+  (interactive)
+  (let ((buffer-lines (split-string (buffer-string) "\n" t)))
+    (mapcar
+     (lambda (y)
+       (let ((key (car y))
+             (value (replace-regexp-in-string "'" "" (car (cdr y)))))
+         (setenv key value)))
+     (mapcar (lambda (x) (split-string x "=" t)) buffer-lines))))
+
+
 (defun kanji ()
   (interactive)
   (if (eq current-input-method nil)
@@ -134,6 +146,7 @@
        ("M-g" . mark-paragraph)
        ("C-c g d" . vc-diff)
        ("C-c g b" . vc-annotate) ;; git blame
+       ("C-c g p" . vc-update) ;; git pull
        ("C-c g l" . vc-print-root-log)
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
@@ -157,6 +170,9 @@
 	        (lambda ()
             (define-key ido-completion-map (kbd "C-w") 'backward-kill-word)
             (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)))
+
+(add-hook 'lisp-interaction-mode-hook
+          (lambda () (define-key lisp-interaction-mode-map (kbd "C-j") 'newline)))
 
 ;; M-DEL backward-kill-word (global-map) on ido-search
 ;; M-DEL on find-file - ido-delete-backward-word-updir (found in ido-completion-map)

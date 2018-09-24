@@ -12,6 +12,14 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(defvar welcome-messages
+  '("I used to live by a code."
+    "What is broken can be reforged."
+    "Shoot for the moon. Even if you miss it you will land among the stars."))
+
+(defun display-startup-echo-area-message ()
+  (message (seq-random-elt welcome-messages)))
+
 (setq-default
  ido-enable-flex-matching t
  backup-directory-alist '(("" . "~/.emacs.d/backup"))

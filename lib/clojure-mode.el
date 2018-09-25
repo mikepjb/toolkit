@@ -13,14 +13,33 @@
    )
   "Minimal highlighting expressions for Clojure mode")
 
+;; (defvar clojure-mode-syntax-table
+;;   (let ((st (make-syntax-table)))
+;;     st)
+;;   "Syntax table for Clojure mode")
+
 (defvar clojure-mode-syntax-table
-  (let ((st (make-syntax-table)))
-    st)
-  "Syntax table for Clojure mode")
+  (let ((table (copy-syntax-table emacs-lisp-mode-syntax-table)))
+    (modify-syntax-entry ?\{ "(}" table)
+    (modify-syntax-entry ?\} "({" table)
+    (modify-syntax-entry ?\[ "(]" table)
+    (modify-syntax-entry ?\] "([" table)
+    (modify-syntax-entry ?\? "_ p" table)
+    (modify-syntax-entry ?# "_ p" table)
+    (modify-syntax-entry ?~ "'" table)
+    (modify-syntax-entry ?^ "'" table)
+    (modify-syntax-entry ?@ "'" table)
+    table)
+  "Syntax table for Clojure mode.")
+
+(defun clojure-indent-line ()
+  (interactive)
+  (lisp-indent-line))
 
 (define-derived-mode clojure-mode lisp-mode "Clojure"
   "Major mode for editing Clojure Language files"
-  (set (make-local-variable 'font-lock-defaults) '(clojure-font-lock-keywords)))
+  (set (make-local-variable 'font-lock-defaults) '(clojure-font-lock-keywords))
+  (set (make-local-variable 'indent-line-function) 'clojure-indent-line))
 
 
 (add-hook 'clojure-mode-hook

@@ -39,40 +39,6 @@ that constant is changed.")
     st)
   "Syntax table for Go mode")
 
-;; mostly works.
-;; basic logic is to look backwards until you find a (, {, ) or } without
-;; a pair e.g () and increment/decrement the indentation relative to that
-;; (defun go-indent-line ()
-;;   "Indent current line as go code"
-;;   (interactive)
-;;   (if (bobp)
-;;       (indent-line-to 0)
-;;     (let ((not-indented t) cur-indent)
-;;       (if (looking-at "\\()\\|}\\)$")
-;;           (progn
-;;             (save-excursion
-;;               (forward-line -1)
-;;               (setq cur-indent (- (current-indentation) tab-width)))
-;;             (if (< cur-indent 0)
-;;                 (setq cur-indent 0)))
-;;         (save-excursion
-;;           (while not-indented ;; iterate backward until we find an indent hint
-;;             (forward-line -1)
-;;             (if (looking-at ".*\\()\\|}\\)") ;; closing scope hint
-;;                 (progn
-;;                   (setq cur-indent (current-indentation))
-;;                   (setq not-indented nil))
-;;               (if (and (looking-at ".*\\((\\|{\\)")
-;;                        (not (looking-at ".*\\()\\|}\\)")))
-;;                   (progn
-;;                     (setq cur-indent (+ (current-indentation) tab-width))
-;;                     (setq not-indented nil))
-;;                 (if (bobp)
-;;                     (setq not-indented nil)))))))
-;;       (if cur-indent
-;;           (indent-line-to cur-indent)
-;;         (indent-line-to 0)))))
-
 (defun go--reset-dangling-cache-before-change (&optional _beg _end)
   "Reset `go-dangling-cache'.
 

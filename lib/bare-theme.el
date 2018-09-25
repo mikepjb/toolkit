@@ -10,14 +10,14 @@
       (bare-green "#365d2e")
       (bare-magenta "#e13dfc")
       (bare-purple "#8b008b")
-      (bare-region "#333300"))
+      (bare-region "#dcb9b9"))
 
   ;; view font-lock under cursor with C-u C-x =
   (custom-theme-set-faces
    'bare
    `(default ((,class (:foreground ,bare-grey :background ,bare-light-grey))))
    `(cursor ((,class (:background ,bare-grey))))
-   `(region ((,class (:background ,bare-magenta))))
+   `(region ((,class (:background ,bare-region))))
    `(highlight ((,class (:background ,bare-grey))))
    `(font-lock-builtin-face ((,class (:foreground ,bare-magenta))))
    `(font-lock-keyword-face ((,class (:foreground ,bare-magenta))))

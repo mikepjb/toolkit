@@ -1,3 +1,7 @@
+;; TODO reached clojure-indent-function - (:require is indented 4 not 2 currently.)
+
+(require 'cl-lib)
+
 (defvar clojure-mode-hook nil)
 
 (defvar clojure-mode-map
@@ -5,18 +9,24 @@
     map)
   "Keymap for Clojure major mode")
 
-(defconst clojure-font-lock-keywords
-  (list
-   `(,(concat "\\b" (regexp-opt '("package" "import" "type" "func" "len") t) "\\b") . 'font-lock-builtin-face)
-   `(,(concat "\\b" (regexp-opt '("ns" "defn" "defmacro" "if" "else") t) "\\b") . 'font-lock-keyword-face)
-   `(,(concat "\\b" (regexp-opt '("loop" "let" "nil" "int") t) "\\b") . 'font-lock-type-face)
-   )
-  "Minimal highlighting expressions for Clojure mode")
-
 ;; (defvar clojure-mode-syntax-table
 ;;   (let ((st (make-syntax-table)))
 ;;     st)
 ;;   "Syntax table for Clojure mode")
+
+;; (put 'ns 'lisp-indent-function 'defun)
+
+;; (defcustom clojure-align-binding-forms
+;;   '("let" "when-let" "when-some" "if-let" "if-some" "binding" "loop"
+;;     "doseq" "for" "with-open" "with-local-vars" "with-redefs")
+;;   "List of strings matching forms that have binding forms"
+;;   :safe #'listp
+;;   :type '(repeat string))
+
+;; TODO search and complete this function
+;; (defun put-clojure-indent (sym indent)
+;;   "Instruct `clojure-indent-function' to indent the body of SYM by INDENT"
+;;   (put sym 'clojure-indent-function indent))
 
 (defvar clojure-mode-syntax-table
   (let ((table (copy-syntax-table emacs-lisp-mode-syntax-table)))
@@ -36,11 +46,24 @@
   (interactive)
   (lisp-indent-line))
 
+(defun clojure-mode-variables ()
+  "set up initial buffer-local variables"
+  (setq-local comment-start ";")
+  (setq-local comment-start-skip ";+ *")
+  (setq-local command-add 1)
+  (setq-local comment-start-skip
+              "\\(\\(^\\|[^\\\\\n]\\)\\(\\\\\\\\\\)*\\)\\(;+\\|#|\\) *")
+  (setq-local indent-line-function #'clojure-indent-line)
+  ;; (setq-local indent-region-function #'clojure-indent-region)
+  ;; (setq-local lisp-indent-function #'clojure-indent-function)
+  )
+
 (define-derived-mode clojure-mode lisp-mode "Clojure"
   "Major mode for editing Clojure Language files"
+  (clojure-mode-variables)
+  ;; (set (make-local-variable 'lisp-indent-function) #'clojure-indent-function)
   (set (make-local-variable 'font-lock-defaults) '(clojure-font-lock-keywords))
   (set (make-local-variable 'indent-line-function) 'clojure-indent-line))
-
 
 (add-hook 'clojure-mode-hook
           (lambda ()

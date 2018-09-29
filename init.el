@@ -132,9 +132,11 @@
   (if (= (count-windows) 1)
       (progn (split-window-below)
              (other-window 1)))
-    (eshell))
+  (let ((default-directory (git-root)))
+    (eshell)))
 
-;; (eq major-mode 'go-mode)
+(defun git-ff ()
+  (interactive) (async-shell-command (concat "cd " (git-root) " && git ff")))
 
 (defun open-repl ()
   (interactive)
@@ -154,7 +156,7 @@
        ("M-g" . mark-paragraph)
        ("C-c g d" . vc-diff)
        ("C-c g b" . vc-annotate) ;; git blame
-       ("C-c g p" . vc-update) ;; git pull
+       ("C-c g p" . git-ff)
        ("C-c g l" . vc-print-root-log)
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)

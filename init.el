@@ -34,6 +34,9 @@
  ns-use-native-fullscreen nil
  package-enable-at-startup nil)
 
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
+
 (add-to-list 'load-path "~/.emacs.d/lib")
 
 (setq grep-command "grep")
@@ -170,7 +173,9 @@
        ("M-/" . comment-line-or-region)
        ("M-z" . zap-up-to-char)
        ("C-c M-j" . open-repl)
+       ("C-c p" . list-processes)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+       ("C-c d" . (lambda () (interactive) (find-file "~/notes/debug.org")))
        ("M-RET" . toggle-frame-fullscreen)))
   (global-set-key (kbd (car binding)) (cdr binding)))
 

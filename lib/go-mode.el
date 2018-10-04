@@ -194,4 +194,8 @@ This is intended to be called from `before-change-functions'."
   (set (make-local-variable 'comment-use-syntax) t)
   (set (make-local-variable 'comment-start-skip) "\\(//+\\|/\\*+\\)\\s *"))
 
+;;;###autoload
+(progn
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode)))
+
 (provide 'go-mode)

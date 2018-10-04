@@ -20,6 +20,16 @@
 (defun display-startup-echo-area-message ()
   (message (seq-random-elt welcome-messages)))
 
+(defvar frame-config
+  '((width . 180)
+    (height . 70)
+    (vertical-scroll-bars . nil)))
+
+(setq
+ initial-frame-alist frame-config
+ default-frame-alist frame-config)
+
+
 (setq-default
  ido-enable-flex-matching t
  backup-directory-alist '(("" . "~/.emacs.d/backup"))
@@ -216,11 +226,19 @@
 
 (load-theme 'bare t)
 
-(autoload 'go-mode "go-mode" "golang major mode" t)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+(require 'go-mode)
+(require 'clojure-mode)
+(require 'paredit)
+(add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+(add-hook 'lisp-mode-hook 'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+(add-hook 'clojure-mode-hook 'enable-paredit-mode)
 
-(autoload 'clojure-mode "clojure-mode" "clojure major mode" t)
-(add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
+;; Interesting - it seems you can order a mode to be evaluated when a function is called
+;; e.g useful for clojurescript-mode, loading clojure-mode which contains the definition.
+;; (autoload 'enable-paredit-mode "paredit"
+;;   "Turn on pseudo-structural editing of Lisp code."
+;;   t)
 
 (add-hook 'after-save-hook
           (lambda () (interactive)

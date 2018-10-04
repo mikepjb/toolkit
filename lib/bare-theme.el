@@ -3,13 +3,17 @@
 (let ((class '((class color) (min-colors 89)))
       (bare-light-grey "#eeeeee")
       (bare-grey "#444444")
+      (bare-charcoal "#434343")
       (bare-black "#1b1d1e")
       (bare-white "#eeeeee")
+      (bare-red "#cc7264")
       (bare-yellow "#cf8f2e")
+      (bare-orange "#de914f")
       (bare-blue "#486ab4")
       (bare-green "#365d2e")
       (bare-magenta "#e13dfc")
       (bare-purple "#8b008b")
+      (bare-lilac "#9d8aC0")
       (bare-region "#dcb9b9"))
 
   ;; view font-lock under cursor with C-u C-x =
@@ -31,15 +35,18 @@
    `(diff-hunk-header ((,class (:foreground ,bare-blue))))
    `(diff-file-header ((,class (:foreground ,bare-blue))))
    `(diff-header ((,class (:foreground ,bare-blue))))
-   `(ido-first-match ((,class (:foreground ,bare-green))))
-   `(ido-only-match ((,class (:foreground ,bare-green))))
-   `(ido-subdir ((,class (:foreground ,bare-yellow))))
-   `(ido-indicator ((,class (:foreground ,bare-green))))
+   `(ido-first-match ((,class (:foreground ,bare-orange))))
+   `(ido-only-match ((,class (:foreground ,bare-orange))))
+   `(ido-subdir ((,class (:foreground ,bare-red))))
+   `(ido-indicator ((,class (:foreground ,bare-orange))))
    `(match ((,class (:background ,bare-region))))
+   ;; `(mode-line ((,class (:background ,bare-charcoal :foreground ,bare-white))))
    `(compilation-info ((,class (:foreground ,bare-green))))
    (custom-theme-set-variables 'bare
     `(ansi-color-names-vector
       [,bare-black
+       ,bare-grey
+       ,bare-charcoal
        ,bare-magenta ;; red
        ,bare-green
        ,bare-yellow ;; yellow

@@ -29,7 +29,6 @@
  initial-frame-alist frame-config
  default-frame-alist frame-config)
 
-
 (setq-default
  ido-enable-flex-matching t
  backup-directory-alist '(("" . "~/.emacs.d/backup"))
@@ -175,8 +174,10 @@
        ("C-w" . kill-backward-or-region)
        ("C-;" . hippie-expand)
        ("C-t" . ido-search)
-       ("M-k" . backward-left-bracket)
-       ("M-l" . forward-right-bracket)
+       ;; ("M-k" . backward-left-bracket)
+       ;; ("M-l" . forward-right-bracket)
+       ("M-k" . paredit-forward-barf-sexp)
+       ("M-l" . paredit-forward-slurp-sexp)
        ("C-c t" . run-tests)
        ("C-z" . open-shell)
        ("M-j" . join-below)
@@ -190,6 +191,11 @@
   (global-set-key (kbd (car binding)) (cdr binding)))
 
 ;; M-s -> . searches under cursor, it would be good to bind this.
+
+;; paredit overwrites M-s with paredit-splice-sexp, reverse this
+(add-hook 'paredit-setup-hook
+          (lambda ()
+            (define-key paredit-mode-map (kbd "M-s ." isearch-forward-symbol-at-point))))
 
 (add-hook 'ido-setup-hook
 	        (lambda ()
@@ -252,9 +258,11 @@
             (setenv "EDITOR" "emacsclient")
             (setenv "GOPATH" (expand-file-name "~"))))
 
+(add-hook 'focus-out-hook 'save-buffer)
+
 (if (eq system-type 'darwin)
     (let ((path-from-shell
-	   (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
+	         (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
       (setenv "PATH" path-from-shell)
       (setq exec-path (split-string path-from-shell path-separator))))
 

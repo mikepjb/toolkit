@@ -258,7 +258,9 @@
             (setenv "EDITOR" "emacsclient")
             (setenv "GOPATH" (expand-file-name "~"))))
 
-(add-hook 'focus-out-hook 'save-buffer)
+(add-hook 'focus-out-hook
+          (lambda ()
+            (if (buffer-file-name) (save-buffer))))
 
 (if (eq system-type 'darwin)
     (let ((path-from-shell

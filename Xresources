@@ -48,8 +48,9 @@ xterm*VT100.Translations: #override \
 *xterm*color8: #7c7c7c
 
 ! Red
-*xterm*color1: #f44336
-*xterm*color9: #e91e63
+*xterm*color1: #800000
+*xterm*color9: #f44336
+! *xterm*color9: #e91e63
 
 ! Green
 *xterm*color2: #365d2e
@@ -65,7 +66,7 @@ xterm*VT100.Translations: #override \
 
 ! Magenta
 *xterm*color5: #f2c3ea
-*xterm*color13: #8b008b
+*xterm*color13: #8b1e8b
 
 ! Cyan
 *xterm*color6: #486ab4

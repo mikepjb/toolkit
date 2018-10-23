@@ -18,7 +18,10 @@ let s:col = {
       \ 'darker': 243,
       \ 'darkest': 239,
       \ 'light': 253,
-      \ 'error': 1
+      \ 'error': 1,
+      \ 'green': 10,
+      \ 'grey': 8,
+      \ 'red': 5
       \ }
 
 function! s:setHighlight(name, fg, bg, display)
@@ -52,10 +55,16 @@ call s:setHighlight('NonText', s:col['dark'], s:col['bg'], 'NONE')
 call s:setHighlight('Delimiter', s:col['dark'], s:col['bg'], 'NONE')
 call s:setHighlight('MatchParen', s:col['fg'], s:col['darker'], 'NONE')
 call s:setHighlight('Operator', s:col['fg'], s:col['bg'], 'NONE')
+" For git?!?
 call s:setHighlight('diffAdded', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('diffChange', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('diffRemoved', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('diffDelete', s:col['fg'], s:col['bg'], 'NONE')
+" For :diffthis & vim -d file1 file2
+call s:setHighlight('DiffAdd', s:col['fg'], s:col['green'], 'NONE')
+call s:setHighlight('DiffChange', s:col['fg'], s:col['grey'], 'NONE')
+call s:setHighlight('DiffText', s:col['fg'], s:col['bg'], 'NONE')
+call s:setHighlight('DiffDelete', s:col['fg'], s:col['red'], 'NONE')
 call s:setHighlight('PMenu', s:col['dark'], s:col['darkest'], 'NONE')
 call s:setHighlight('PMenuSel', s:col['fg'], s:col['darkest'], 'NONE')
 call s:setHighlight('Folded', s:col['fg'], s:col['light'], 'NONE')

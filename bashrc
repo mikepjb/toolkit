@@ -52,6 +52,7 @@ alias de='export $(egrep -v "^#" .env | xargs)'
 alias cl='for code in {0..16}; do echo -e "\e[38;05;${code}m $code: Test"; done'
 alias json="python -m json.tool"
 alias csv="column -t -s, | less -S" #use with cat a.csv | csv
+alias ag='echo "use ripgrep fool!"'
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib

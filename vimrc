@@ -103,12 +103,13 @@ function! LoadClojureFile()
   !hurl "(load-file \"%:p\")"
 endfunction
 
-" if executable('ag')
-"   set grepprg=ag\ --nogroup\ --nocolor
-"   nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-"   command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-"   nnoremap \ :Ag<SPACE>
-" endif
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading
+  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  command! -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Rg<SPACE>
+  nnoremap <leader>g :Rg<SPACE>
+endif
 
 command! TrimWhitespace :%s/\s\+$//e
 command! PrettifyJSON :%!python -m json.tool

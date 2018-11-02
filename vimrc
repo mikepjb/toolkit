@@ -157,7 +157,7 @@ function! MarkdownEnvironment()
   setlocal foldexpr=Foldexpr_markdown(v:lnum)
   setlocal foldmethod=expr
   setlocal spell
-  set spellfile=~/.vim/spellfile.en.utf-8.add
+  set spellfile=~/.vim/en.utf-8.add
 endfunction
 
 augroup markdown

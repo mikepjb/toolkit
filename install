@@ -9,7 +9,7 @@ done
 
 mkdir -p $HOME/.vim/colors
 ln -sfv $BASE/bare.vim ~/.vim/colors/bare.vim
-ln -sfv $BASE/spellfile.en.utf-8.add ~/.vim/spellfile.en.utf-8.add
+ln -sfv $BASE/en.utf-8.add ~/.vim/en.utf-8.add
 
 mkdir -p $HOME/.vim/autoload
 ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim

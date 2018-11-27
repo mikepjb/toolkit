@@ -82,3 +82,6 @@ git_state() {
 }
 
 PROMPT_COMMAND='PS1="\W($(git_state)) \$ "'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use

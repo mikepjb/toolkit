@@ -1,0 +1,23 @@
+#!/bin/sh -e
+# vim: ft=sh
+
+echo 'building server binary...'
+GOOS=linux GOARCH=amd64 go build
+
+echo 'creating server tarball'
+tar \
+  --exclude='./vendor' \
+  --exclude='./src' \
+  --exclude='./site/posts/generated' \
+  --exclude='./.gitignore' \
+  --exclude='./Gopkg*' \
+  --exclude='./site/posts/unpublished' \
+  --exclude='./site.tar.gz' \
+  --exclude='./.git' \
+  --exclude='*.go' -zcvf site.tar.gz .
+
+echo 'removing site binary...'
+rm ./${PWD##*/}
+
+# ssh <target> "mkdir -p /var/www/${PWD##*/} && tar -C # /var/www/${PWD##*/} -xz -f-" < site.tar.gz 
+

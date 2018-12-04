@@ -38,6 +38,7 @@ symlink_emacs_configuration
 configure_npm_directory() {
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'
+  # curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 }
 
 setup_go_tools() {

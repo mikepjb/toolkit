@@ -48,6 +48,7 @@ map <C-k> <C-w><C-k>
 map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
 imap <C-c> <esc>
+imap <C-t> <></><Esc>5hdiwp3lpT>i
 
 function! SelectaCommand(choice_command, selecta_args, vim_command)
   try
@@ -208,11 +209,7 @@ function! RunTestFile(...)
   elseif &filetype == 'scheme'
     exec ":!csi -s %"
   elseif &filetype == 'go'
-    if !isdirectory("./src")
-      exec ":!go test ./... -v"
-    else
-      exec ":!go test -v ./src"
-    endif
+    exec ":!go test ./... -v"
   else
     if in_test_file
       call SetTestFile(command_suffix)

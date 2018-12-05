@@ -20,7 +20,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     join_by() { local IFS="$1"; shift; echo "$*"; }
 
     binary_directories=(
-    ~/trove/bin
+    ~/toolkit/bin
     $GOPATH/bin
     $HOME/.npm-global/bin
     /usr/local/bin

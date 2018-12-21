@@ -24,9 +24,19 @@ set autoread
 set gdefault
 set t_ti= t_te=
 set isk+=-
+set completeopt -=preview
+set omnifunc=Suggest
 runtime macros/matchit.vim
 
-set tags=.git/tags
+function! Suggest(findstart, base)
+  if a:findstart == 1
+    " gocode complete examines the current buffer itself..
+    execute "silent let g:suggest_completions = " . system('suggest')
+    return col('.') - g:suggest_completions[0] - 1
+  else
+    return g:suggest_completions[1]
+  endif
+endfunction
 
 colorscheme bare
 
@@ -40,6 +50,7 @@ inoremap <C-e> <C-o>$
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-d> <Delete>
+inoremap <C-l> <space>=><space>
 map Q @q
 map Y y$
 map <C-h> <C-w><C-h>
@@ -163,6 +174,25 @@ endfunction
 
 augroup markdown
   au! Filetype markdown :call MarkdownEnvironment()
+augroup END
+
+func! Foldexpr_css(lnum)
+  let l1 = getline(a:lnum)
+  let l2 = getline(a:lnum+1)
+
+  echo l1
+  if l1 =~ '^/.\?\*.*\\*.\?/$'
+    return '>1'
+  elseif l2 =~ '^/.\?\*.*\\*.\?/$'
+    return '<1'
+  else
+    return '='
+  endif
+endfunc
+
+augroup css
+  setlocal foldexpr=Foldexpr_css(v:lnum)
+  setlocal foldmethod=expr
 augroup END
 
 function! GolangEnvironment()

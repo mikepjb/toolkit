@@ -180,7 +180,6 @@ func! Foldexpr_css(lnum)
   let l1 = getline(a:lnum)
   let l2 = getline(a:lnum+1)
 
-  echo l1
   if l1 =~ '^/.\?\*.*\\*.\?/$'
     return '>1'
   elseif l2 =~ '^/.\?\*.*\\*.\?/$'

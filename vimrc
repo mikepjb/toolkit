@@ -176,22 +176,26 @@ augroup markdown
   au! Filetype markdown :call MarkdownEnvironment()
 augroup END
 
-func! Foldexpr_css(lnum)
-  let l1 = getline(a:lnum)
-  let l2 = getline(a:lnum+1)
+func! CSSEnvironment()
+  func! Foldexpr_css(lnum)
+    let l1 = getline(a:lnum)
+    let l2 = getline(a:lnum+1)
 
-  if l1 =~ '^/.\?\*.*\\*.\?/$'
-    return '>1'
-  elseif l2 =~ '^/.\?\*.*\\*.\?/$'
-    return '<1'
-  else
-    return '='
-  endif
+    if l1 =~ '^/.\?\*.*\\*.\?/$'
+      return '>1'
+    elseif l2 =~ '^/.\?\*.*\\*.\?/$'
+      return '<1'
+    else
+      return '='
+    endif
+  endfunc
+
+  setlocal foldexpr=Foldexpr_css(v:lnum)
+  setlocal foldmethod=expr
 endfunc
 
 augroup css
-  setlocal foldexpr=Foldexpr_css(v:lnum)
-  setlocal foldmethod=expr
+  au! Filetype css :call CSSEnvironment()
 augroup END
 
 function! GolangEnvironment()

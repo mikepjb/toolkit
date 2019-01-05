@@ -14,17 +14,6 @@ ln -sfv $BASE/en.utf-8.add ~/.vim/en.utf-8.add
 mkdir -p $HOME/.vim/autoload
 ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
 
-if [ "$PLATFORM" == Darwin ]; then
-  echo "OSX Detected"
-  LOCATION=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-else
-  echo "Linux Detected"
-  LOCATION=~/.config/sublime-text-3/Packages/User
-fi
-
-mkdir -p "$LOCATION"
-ln -sfv $BASE/sublime/* "$LOCATION"
-
 symlink_emacs_configuration() {
     mkdir -p ~/.emacs.d
     ln -sfv $BASE/init.el ~/.emacs.d/init.el
@@ -44,6 +33,7 @@ configure_npm_directory() {
 setup_go_tools() {
   go get golang.org/x/tools/cmd/godoc
   go get -u github.com/nsf/gocode # autocomplete tool
+  go get github.com/cortesi/devd # hot reloading web server
   go install # golang.org/x/tools/cmd/godoc
 
   go get golang.org/x/tools/cmd/goimports # gofmt w/ autoinclude imports
@@ -54,4 +44,4 @@ setup_go_tools() {
   go get -u github.com/golang/dep/cmd/dep
 }
 
-setup_go_tools
+# setup_go_tools

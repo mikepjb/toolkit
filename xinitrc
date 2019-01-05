@@ -19,4 +19,4 @@ fi
 xmodmap ~/.Xmodmap
 
 xset r rate 200 25
-exec startfluxbox
+exec bspwm

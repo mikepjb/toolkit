@@ -14,6 +14,8 @@ export EDITOR=vim
 export PLATFORM=$(uname -s)
 export SB_ROOT=~/src
 export GOPATH=$HOME
+export XDG_CONFIG_HOME=$HOME/.config
+export NVM_DIR="$HOME/.nvm"
 
 if [ -z "$PATH_EXPANDED" ]; then
     # IFS stands for internal field seperator
@@ -22,6 +24,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     binary_directories=(
     ~/toolkit/bin
     $GOPATH/bin
+    ~/.nvm/versions/node/v11.2.0/bin
     $HOME/.npm-global/bin
     /usr/local/bin
     $PATH
@@ -35,6 +38,7 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 chruby 2.5.0
 
+alias nvm="unalias nvm && [ -s "$NVM_DIR/nvm.sh" ] && \. \"$NVM_DIR/nvm.sh\""
 alias git-root='git rev-parse --show-toplevel || echo "."'
 alias tags='ctags -f $(git-root)/.git/tags -R $(git-root)'
 alias gr='cd $(git-root)'
@@ -83,6 +87,3 @@ git_state() {
 }
 
 PROMPT_COMMAND='PS1="\W($(git_state)) \$ "'
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use

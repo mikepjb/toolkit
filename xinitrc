@@ -12,9 +12,11 @@ LANG="en_GB.UTF-8"
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-if [[ `uname -n` -eq 'mikepjb-laptop' ]]; then
-  xrdb -merge <<< 'xterm*faceName: xft:inconsolata:size=20'
-fi
+# For when you have scaling issues at 4k!
+# if [[ `xdpyinfo | awk '/dimensions/{print $2}'` -eq '3840x2160']]; then
+#   xrdb -merge <<< 'xterm*faceName: xft:inconsolata:size=20'
+#   xrandr --output HDMI-0 --scale 1x1
+# fi
 
 xmodmap ~/.Xmodmap
 

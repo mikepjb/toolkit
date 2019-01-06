@@ -60,6 +60,7 @@ map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
 imap <C-c> <esc>
 imap <C-t> <></><Esc>5hdiwp3lpT>i
+vmap <C-t> :'<,'>!column -t<cr>
 
 function! SelectaCommand(choice_command, selecta_args, vim_command)
   try

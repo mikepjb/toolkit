@@ -18,6 +18,11 @@ LANG="en_GB.UTF-8"
 #   xrandr --output HDMI-0 --scale 1x1
 # fi
 
+if [[ `uname -n` -eq "mikepjb-desktop" ]]; then
+  xcalib -d :0 $HOME/src/arch-configuration/samsung_C27F591.icm 
+fi
+
+
 xmodmap ~/.Xmodmap
 
 xset r rate 200 25

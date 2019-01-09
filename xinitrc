@@ -12,14 +12,12 @@ LANG="en_GB.UTF-8"
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-# For when you have scaling issues at 4k!
-# if [[ `xdpyinfo | awk '/dimensions/{print $2}'` -eq '3840x2160']]; then
-#   xrdb -merge <<< 'xterm*faceName: xft:inconsolata:size=20'
-#   xrandr --output HDMI-0 --scale 1x1
-# fi
+if [ `xdpyinfo | awk '/dimensions/{print $2}'` = '3840x2160' ]; then
+  xrdb -merge <<< 'Xft.dpi: 100'
+fi
 
-if [[ `uname -n` -eq "mikepjb-desktop" ]]; then
-  xcalib -d :0 $HOME/src/arch-configuration/samsung_C27F591.icm 
+if [ `uname -n` = "mikepjb-desktop" ]; then
+  xcalib -d :0 $HOME/src/arch-configuration/samsung_C27F591.icm
 fi
 
 

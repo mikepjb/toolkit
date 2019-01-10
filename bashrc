@@ -15,7 +15,6 @@ export PLATFORM=$(uname -s)
 export SB_ROOT=~/src
 export GOPATH=$HOME
 export XDG_CONFIG_HOME=$HOME/.config
-export NVM_DIR="$HOME/.nvm"
 
 if [ -z "$PATH_EXPANDED" ]; then
     # IFS stands for internal field seperator

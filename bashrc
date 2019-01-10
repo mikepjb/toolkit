@@ -36,7 +36,7 @@ fi
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-chruby 2.5.0
+chruby 2.5.1
 
 alias nvm="unalias nvm && [ -s "$NVM_DIR/nvm.sh" ] && \. \"$NVM_DIR/nvm.sh\""
 alias git-root='git rev-parse --show-toplevel || echo "."'

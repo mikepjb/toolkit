@@ -20,6 +20,10 @@ if [ `uname -n` = "mikepjb-desktop" ]; then
   xcalib -d :0 $HOME/src/arch-configuration/samsung_C27F591.icm
 fi
 
+if [ `uname -n` = "mikepjb-london" ]; then
+  xinput set-button-map 9 1 2 3 5 4 6 7 # reverse mouse scroll direction
+fi
+
 
 xmodmap ~/.Xmodmap
 

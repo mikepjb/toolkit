@@ -17,7 +17,8 @@ if [ `xdpyinfo | awk '/dimensions/{print $2}'` = '3840x2160' ]; then
 fi
 
 if [ `uname -n` = "mikepjb-desktop" ]; then
-  xcalib -d :0 $HOME/src/arch-configuration/samsung_C27F591.icm
+  xcalib -d :0 $HOME/src/arch-configuration/dell_u2515h.icc
+  xrdb -merge <<< 'Xft.dpi: 70'
 fi
 
 if [ `uname -n` = "mikepjb-london" ]; then

@@ -1,3 +1,14 @@
+(setq package-enable-at-startup nil)
+(package-initialize)
+
+(add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
+
+(if (not (package-installed-p 'use-package))
+    (progn (package-refresh-contents)
+           (package-install 'use-package)))
+
+(require 'use-package)
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -5,7 +16,6 @@
 (setq debug-on-error t)
 (setq inhibit-splash-screen t)
 
-(global-font-lock-mode -1)
 (electric-pair-mode 1)
 (show-paren-mode 1)
 (ido-mode 1)
@@ -48,8 +58,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/lib")
 
-(setq grep-command "grep")
-
 (defun kill-backward-or-region ()
   "kill region when mark is set, other kill previous word"
   (interactive)
@@ -90,65 +98,7 @@
     (shell-command-on-region b e
      "python -mjson.tool" (current-buffer) t)))
 
-(defun build-tags ()
-  (interactive)
-  (shell-command
-   (concat "ctags -e -f " (git-root) "/.git/etags -R " (git-root))))
-
-(defun run-tests ()
-  (interactive)
-  (if (eq major-mode 'go-mode)
-      (shell-command (concat "cd " (git-root) "&& go test ./..."))))
-
-(defvar left-brackets '("(" "[" "{" "<"))
-(defun backward-left-bracket ()
-  (interactive) (re-search-backward (regexp-opt left-brackets) nil t))
-(defvar right-brackets '(")" "]" "}" ">"))
-(defun forward-right-bracket ()
-  (interactive) (re-search-forward (regexp-opt right-brackets) nil t))
-;; (defun select-sexp () (interactive))
-(defun group-select ()
-  "select current grouping of text, a sexp, a string or extend to the parent group"
-  )
-
 (defun join-below () (interactive) (next-line 1) (join-line))
-
-;; last option for compiile you can specify a minor mode (to make error lines clickable)
-(defun rspec-compile ()
-  (interactive)
-  (let ((compile-target (buffer-file-name)))
-    (use-latest-ruby)
-    (let ((default-directory (git-root)))
-      (compile (concat "bundle exec rspec --no-color " compile-target) nil))))
-
-
-(defun read-dotenv ()
-  (interactive)
-  (let ((buffer-lines (split-string (buffer-string) "\n" t)))
-    (mapcar
-     (lambda (y)
-       (let ((key (car y))
-             (value (replace-regexp-in-string "'" "" (car (cdr y)))))
-         (setenv key value)))
-     (mapcar (lambda (x) (split-string x "=" t)) buffer-lines))))
-
-
-(defun kanji ()
-  (interactive)
-  (if (eq current-input-method nil)
-      (set-input-method 'japanese)
-    (deactivate-input-method)))
-
-(defun open-shell ()
-  (interactive)
-  (if (= (count-windows) 1)
-      (progn (split-window-below)
-             (other-window 1)))
-  (let ((default-directory (git-root)))
-    (eshell)))
-
-(defun git-ff ()
-  (interactive) (async-shell-command (concat "cd " (git-root) " && git ff")))
 
 (defun open-repl ()
   (interactive)
@@ -198,20 +148,12 @@
             (define-key paredit-mode-map (kbd "M-s ." isearch-forward-symbol-at-point))))
 
 (add-hook 'ido-setup-hook
-	        (lambda ()
+          (lambda ()
             (define-key ido-completion-map (kbd "C-w") 'backward-kill-word)
             (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)))
 
 (add-hook 'lisp-interaction-mode-hook
           (lambda () (define-key lisp-interaction-mode-map (kbd "C-j") 'newline)))
-
-;; M-DEL backward-kill-word (global-map) on ido-search
-;; M-DEL on find-file - ido-delete-backward-word-updir (found in ido-completion-map)
-
-;; (add-hook 'minibuffer-setup-hook
-;;           (lambda ()
-;;             (define-key minibuffer-local-map (kbd "C-w") 'backward-kill-word)
-;;             (define-key minibuffer-local-completion-map (kbd "C-w") 'backward-kill-word)))
 
 (add-hook 'dired-mode-hook
           (lambda ()
@@ -226,46 +168,39 @@
                           (?\( . ?\))
                           (?\[ . ?\])))))
 
-(if (string-match "\\`hades-desktop" (system-name))
-    (set-frame-font "Inconsolata 19" nil t)
-  (set-frame-font "Inconsolata 16" nil t))
-
-(load-theme 'bare t)
-
-(require 'go-mode)
-(require 'clojure-mode)
-(require 'paredit)
-(add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-(add-hook 'lisp-mode-hook 'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-(add-hook 'clojure-mode-hook 'enable-paredit-mode)
-
-;; Interesting - it seems you can order a mode to be evaluated when a function is called
-;; e.g useful for clojurescript-mode, loading clojure-mode which contains the definition.
-;; (autoload 'enable-paredit-mode "paredit"
-;;   "Turn on pseudo-structural editing of Lisp code."
-;;   t)
-
-(add-hook 'after-save-hook
-          (lambda () (interactive)
-            (if (eq major-mode 'go-mode)
-                (progn (shell-command (concat "goimports -w " (buffer-file-name)))
-                       (revert-buffer nil t)))))
-
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (setenv "PAGER" "cat")
-            (setenv "EDITOR" "emacsclient")
-            (setenv "GOPATH" (expand-file-name "~"))))
-
-(add-hook 'focus-out-hook
-          (lambda ()
-            (if (buffer-file-name) (save-buffer))))
+(use-package clojure-mode :ensure t)
+(use-package paredit
+ :ensure t
+ :config (lambda ()
+           (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+           (add-hook 'lisp-mode-hook 'enable-paredit-mode)
+           (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+           (add-hook 'clojure-mode-hook 'enable-paredit-mode)))
+(use-package rainbow-delimiters
+  :ensure t
+  :config (lambda ()
+            (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+            (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+            (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)))
+(use-package cider
+  :ensure t
+  :config (lambda ()
+            (add-hook 'cider-repl-mode-hook 'paredit-mode)))
 
 (if (eq system-type 'darwin)
     (let ((path-from-shell
 	         (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
       (setenv "PATH" path-from-shell)
       (setq exec-path (split-string path-from-shell path-separator))))
-
-(require 'elruby)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (cider paredit clojure-mode use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

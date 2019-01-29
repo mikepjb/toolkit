@@ -39,6 +39,8 @@
  initial-frame-alist frame-config
  default-frame-alist frame-config)
 
+(set-frame-font "Inconsolata-14")
+
 (setq-default
  ido-enable-flex-matching t
  backup-directory-alist '(("" . "~/.emacs.d/backup"))
@@ -192,6 +194,7 @@
 	         (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
       (setenv "PATH" path-from-shell)
       (setq exec-path (split-string path-from-shell path-separator))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

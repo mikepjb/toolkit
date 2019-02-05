@@ -62,18 +62,7 @@ imap <C-c> <esc>
 imap <C-t> <></><Esc>5hdiwp3lpT>i
 vmap <C-t> :'<,'>!column -t<cr>
 
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-  catch /Vim:Interrupt/
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
-endfunction
-
-nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
+nnoremap <leader>f :FZF<cr>
 
 command! -nargs=? -range Align <line1>,<line2>call AlignSection('<args>')
 vnoremap <silent> <Leader>a :Align<CR>

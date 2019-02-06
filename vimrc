@@ -22,6 +22,7 @@ set nojoinspaces
 set laststatus=1
 set autoread
 set gdefault
+set nohlsearch
 set t_ti= t_te=
 set isk+=-
 set completeopt -=preview

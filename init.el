@@ -87,21 +87,6 @@
                    "echo -ne $(git rev-parse --show-toplevel || echo \".\")")))
     (if (string-match-p (regexp-quote "fatal") response) "." response)))
 
-(defun ido-search ()
-  (interactive)
-  (save-excursion
-    (find-file
-     (concat
-      (git-root)
-      "/"
-      (ido-completing-read
-       "Open: "
-       (split-string
-        (shell-command-to-string
-         (concat "cd " (git-root) " && find * -type f")) "\n")
-       nil
-       t)))))
-
 ;; (defun build-tags ()
 ;;   (interactive)
 ;;   (shell-command (concat "cd " (git-root) " && ctags -f TAGS -e -R .")))
@@ -127,6 +112,14 @@
       ('python-mode (comint-run "python"))
       (_ (message "major mode has no defined repl")))))
 
+(defun backtrace-split ()
+  "replace \n with newline chars for long backtrace buffers"
+  (interactive)
+  (read-only-mode 0)
+  (replace-string "\\n" "
+" nil (point-min) (point-max) nil))
+
+
 (dolist
     (binding
      '(("M-o" . other-window)
@@ -138,7 +131,7 @@
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
        ("C-;" . hippie-expand)
-       ("C-t" . ido-search)
+       ("C-t" . projectile-find-file)
        ;; ("M-k" . backward-left-bracket)
        ;; ("M-l" . forward-right-bracket)
        ("M-k" . paredit-forward-barf-sexp)
@@ -172,7 +165,7 @@
 
 (add-hook 'dired-mode-hook
           (lambda ()
-            (define-key dired-mode-map (kbd "C-t") 'ido-search)))
+            (define-key dired-mode-map (kbd "C-t") 'projectile-find-file)))
 
 (add-hook 'inferior-lisp-mode-hook
           (lambda ()
@@ -207,7 +200,11 @@
 (setq cider-jdk-src-paths '("/usr/lib/jvm/java-8-openjdk/src.zip"))
 
 (use-package company :ensure t)
-;; (use-package magit :ensure t)
+(use-package magit :ensure t)
+
+(use-package projectile :ensure t)
+;; (use-package ivy :ensure t)
+;; (use-package counsel :ensure t)
 
 ;; (use-package clj-refactor :ensure t)
 

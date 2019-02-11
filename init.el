@@ -58,10 +58,13 @@
  vc-follow-symlinks t
  tab-width 2
  mac-command-modifier 'meta
+ ido-auto-merge-work-directories-length -1
  case-fold-search t
  custom-theme-load-path (list "~/toolkit")
  custom-file (make-temp-file "")
  ns-use-native-fullscreen nil
+ auto-fill-function 'do-auto-fill ;; wrap lines
+ fill-column 80
  package-enable-at-startup nil)
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
@@ -124,16 +127,12 @@
     (binding
      '(("M-o" . other-window)
        ("M-g" . mark-paragraph)
-       ("C-c g d" . vc-diff)
-       ("C-c g b" . vc-annotate) ;; git blame
-       ("C-c g p" . git-ff)
-       ("C-c g l" . vc-print-root-log)
+       ("C-c g" . magit)
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
        ("C-;" . hippie-expand)
        ("C-t" . projectile-find-file)
-       ;; ("M-k" . backward-left-bracket)
-       ;; ("M-l" . forward-right-bracket)
+       ("C-h" . delete-backward-char)
        ("M-k" . paredit-forward-barf-sexp)
        ("M-l" . paredit-forward-slurp-sexp)
        ("C-c t" . run-tests)
@@ -148,12 +147,15 @@
        ("M-RET" . toggle-frame-fullscreen)))
   (global-set-key (kbd (car binding)) (cdr binding)))
 
+(global-set-key (kbd "M-H") help-map)
+
 ;; M-s -> . searches under cursor, it would be good to bind this.
 
 ;; paredit overwrites M-s with paredit-splice-sexp, reverse this
 (add-hook 'paredit-setup-hook
           (lambda ()
-            (define-key paredit-mode-map (kbd "M-s ." isearch-forward-symbol-at-point))))
+            (define-key paredit-mode-map (kbd "M-s ." isearch-forward-symbol-at-point))
+            (define-key paredit-mode-map (kbd "C-h" paredit-backward-delete))))
 
 (add-hook 'ido-setup-hook
           (lambda ()

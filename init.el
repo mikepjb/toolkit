@@ -59,7 +59,7 @@
  tab-width 2
  mac-command-modifier 'meta
  case-fold-search t
- custom-theme-load-path (list "~/.emacs.d/lib")
+ custom-theme-load-path (list "~/toolkit")
  custom-file (make-temp-file "")
  ns-use-native-fullscreen nil
  package-enable-at-startup nil)
@@ -225,6 +225,8 @@
 
 ;; (use-package doom-themes :ensure t)
 ;; (load-theme 'doom-one t)
+
+(load-theme 'bare t)
 
 (if (eq system-type 'darwin)
     (let ((path-from-shell

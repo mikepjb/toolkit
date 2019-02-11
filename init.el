@@ -1,3 +1,11 @@
+;; Setup instructions
+;; primarily for clojure development environment.
+;; Source lookup (with M-.)
+;; for UsageDataSource/SOURCES in runs.clj
+;; => with REPL unloaded.. symbol not found
+;; => with REPL loaded.. source not found
+;; => ielm is a emacs-lisp repl
+
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -52,6 +60,7 @@
  mac-command-modifier 'meta
  case-fold-search t
  custom-theme-load-path (list "~/.emacs.d/lib")
+ custom-file (make-temp-file "")
  ns-use-native-fullscreen nil
  package-enable-at-startup nil)
 
@@ -92,6 +101,10 @@
          (concat "cd " (git-root) " && find * -type f")) "\n")
        nil
        t)))))
+
+;; (defun build-tags ()
+;;   (interactive)
+;;   (shell-command (concat "cd " (git-root) " && ctags -f TAGS -e -R .")))
 
 (defun beautify-json ()
   (interactive)
@@ -171,39 +184,50 @@
                           (?\[ . ?\])))))
 
 (use-package clojure-mode :ensure t)
+
 (use-package paredit
- :ensure t
- :config (lambda ()
-           (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-           (add-hook 'lisp-mode-hook 'enable-paredit-mode)
-           (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-           (add-hook 'clojure-mode-hook 'enable-paredit-mode)))
+  :ensure t
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook 'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook 'enable-paredit-mode))
+
 (use-package rainbow-delimiters
   :ensure t
-  :config (lambda ()
-            (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-            (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-            (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)))
+  :init
+  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
+
 (use-package cider
   :ensure t
-  :config (lambda ()
-            (add-hook 'cider-repl-mode-hook 'paredit-mode)))
+  :init (add-hook 'cider-repl-mode-hook 'paredit-mode))
+
+(setq cider-jdk-src-paths '("/usr/lib/jvm/java-8-openjdk/src.zip"))
+
+(use-package company :ensure t)
+;; (use-package magit :ensure t)
+
+;; (use-package clj-refactor :ensure t)
+
+;; (use-package monokai-theme
+;;   :ensure t
+;;   :config (lambda ()
+;;             (load-theme 'monokai t)))
+
+;; (use-package spacemacs-theme
+;;   :ensure t
+;;   :config (lambda ()
+;;             (load-theme 'spacemacs-dark)))
+
+;; (use-package zenburn-theme :ensure t)
+
+;; (use-package doom-themes :ensure t)
+;; (load-theme 'doom-one t)
 
 (if (eq system-type 'darwin)
     (let ((path-from-shell
 	         (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
       (setenv "PATH" path-from-shell)
       (setq exec-path (split-string path-from-shell path-separator))))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (cider paredit clojure-mode use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

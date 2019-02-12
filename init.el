@@ -128,6 +128,7 @@
      '(("M-o" . other-window)
        ("M-g" . mark-paragraph)
        ("C-c g" . magit)
+       ("C-x p" . (lambda () (interactive) (ido-find-file-in-dir "~/src")))
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
        ("C-;" . hippie-expand)

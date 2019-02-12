@@ -3,8 +3,8 @@ shopt -s checkwinsize # Check the window size after each command
 shopt -s nocaseglob #case insensitive completion
 [[ $- =~ i ]] && stty -ixoff -ixon # Disable CTRL-S and CTRL-Q
 
-bind '"\C-g":" vim $(find ~/notes/* -type f | selecta)\n"'
-bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| selecta)\n"'
+bind '"\C-g":" vim $(find ~/notes/* -type f | fzf)\n"'
+bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| fzf)\n"'
 
 export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth:erasedups

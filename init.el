@@ -202,7 +202,9 @@
 
 (setq cider-jdk-src-paths '("/usr/lib/jvm/java-8-openjdk/src.zip"))
 
-(use-package company :ensure t)
+(use-package company
+  :ensure t
+  :init (add-hook 'after-init-hook 'global-company-mode))
 (use-package magit :ensure t)
 
 (use-package projectile :ensure t)

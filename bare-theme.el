@@ -2,6 +2,7 @@
 
 (let ((class '((class color) (min-colors 89)))
       (origin-1 "#1d1e1a")
+      (origin-2 "#333430")
       (origin-10 "#eeeeee")
       (origin-9 "#cccccc")
       (magenta-5 "#ff3399")
@@ -51,6 +52,15 @@
    `(rainbow-delimiters-depth-1-face ((,class (:foreground ,aqua-5))))
    `(rainbow-delimiters-depth-2-face ((,class (:foreground ,aqua-4))))
    `(rainbow-delimiters-depth-3-face ((,class (:foreground ,aqua-3))))
+   `(company-tooltip ((,class (:foreground ,origin-10 :background ,origin-2))))
+   `(company-tooltip-annotation ((,class (:foreground ,aqua-5))))
+   `(company-tooltip-annotation-selection ((,class (:foreground ,aqua-3))))
+   `(company-tooltip-common ((,class (:foreground ,aqua-5))))
+   `(company-tooltip-common-selection ((,class (:foreground ,magenta-5))))
+   `(company-scrollbar-fg ((,class (:background ,origin-9))))
+   `(company-scrollbar-bg ((,class (:background ,origin-1))))
+   `(company-tooltip-selection ((,class (:foreground ,origin-10 :background
+                                                     ,origin-1))))
    (custom-theme-set-variables
     'bare
     `(ansi-color-names-vector

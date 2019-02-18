@@ -199,47 +199,24 @@
 
 (use-package cider
   :ensure t
-  :init (add-hook 'cider-repl-mode-hook 'paredit-mode))
-
-;; (set-variable 'cider-lein-parameters "with-profile +jetty repl")
-;; (/ 1024.0 (.maxMemory (java.lang.Runtime/getRuntime)))
-;; max 2.1455838734483138E-7
-;; total 8.521487783595114E-7
-;; free 2.0572918491575614E-6
-(set-variable 'cider-lein-parameters "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\" -- repl :headless :host localhost")
-;; (setenv "JVM_OPTS" "-Xmx5g")
-
-(setq cider-jdk-src-paths '("/usr/lib/jvm/java-8-openjdk/src.zip"))
-;; (set-variable 'cider-lein-command "JVM_OPTS=\"-Xmx5g\" lein")
+  :init (progn
+          (add-hook 'cider-repl-mode-hook 'paredit-mode)
+          (setq cider-jdk-src-paths '("/usr/lib/jvm/java-8-openjdk/src.zip"))
+          (set-variable
+           'cider-lein-parameters
+           (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\" -- repl :headless :host localhost"))))
 
 (use-package company
   :ensure t
   :init (add-hook 'after-init-hook 'global-company-mode))
-(use-package magit :ensure t)
 
+(use-package magit :ensure t)
 (use-package ripgrep :ensure t)
 (use-package projectile :ensure t)
+(use-package js2-mode :ensure t)
 ;; (use-package ivy :ensure t)
 ;; (use-package counsel :ensure t)
-
 ;; (use-package clj-refactor :ensure t)
-
-;; (use-package monokai-theme
-;;   :ensure t
-;;   :config (lambda ()
-;;             (load-theme 'monokai t)))
-
-;; (use-package spacemacs-theme
-;;   :ensure t
-;;   :config (lambda ()
-;;             (load-theme 'spacemacs-dark)))
-
-;; (use-package zenburn-theme :ensure t)
-
-;; (use-package doom-themes :ensure t)
-;; (load-theme 'doom-one t)
-
-(use-package js2-mode :ensure t)
 
 (load-theme 'bare t)
 

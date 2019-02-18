@@ -51,7 +51,7 @@
 
 (setq-default
  ido-enable-flex-matching t
- backup-directory-alist '(("" . "~/.emacs.d/backup"))
+ make-backup-files nil
  column-number-mode t
  indent-tabs-mode nil
  ring-bell-function 'ignore
@@ -60,11 +60,13 @@
  mac-command-modifier 'meta
  ido-auto-merge-work-directories-length -1
  case-fold-search t
+ dired-listing-switches "-alh"
  custom-theme-load-path (list "~/toolkit")
  custom-file (make-temp-file "")
  ns-use-native-fullscreen nil
  auto-fill-function 'do-auto-fill ;; wrap lines
  fill-column 80
+ css-indent-offset 2
  package-enable-at-startup nil)
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
@@ -121,7 +123,6 @@
   (read-only-mode 0)
   (replace-string "\\n" "
 " nil (point-min) (point-max) nil))
-
 
 (dolist
     (binding
@@ -227,6 +228,8 @@
 
 ;; (use-package doom-themes :ensure t)
 ;; (load-theme 'doom-one t)
+
+(use-package js2-mode :ensure t)
 
 (load-theme 'bare t)
 

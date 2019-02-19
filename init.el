@@ -1,8 +1,3 @@
-;; Setup instructions
-;; primarily for clojure development environment.
-;; Source lookup (with M-.)
-;; => ielm is a emacs-lisp repl
-
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -199,9 +194,12 @@
   :init (progn
           (add-hook 'cider-repl-mode-hook 'paredit-mode)
           (setq cider-jdk-src-paths '("/usr/lib/jvm/java-8-openjdk/src.zip"))
+          (set-variable 'cider-default-cljs-repl 'figwheel-main)
+          (set-variable 'cider-figwheel-main-default-options ":dev")
           (set-variable
            'cider-lein-parameters
-           (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\" -- repl :headless :host localhost"))))
+           (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\""
+                   " -- repl :headless :host localhost"))))
 
 (use-package company
   :ensure t

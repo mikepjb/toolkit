@@ -1,9 +1,6 @@
 ;; Setup instructions
 ;; primarily for clojure development environment.
 ;; Source lookup (with M-.)
-;; for UsageDataSource/SOURCES in runs.clj
-;; => with REPL unloaded.. symbol not found
-;; => with REPL loaded.. source not found
 ;; => ielm is a emacs-lisp repl
 
 (setq package-enable-at-startup nil)

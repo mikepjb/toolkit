@@ -118,8 +118,7 @@
   "replace \n with newline chars for long backtrace buffers"
   (interactive)
   (read-only-mode 0)
-  (replace-string "\\n" "
-" nil (point-min) (point-max) nil))
+  (replace-string "\\n" "\n" nil (point-min) (point-max) nil))
 
 (dolist
     (binding
@@ -198,13 +197,20 @@
   :ensure t
   :init (progn
           (add-hook 'cider-repl-mode-hook 'paredit-mode)
-          (setq cider-jdk-src-paths '("/usr/lib/jvm/java-8-openjdk/src.zip"))
+          (setq
+           cider-jdk-src-paths
+           '("/usr/lib/jvm/java-8-openjdk/src.zip"
+             "~/src/clojure-1.10.0-sources/"))
           (set-variable 'cider-default-cljs-repl 'figwheel-main)
           (set-variable 'cider-figwheel-main-default-options ":dev")
           (set-variable
            'cider-lein-parameters
            (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\""
                    " -- repl :headless :host localhost"))))
+
+;; (use-package clj-refactor
+;;   :ensure t
+;;   :init (add-hook 'clojure-mode-hook 'clj-refactor-mode))
 
 (use-package company
   :ensure t
@@ -214,9 +220,6 @@
 (use-package ripgrep :ensure t)
 (use-package projectile :ensure t)
 (use-package js2-mode :ensure t)
-;; (use-package ivy :ensure t)
-;; (use-package counsel :ensure t)
-;; (use-package clj-refactor :ensure t)
 
 (load-theme 'bare t)
 

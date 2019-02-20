@@ -95,7 +95,12 @@
     (shell-command-on-region b e
      "python -mjson.tool" (current-buffer) t)))
 
-(defun join-below () (interactive) (next-line 1) (join-line))
+(defun join-below ()
+  "join line below or all lines for a given region"
+  (interactive)
+  (if mark-active
+      (replace-string "\n" "" nil (region-beginning) (region-end))
+        (progn (next-line 1) (join-line))))
 
 (defun open-repl ()
   (interactive)

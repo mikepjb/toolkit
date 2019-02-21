@@ -120,6 +120,7 @@
   (read-only-mode 0)
   (replace-string "\\n" "\n" nil (point-min) (point-max) nil))
 
+;; C-u C-x = (describes font-lock under cursor)
 (dolist
     (binding
      '(("M-o" . other-window)

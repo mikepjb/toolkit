@@ -130,6 +130,7 @@
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
        ("C-;" . hippie-expand)
+       ("M-G" . projectile-ripgrep)
        ("C-t" . projectile-find-file)
        ("C-h" . delete-backward-char)
        ("M-k" . paredit-forward-barf-sexp)
@@ -217,8 +218,11 @@
   :ensure t
   :init (add-hook 'after-init-hook 'global-company-mode))
 
+(use-package ripgrep
+  :ensure t
+  :init (set-variable 'ripgrep-arguments '("-M" "120")))
+
 (use-package magit :ensure t)
-(use-package ripgrep :ensure t)
 (use-package projectile :ensure t)
 (use-package js2-mode :ensure t)
 

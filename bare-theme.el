@@ -39,7 +39,7 @@
    `(font-lock-function-name-face ((t (:foreground ,daffodil-5))))
    `(font-lock-string-face ((t (:foreground ,lavender-5))))
    `(font-lock-comment-face ((t (:foreground ,magenta-5))))
-   `(comint-highlight-prompt ((t (:foreground ,origin-2))))
+   `(comint-highlight-prompt ((t (:foreground ,origin-10))))
    `(diff-added ((t (:foreground ,origin-10))))
    `(diff-removed ((t (:foreground ,origin-10))))
    `(diff-hunk-header ((t (:foreground ,origin-10))))

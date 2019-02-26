@@ -62,6 +62,8 @@
    `(company-tooltip-common-selection ((t (:foreground ,magenta-5))))
    `(company-scrollbar-fg ((t (:background ,origin-9))))
    `(company-scrollbar-bg ((t (:background ,origin-1))))
+   `(company-preview ((t (:foreground ,origin-9 :background ,origin-2))))
+   `(company-preview-common ((t (:foreground ,origin-9 :background ,origin-2))))
    (custom-theme-set-variables
     'bare
     `(ansi-color-names-vector

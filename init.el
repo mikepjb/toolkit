@@ -120,12 +120,24 @@
   (read-only-mode 0)
   (replace-string "\\n" "\n" nil (point-min) (point-max) nil))
 
+(defun duplicate-line ()
+  "copy and paste the current line"
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank))
+
 ;; C-u C-x = (describes font-lock under cursor)
 (dolist
     (binding
      '(("M-o" . other-window)
        ("M-g" . mark-paragraph)
+       ("M-D" . duplicate-line)
        ("C-c g" . magit)
+       ("C-c l" . magit-log-current)
        ("C-x p" . (lambda () (interactive) (ido-find-file-in-dir "~/src")))
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
@@ -186,7 +198,11 @@
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
   (add-hook 'lisp-mode-hook 'enable-paredit-mode)
   (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-  (add-hook 'clojure-mode-hook 'enable-paredit-mode))
+  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+  (defadvice he-substitute-string (after he-paredit-fix)
+  "remove extra paren when expanding line in paredit"
+  (if (and paredit-mode (equal (substring str -1) ")"))
+      (progn (backward-delete-char 1) (forward-char)))))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -210,9 +226,9 @@
            (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\""
                    " -- repl :headless :host localhost"))))
 
-;; (use-package clj-refactor
-;;   :ensure t
-;;   :init (add-hook 'clojure-mode-hook 'clj-refactor-mode))
+(use-package clj-refactor
+  :ensure t
+  :init (add-hook 'clojure-mode-hook 'clj-refactor-mode))
 
 (use-package company
   :ensure t

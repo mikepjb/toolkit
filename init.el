@@ -226,10 +226,6 @@
            (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\""
                    " -- repl :headless :host localhost"))))
 
-(use-package clj-refactor
-  :ensure t
-  :init (add-hook 'clojure-mode-hook 'clj-refactor-mode))
-
 (use-package company
   :ensure t
   :init (add-hook 'after-init-hook 'global-company-mode))

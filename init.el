@@ -201,7 +201,7 @@
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (defadvice he-substitute-string (after he-paredit-fix)
   "remove extra paren when expanding line in paredit"
-  (if (and paredit-mode (equal (substring str -1) ")"))
+  (if (and paredit-mode (equal (substring str -1) (or ")" "]" "}")))
       (progn (backward-delete-char 1) (forward-char)))))
 
 (use-package rainbow-delimiters

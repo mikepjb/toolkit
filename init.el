@@ -56,7 +56,7 @@
  custom-theme-load-path (list "~/toolkit")
  custom-file (make-temp-file "")
  ns-use-native-fullscreen nil
- auto-fill-function 'do-auto-fill ;; wrap lines
+ auto-fill-function nil ;; do not wrap lines
  fill-column 80
  css-indent-offset 2
  package-enable-at-startup nil)
@@ -65,6 +65,13 @@
 (setq mouse-wheel-progressive-speed nil)
 
 (add-to-list 'load-path "~/.emacs.d/lib")
+
+(defun toggle-line-wrap ()
+  (interactive)
+  (setq
+   auto-fill-function
+   (if (equal auto-fill-function 'do-auto-fill)
+       nil 'do-auto-fill)))
 
 (defun kill-backward-or-region ()
   "kill region when mark is set, other kill previous word"

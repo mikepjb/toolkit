@@ -17,6 +17,7 @@ export PLATFORM=$(uname -s)
 export SB_ROOT=~/src
 export GOPATH=$HOME
 export XDG_CONFIG_HOME=$HOME/.config
+export SSH_AUTH_SOCK=$HOME/.ssh/ssh-agent.socket
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 if [ -z "$PATH_EXPANDED" ]; then

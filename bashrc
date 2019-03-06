@@ -4,8 +4,8 @@ shopt -s nocaseglob #case insensitive completion
 [[ $- =~ i ]] && stty -ixoff -ixon # Disable CTRL-S and CTRL-Q
 
 if [ "$TERM" != "dumb" ]; then
-  bind '"\C-g":" vim $(find ~/notes/* -type f | fzf)\n"'
-  bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| fzf)\n"'
+  bind '"\C-g":" vim $(find ~/notes/* -type f | pick)\n"'
+  bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| pick)\n"'
 fi
 
 export LANG=en_US.UTF-8
@@ -16,6 +16,7 @@ export EDITOR=vim
 export PLATFORM=$(uname -s)
 export SB_ROOT=~/src
 export GOPATH=$HOME
+export GO111MODULE=on # allow go modules in GOPATH
 export XDG_CONFIG_HOME=$HOME/.config
 export SSH_AUTH_SOCK=$HOME/.ssh/ssh-agent.socket
 export _JAVA_AWT_WM_NONREPARENTING=1

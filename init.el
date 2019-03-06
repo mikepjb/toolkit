@@ -1,3 +1,8 @@
+;; align args - clojure-align for clojure.. align-regexp general solution - how to use?
+;; allow C-w company-mode delete backward word...
+;; prevent C-w from unbalancing parens in paredit-mode...
+;; search under cursor...
+
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -230,7 +235,7 @@
           (set-variable 'cider-figwheel-main-default-options ":dev")
           (set-variable
            'cider-lein-parameters
-           (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\""
+           (concat "update-in :jvm-opts conj \"\\\"-Xmx10g\\\"\""
                    " -- repl :headless :host localhost"))))
 
 (use-package company

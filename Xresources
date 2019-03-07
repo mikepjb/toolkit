@@ -65,7 +65,7 @@ xterm*VT100.Translations: #override \
 *xterm*color12: #4884a9
 
 ! Magenta
-*xterm*color5: #f2c3ea
+*xterm*color5: #9933ff ! purple
 *xterm*color13: #8b1e8b
 
 ! Cyan

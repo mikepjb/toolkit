@@ -23,6 +23,7 @@ fi
 
 if [ `uname -n` = "mikepjb-london" ]; then
   xinput set-button-map 9 1 2 3 5 4 6 7 # reverse mouse scroll direction
+  xinput set-prop 9 "libinput Accel Speed" -0.7
 fi
 
 

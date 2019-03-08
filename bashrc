@@ -64,7 +64,7 @@ alias rg='rg -M 120'
 # data related
 alias json="python -m json.tool"
 alias showcsv="column -t -s, | less -S" #use with head -100 a.csv | showcsv
-headers() { head -1 "$1" | sed "s/,/\n/g" } # prints headers line by line
+headers() { head -1 "$1" | sed "s/,/\n/g"; } # prints headers line by line
 
 
 if [ "$PLATFORM" == Darwin ]; then

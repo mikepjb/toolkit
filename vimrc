@@ -98,15 +98,6 @@ function! AlignSection(regex) range
   call setline(a:firstline, section)
 endfunction
 
-function! SelectaBuffer()
-  let bufnrs = filter(range(1, bufnr("$")), 'buflisted(v:val)')
-  let buffers = map(bufnrs, 'bufname(v:val)')
-  call SelectaCommand('echo "' . join(buffers, "\n") . '"', "", ":b")
-endfunction
-
-" Fuzzy select a buffer. Open the selected buffer with :b.
-nnoremap <leader>b :call SelectaBuffer()<cr>
-
 function! AlignLine(line, sep, maxpos, extra)
   let m = matchlist(a:line, '\(.\{-}\) \{-}\('.a:sep.'.*\)')
   if empty(m)
@@ -212,9 +203,27 @@ function! GolangEnvironment()
         \ listchars+=tab:\ \ ,
 endfunction
 
+function! GodefUnderCursor()
+    let pos = getpos(".")[1:2]
+    if &encoding == 'utf-8'
+        let offs = line2byte(pos[0]) + pos[1] - 2
+    else
+        let c = pos[1]
+        let buf = line('.') == 1 ? "" : (join(getline(1, pos[0] - 1), "\n") . "\n")
+        let buf .= c == 1 ? "" : getline(pos[0])[:c-2]
+        let offs = len(iconv(buf, &encoding, "utf-8"))
+    endif
+    " echo offs
+    let source_location = 
+          \split(system("godef -f=". expand("%:p") . " -o=" . offs), ":")
+
+    exec "e +" . source_location[1] . " " . source_location[0]
+endfunction
+
 augroup golang
   au! BufWritePost *.go :call Format()
   au! Filetype go :call GolangEnvironment()
+  au! Filetype go :nnoremap gf :call GodefUnderCursor()<cr>
 augroup END
 
 " Leave the return key alone when in command line windows, since it's used
@@ -367,3 +376,4 @@ let g:clojure_fuzzy_indent_patterns = ['^ns', '^def', '^fn', 'let$']
 function! Govern()
   exec ":!govern -file " . expand("%")
 endfunction
+

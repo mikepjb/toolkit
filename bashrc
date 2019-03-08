@@ -58,10 +58,14 @@ alias y='tmux attach -t vty2 || tmux new -s vty2'
 alias be='bundle exec'
 alias de='export $(egrep -v "^#" .env | xargs)'
 alias cl='for code in {0..16}; do echo -e "\e[38;05;${code}m $code: Test"; done'
-alias json="python -m json.tool"
-alias csv="column -t -s, | less -S" #use with cat a.csv | csv
 alias ag='echo "use ripgrep fool!"'
 alias rg='rg -M 120'
+
+# data related
+alias json="python -m json.tool"
+alias showcsv="column -t -s, | less -S" #use with head -100 a.csv | showcsv
+headers() { head -1 "$1" | sed "s/,/\n/g" } # prints headers line by line
+
 
 if [ "$PLATFORM" == Darwin ]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib

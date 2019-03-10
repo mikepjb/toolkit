@@ -53,7 +53,7 @@ call s:setHighlight('ErrorMsg', s:col['error'], s:col['bg'], 'NONE')
 call s:setHighlight('WarningMsg', s:col['error'], s:col['bg'], 'NONE')
 call s:setHighlight('NonText', s:col['dark'], s:col['bg'], 'NONE')
 call s:setHighlight('Delimiter', s:col['dark'], s:col['bg'], 'NONE')
-call s:setHighlight('MatchParen', s:col['fg'], s:col['darker'], 'NONE')
+call s:setHighlight('MatchParen', s:col['fg'], s:col['dark'], 'NONE')
 call s:setHighlight('Operator', s:col['fg'], s:col['bg'], 'NONE')
 " For git?!?
 call s:setHighlight('diffAdded', s:col['fg'], s:col['bg'], 'NONE')

@@ -200,7 +200,6 @@ function! GolangEnvironment()
         \ softtabstop=2
         \ noexpandtab
         \ omnifunc=autoload#GoComplete
-        \ listchars+=tab:\ \ ,
 endfunction
 
 function! GodefUnderCursor()
@@ -224,6 +223,7 @@ augroup golang
   au! BufWritePost *.go :call Format()
   au! Filetype go :call GolangEnvironment()
   au! Filetype go :nnoremap gf :call GodefUnderCursor()<cr>
+  au! BufNewFile,BufRead *.go setlocal nolist
 augroup END
 
 " Leave the return key alone when in command line windows, since it's used

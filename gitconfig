@@ -37,7 +37,7 @@
   total = rev-list --all --count
   ra = \
     log --abbrev-commit \
-    --pretty=format:'%C(yellow)%h%C(red)%d %Cgreen(%cr) %C(bold cyan)<%an>%Creset %s'
+    --pretty=format:'%<(7)%C(yellow)%h %Cgreen%<(15)"(%cr)" %C(bold cyan)%<(17)<%an>%C(red)%d %Creset %s'
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -60,6 +60,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
   required = true
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true

@@ -65,6 +65,7 @@ alias rg='rg -M 120'
 alias json="python -m json.tool"
 alias showcsv="column -t -s, | less -S" #use with head -100 a.csv | showcsv
 headers() { head -1 "$1" | sed "s/,/\n/g"; } # prints headers line by line
+# multi search/replace # find ./ -type f -exec sed -i -e 's/apple/orange/g' {} \;
 
 
 if [ "$PLATFORM" == Darwin ]; then

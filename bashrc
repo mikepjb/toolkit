@@ -42,6 +42,7 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 chruby 2.5.1
 
+alias pacfiles="pacman -Ql" # list files associated with a package
 alias nvm="unalias nvm && [ -s "$NVM_DIR/nvm.sh" ] && \. \"$NVM_DIR/nvm.sh\""
 alias git-root='git rev-parse --show-toplevel || echo "."'
 alias tags='ctags -f $(git-root)/.git/tags -R $(git-root)'

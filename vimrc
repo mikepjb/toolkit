@@ -16,7 +16,7 @@ set autoindent
 set textwidth=80
 set shortmess=aIT
 set noswapfile nobackup nowritebackup
-set clipboard=unnamed,unnamedplus
+set clipboard=unnamedplus
 set ignorecase smartcase
 set incsearch
 set list

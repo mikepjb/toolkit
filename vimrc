@@ -256,7 +256,8 @@ function! RunTestFile(...)
   elseif &filetype == 'scheme'
     exec ":!csi -s %"
   elseif &filetype == 'go'
-    exec ":!go test ./... -v"
+    " exec ":!go test ./... -v"
+    exec ":cexpr system('go test ./... -v') | cw"
   else
     if in_test_file
       call SetTestFile(command_suffix)

@@ -178,8 +178,8 @@
 ;; paredit overwrites M-s with paredit-splice-sexp, reverse this
 (add-hook 'paredit-setup-hook
           (lambda ()
-            (define-key paredit-mode-map (kbd "M-s ." isearch-forward-symbol-at-point))
-            (define-key paredit-mode-map (kbd "C-h" paredit-backward-delete))))
+            (define-key paredit-mode-map (kbd "M-s .") 'isearch-forward-symbol-at-point)
+            (define-key paredit-mode-map (kbd "C-h") 'paredit-backward-delete)))
 
 (add-hook 'ido-setup-hook
           (lambda ()
@@ -191,7 +191,8 @@
 
 (add-hook 'dired-mode-hook
           (lambda ()
-            (define-key dired-mode-map (kbd "C-t") 'projectile-find-file)))
+            (define-key dired-mode-map (kbd "C-t") 'projectile-find-file)
+            ))
 
 (add-hook 'inferior-lisp-mode-hook
           (lambda ()
@@ -230,7 +231,8 @@
           (setq
            cider-jdk-src-paths
            '("/usr/lib/jvm/java-8-openjdk/src.zip"
-             "~/src/clojure-1.10.0-sources/"))
+             "~/src/clojure-1.10.0-sources/")
+           cider-repl-display-help-banner nil)
           (set-variable 'cider-default-cljs-repl 'figwheel-main)
           (set-variable 'cider-figwheel-main-default-options ":dev")
           (set-variable
@@ -249,6 +251,11 @@
 (use-package magit :ensure t)
 (use-package projectile :ensure t)
 (use-package js2-mode :ensure t)
+(use-package haskell-mode
+  :ensure t
+  :init (progn
+          (add-hook 'haskell-mode 'turn-on-haskell-indentation)))
+(use-package inf-ruby :ensure t)
 
 (load-theme 'bare t)
 

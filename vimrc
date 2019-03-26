@@ -107,6 +107,8 @@ function! AlignLine(line, sep, maxpos, extra)
   return m[1] . spaces . m[2]
 endfunction
 
+" align: '<,'>!sed $'s/::/\001::/' | column -ets $'\001'
+
 command! Load call LoadClojureFile()
 function! LoadClojureFile()
   update

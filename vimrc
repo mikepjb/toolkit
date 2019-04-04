@@ -174,8 +174,8 @@ augroup markdown
   au! Filetype markdown :call MarkdownEnvironment()
 augroup END
 
-func! CSSEnvironment()
-  func! Foldexpr_css(lnum)
+func! FoldOnComments()
+  func! Foldexpr(lnum)
     let l1 = getline(a:lnum)
     let l2 = getline(a:lnum+1)
 
@@ -188,12 +188,13 @@ func! CSSEnvironment()
     endif
   endfunc
 
-  setlocal foldexpr=Foldexpr_css(v:lnum)
+  setlocal foldexpr=Foldexpr(v:lnum)
   setlocal foldmethod=expr
 endfunc
 
-augroup css
-  au! Filetype css :call CSSEnvironment()
+augroup commentFolding
+  au! Filetype css :call FoldOnComments()
+  au! Filetype javascript :call FoldOnComments()
 augroup END
 
 function! GolangEnvironment()

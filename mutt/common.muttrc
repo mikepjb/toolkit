@@ -17,6 +17,8 @@ set read_inc = 1000
 
 color normal black white
 color indicator white black
+color tilde black white
+color header black white "^(From|Subject|To|Date):"
 
 # Strip HTML tags from HTML emails
 # set mailcap_path = ~/.mutt/mailcap

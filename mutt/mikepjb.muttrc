@@ -1,0 +1,45 @@
+# Auth
+
+set smtp_url = "smtps://mikepjb@smtp.gmail.com"
+set smtp_pass = `grant -show gmail`
+
+set from = "mikepjb@gmail.com"
+set realname = "Michael Bruce"
+
+# Aliases
+
+# set alias_file=~/.mutt/aliases
+# source $alias_file
+
+# Set "display filter", which I use to capture email addresses
+# set display_filter=~/.mutt/display-filter.sh
+
+# Folders
+
+# set my_inbox="INBOX"
+# set my_archive="INBOX.Archive"
+# set my_sent="INBOX.Send<quote-char> Items"
+
+set folder = "~/.mutt/mailbox/personal"
+set spoolfile = "~/.mutt/mailbox/personal/inbox"
+# set mbox "+Archive"
+unset record
+set trash = "+/trash"
+
+macro index y "<save-message>+INBOX.Archive<enter>"
+macro pager y "<exit><save-message>+INBOX.Archive<enter>"
+
+# folder-hook 'personal' 'source ~/.mutt/mailbox/personal'
+# folder-hook 'personal'
+macro index 1 "<change-folder> =../personal/inbox/<enter>"
+# macro index 2 
+macro index G "!mbsync -a^M" "Update through mbsync"
+set move = no
+
+set delete=yes
+
+# tls 587
+# ssl 465
+# tls/ssl req? yes
+
+source ~/.mutt/common.muttrc

@@ -2,7 +2,7 @@
 " comment regions/visual selection
 " markdown preview
 
-syntax off
+syntax on " required for ruby indentation
 filetype plugin indent on
 
 set encoding=utf-8

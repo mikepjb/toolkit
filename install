@@ -3,7 +3,7 @@
 cd $(dirname $BASH_SOURCE)
 BASE=$(pwd)
 
-for rc in *rc gitconfig Xresources Xmodmap gitconfig tmux.conf mongorc.js ctags; do
+for rc in *rc gitconfig Xresources Xmodmap tmux.conf ctags; do
   ln -sfv $BASE/$rc ~/.$rc
 done
 
@@ -20,6 +20,11 @@ ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
 
 mkdir -p $HOME/.config/nvim/autoload
 ln -sfv $BASE/autoload.vim ~/.config/nvim/autoload/autoload.vim
+
+[ -L ~/.mutt ] && unlink ~/.mutt
+ln -sfv $BASE/mutt ~/.mutt
+
+mkdir -p ~/.mutt/mailbox/personal
 
 symlink_emacs_configuration() {
     mkdir -p ~/.emacs.d
@@ -52,4 +57,4 @@ setup_go_tools() {
   go get -u github.com/golang/dep/cmd/dep
 }
 
-setup_go_tools
+# setup_go_tools

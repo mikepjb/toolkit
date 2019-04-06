@@ -1,0 +1,25 @@
+# comes from isync package
+
+IMAPAccount personal
+Host imap.gmail.com
+User mikepjb@gmail.com
+PassCmd "grant -show offlineimap-gmail"
+SSLType IMAPS
+SSLVersion TLSv1.2
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+Path ~/.mutt/mailbox/personal
+Inbox ~/.mutt/mailbox/personal/inbox
+
+Channel personal
+Master :personal-remote:
+Slave :personal-local:
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+Patterns * ![Google Mail]*
+Create Both
+SyncState *
+Sync All

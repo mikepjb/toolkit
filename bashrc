@@ -61,6 +61,7 @@ alias de='export $(egrep -v "^#" .env | xargs)'
 alias cl='for code in {0..16}; do echo -e "\e[38;05;${code}m $code: Test"; done'
 alias ag='echo "use ripgrep fool!"'
 alias rg='rg -M 120'
+alias pm='mutt -F ~/.mutt/mikepjb.muttrc'
 
 # data related
 alias json="python -m json.tool"

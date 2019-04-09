@@ -86,6 +86,14 @@ call s:setHighlight('clojureVarArg', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('goEscapeC', s:col['red'], s:col['bg'], 'NONE')
 
+call s:setHighlight('markdownH1', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('markdownH2', s:col['red'], s:col['bg'], 'NONE')
+
+call s:setHighlight('vimMapModKey', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('vimNotation', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('helpSpecial', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('helpNotVi', s:col['red'], s:col['bg'], 'NONE')
+
 call s:setHighlight('User1', s:col['dark'], s:col['bg'], 'NONE')
 set stl=--\ %1*%F%m%r%h%w%*\ %=\ %y\ -\ [%l,%c]\ [%L,%p%%] showtabline=1
 set fillchars=stlnc:\-,stl:\-,vert:\|

@@ -380,3 +380,19 @@ function! Govern()
   exec ":!govern -file " . expand("%")
 endfunction
 
+func! Require()
+  " echo('clji "(load-file \"' . expand('%') . '\")"')
+  let call = system('clji "(load-file \"' . expand('%') . '\")"')
+  " let call = system("clji \"(require 'blue.strategic.billing.backing-sheets :reload)\"")
+  echo call
+endfunc
+
+command! Require :call Require()
+
+command! -nargs=? -range Eval <line1>,<line2>call Eval('<args>')
+vnoremap <CR> :Eval<CR>
+function! Eval(regex) range
+  let section = getline(a:firstline, a:lastline)
+  let call = system("clji \"" . join(section) . "\"")
+  echo call
+endfunction

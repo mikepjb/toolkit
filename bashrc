@@ -49,7 +49,6 @@ alias tags='ctags -f $(git-root)/.git/tags -R $(git-root)'
 alias gr='cd $(git-root)'
 alias space='df -h'
 alias .space='du -sh * | sort -h'
-alias pgstart='sudo systemctl start postgresql'
 alias t0="printf '\e[8;50;100t'"
 alias t1="printf '\e[8;50;160t'"
 alias t2="printf '\e[8;20;100t'"
@@ -69,19 +68,6 @@ alias json="python -m json.tool"
 alias showcsv="column -t -s, | less -S" #use with head -100 a.csv | showcsv
 headers() { head -1 "$1" | sed "s/,/\n/g"; } # prints headers line by line
 # multi search/replace # find ./ -type f -exec sed -i -e 's/apple/orange/g' {} \;
-
-
-if [ "$PLATFORM" == Darwin ]; then
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.:/usr/local/lib
-    export JAVA_HOME=$(/usr/libexec/java_home)
-    export COPYFILE_DISABLE=true
-    alias acpi="pmset -g batt"
-    alias ctags="`brew --prefix`/bin/ctags"
-    alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-    alias find='gfind'
-    alias sort='gsort'
-    alias gimp='/Applications/GIMP-2.10.app/Contents/MacOS/gimp'
-fi
 
 viw() {
     vi `which "$1"`

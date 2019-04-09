@@ -21,7 +21,8 @@ let s:col = {
       \ 'error': 1,
       \ 'green': 10,
       \ 'grey': 8,
-      \ 'red': 5
+      \ 'diffred': 5,
+      \ 'red': 1
       \ }
 
 function! s:setHighlight(name, fg, bg, display)
@@ -65,7 +66,7 @@ call s:setHighlight('diffDelete', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('DiffAdd', s:col['fg'], s:col['green'], 'NONE')
 call s:setHighlight('DiffChange', s:col['fg'], s:col['grey'], 'NONE')
 call s:setHighlight('DiffText', s:col['fg'], s:col['bg'], 'NONE')
-call s:setHighlight('DiffDelete', s:col['fg'], s:col['red'], 'NONE')
+call s:setHighlight('DiffDelete', s:col['fg'], s:col['diffred'], 'NONE')
 call s:setHighlight('PMenu', s:col['dark'], s:col['darkest'], 'NONE')
 call s:setHighlight('PMenuSel', s:col['fg'], s:col['darkest'], 'NONE')
 call s:setHighlight('Folded', s:col['fg'], s:col['light'], 'NONE')
@@ -75,6 +76,15 @@ call s:setHighlight('rubyBlock', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('rubySymbol', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('rubyInterpolationDelimiter', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('rubyStringDelimiter', s:col['fg'], s:col['bg'], 'NONE')
+
+call s:setHighlight('clojureSpecial', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('clojureDispatch', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('clojureSexp', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('clojureAnonArg', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('clojureMeta', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('clojureVarArg', s:col['red'], s:col['bg'], 'NONE')
+
+call s:setHighlight('goEscapeC', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('User1', s:col['dark'], s:col['bg'], 'NONE')
 set stl=--\ %1*%F%m%r%h%w%*\ %=\ %y\ -\ [%l,%c]\ [%L,%p%%] showtabline=1

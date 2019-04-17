@@ -86,6 +86,13 @@ call s:setHighlight('clojureVarArg', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('goEscapeC', s:col['red'], s:col['bg'], 'NONE')
 
+call s:setHighlight('rubyRegexp', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('rubyRegexpAnchor', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('rubyRegexpCharClass', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('rubyRegexpQuantifier', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('rubyRegexpEscape', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('rubyRegexpSpecial', s:col['red'], s:col['bg'], 'NONE')
+
 call s:setHighlight('markdownH1', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('markdownH2', s:col['red'], s:col['bg'], 'NONE')
 
@@ -97,6 +104,11 @@ call s:setHighlight('helpNotVi', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('shOption', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('htmlEvent', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('htmlSpecialChar', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('htmlLink', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('htmlH3', s:col['red'], s:col['bg'], 'NONE')
+
+call s:setHighlight('javaScript', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('User1', s:col['dark'], s:col['bg'], 'NONE')
 set stl=--\ %1*%F%m%r%h%w%*\ %=\ %y\ -\ [%l,%c]\ [%L,%p%%] showtabline=1

@@ -106,9 +106,12 @@ call s:setHighlight('shOption', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('htmlEvent', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('htmlSpecialChar', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('htmlLink', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('htmlH1', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('htmlH3', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('htmlTitle', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('javaScript', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('qfFileName', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('User1', s:col['dark'], s:col['bg'], 'NONE')
 set stl=--\ %1*%F%m%r%h%w%*\ %=\ %y\ -\ [%l,%c]\ [%L,%p%%] showtabline=1

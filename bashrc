@@ -65,6 +65,7 @@ alias pm='mutt -F ~/.mutt/mikepjb.muttrc'
 alias sm='mbsync -a'
 
 # data related
+alias jv="jq -C | less -R"
 alias json="python -m json.tool"
 alias showcsv="column -t -s, | less -S" #use with head -100 a.csv | showcsv
 headers() { head -1 "$1" | sed "s/,/\n/g"; } # prints headers line by line

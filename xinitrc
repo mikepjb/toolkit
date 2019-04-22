@@ -30,4 +30,6 @@ fi
 xmodmap ~/.Xmodmap
 
 xset r rate 200 25
-exec bspwm
+# exec bspwm
+# exec fluxbox
+exec openbox-session

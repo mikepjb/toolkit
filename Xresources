@@ -10,7 +10,7 @@ XTerm*titeInhibit: true
 URxvt*jumpScroll: True
 URxvt*skipScroll: True
 
-Xft.dpi: 60
+Xft.dpi: 70
 XTerm*renderFont: True
 xterm*faceName: xft:inconsolata:size=14
 xURxvt.letterSpace: -1

@@ -102,6 +102,7 @@ call s:setHighlight('helpSpecial', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('helpNotVi', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('shOption', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('shCommandSubBQ', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('htmlEvent', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('htmlSpecialChar', s:col['red'], s:col['bg'], 'NONE')

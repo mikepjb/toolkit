@@ -120,6 +120,8 @@ call s:setHighlight('cssSelectorOp', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('javaScript', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('javaScriptEmbed', s:col['red'], s:col['bg'], 'NONE')
 
+call s:setHighlight('sqlKeyword', s:col['red'], s:col['bg'], 'NONE')
+
 call s:setHighlight('qfFileName', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('User1', s:col['dark'], s:col['bg'], 'NONE')

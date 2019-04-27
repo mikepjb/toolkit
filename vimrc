@@ -65,7 +65,7 @@ map <C-k> <C-w><C-k>
 map <C-l> <C-w><C-l>
 map <C-q> :quit<CR>
 imap <C-c> <esc>
-imap <C-t> <></><Esc>5hdiwp3lpT>i
+imap <C-t> <></><Esc>5h"gdiw"gp3l"gpT>i
 vmap <C-t> :'<,'>!column -t<cr>
 
 func! Pick(input_cmd, vim_cmd)

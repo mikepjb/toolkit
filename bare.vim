@@ -95,6 +95,8 @@ call s:setHighlight('rubyRegexpSpecial', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('yamlBlockMappingMerge', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('yamlFlowIndicator', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('yamlKeyValueDelimiter', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('yamlEscape', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('markdownH1', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('markdownH2', s:col['red'], s:col['bg'], 'NONE')
@@ -119,6 +121,7 @@ call s:setHighlight('cssSelectorOp', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('javaScript', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('javaScriptEmbed', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('javaScriptSpecial', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('sqlKeyword', s:col['red'], s:col['bg'], 'NONE')
 

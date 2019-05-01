@@ -2,6 +2,15 @@
 ;; allow C-w company-mode delete backward word...
 ;; prevent C-w from unbalancing parens in paredit-mode...
 ;; search under cursor...
+;; replace all origin-0 etc with black (descriptive variables)
+;; NO temp #. files please!
+
+;; Use Cases:
+;; 1. Postgres - sql-postgres
+;; 2. Mongo?
+
+;; Useful Commands:
+;; C-u C-x = (describes font-lock under cursor)
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -20,6 +29,7 @@
 
 (setq debug-on-error t)
 (setq inhibit-splash-screen t)
+
 
 (electric-pair-mode 1)
 (show-paren-mode 1)
@@ -49,6 +59,7 @@
 (setq-default
  ido-enable-flex-matching t
  make-backup-files nil
+ auto-save-default nil
  column-number-mode t
  indent-tabs-mode nil
  ring-bell-function 'ignore
@@ -64,6 +75,9 @@
  auto-fill-function nil ;; do not wrap lines
  fill-column 80
  css-indent-offset 2
+ js-indent-level 2
+ pop-up-windows nil ;; do not open new buffers by default
+ display-buffer-function 'buffer-policy
  package-enable-at-startup nil)
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
@@ -96,16 +110,21 @@
                    "echo -ne $(git rev-parse --show-toplevel || echo \".\")")))
     (if (string-match-p (regexp-quote "fatal") response) "." response)))
 
-;; (defun build-tags ()
-;;   (interactive)
-;;   (shell-command (concat "cd " (git-root) " && ctags -f TAGS -e -R .")))
+(defun async-from-root ()
+  (interactive)
+  (let ((default-directory (git-root)))
+    (call-interactively 'async-shell-command)))
+
+(defun build-tags ()
+  (interactive)
+  (shell-command (concat "cd " (git-root) " && ctags -f TAGS -e -R .")))
 
 (defun beautify-json ()
   (interactive)
   (let ((b (if mark-active (min (point) (mark)) (point-min)))
         (e (if mark-active (max (point) (mark)) (point-max))))
     (shell-command-on-region b e
-     "python -mjson.tool" (current-buffer) t)))
+                             "python -mjson.tool" (current-buffer) t)))
 
 (defun join-below ()
   "join line below or all lines for a given region"
@@ -142,10 +161,24 @@
   (next-line 1)
   (yank))
 
-;; C-u C-x = (describes font-lock under cursor)
+(defun buffer-policy (buf not-this-window)
+  (if (and (not pop-up-frames)
+           (one-window-p)
+           (or not-this-window
+               (not (eq (window-buffer (selected-window)) buf)))
+           (> (frame-height) 70))
+      (split-window-vertically))
+  ;; Note: Some modules set `pop-up-windows' to t before calling `display-buffer'
+  (let ((display-buffer-function nil)
+        (pop-up-windows nil))
+    (display-buffer buf not-this-window))
+  ;; (balance-windows) ;; does not seem to trigger here.
+  )
+
 (dolist
     (binding
      '(("M-o" . other-window)
+       ("M-O" . (lambda () (interactive) (other-window -1)))
        ("M-g" . mark-paragraph)
        ("M-D" . duplicate-line)
        ("C-c g" . magit)
@@ -159,11 +192,14 @@
        ("C-h" . delete-backward-char)
        ("M-k" . paredit-forward-barf-sexp)
        ("M-l" . paredit-forward-slurp-sexp)
+       ("C-T" . cider-test-run-ns-tests) ;; intellij compatability
+       ("C-L" . cider-load-buffer)
        ("C-c t" . run-tests)
        ("C-z" . open-shell)
        ("M-j" . join-below)
        ("M-/" . comment-line-or-region)
        ("M-z" . zap-up-to-char)
+       ("M-&" . async-from-root)
        ("C-c M-j" . open-repl)
        ("C-c p" . list-processes)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
@@ -217,12 +253,13 @@
   (if (and paredit-mode (equal (substring str -1) (or ")" "]" "}")))
       (progn (backward-delete-char 1) (forward-char)))))
 
-(use-package rainbow-delimiters
-  :ensure t
-  :init
-  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode))
+;; (use-package rainbow-delimiters
+;;   :ensure t
+;;   :init
+;;   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+;;   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+;;   (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+;;   )
 
 (use-package cider
   :ensure t

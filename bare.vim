@@ -71,6 +71,7 @@ call s:setHighlight('PMenu', s:col['dark'], s:col['darkest'], 'NONE')
 call s:setHighlight('PMenuSel', s:col['fg'], s:col['darkest'], 'NONE')
 call s:setHighlight('Folded', s:col['fg'], s:col['light'], 'NONE')
 call s:setHighlight('FoldColumn', s:col['fg'], s:col['light'], 'NONE')
+call s:setHighlight('Quote', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('rubyBlock', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('rubySymbol', s:col['fg'], s:col['bg'], 'NONE')

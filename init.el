@@ -183,6 +183,7 @@
        ("M-D" . duplicate-line)
        ("C-c g" . magit)
        ("C-c l" . magit-log-current)
+       ("C-c P" . magit-pull-from-upstream)
        ("C-x p" . (lambda () (interactive) (ido-find-file-in-dir "~/src")))
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)

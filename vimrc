@@ -32,6 +32,7 @@ set isk+=-
 set completeopt -=preview
 set omnifunc=Suggest
 runtime macros/matchit.vim
+let g:ftplugin_sql_omni_key = '<C-j>' " ctrl+c is for escape, not completion.
 
 function! Suggest(findstart, base)
   if a:findstart == 1

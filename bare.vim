@@ -125,6 +125,7 @@ call s:setHighlight('javaScriptEmbed', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('javaScriptSpecial', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('sqlKeyword', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('sqlSpecial', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('qfFileName', s:col['red'], s:col['bg'], 'NONE')
 

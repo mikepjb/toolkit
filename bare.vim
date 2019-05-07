@@ -127,6 +127,8 @@ call s:setHighlight('javaScriptSpecial', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('sqlKeyword', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('sqlSpecial', s:col['red'], s:col['bg'], 'NONE')
 
+call s:setHighlight('rDollar', s:col['red'], s:col['bg'], 'NONE')
+
 call s:setHighlight('qfFileName', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('User1', s:col['dark'], s:col['bg'], 'NONE')

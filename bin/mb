@@ -19,7 +19,7 @@ authenticate_identity() {
 update_repo() {
   repo_path="$1"
   eval full_repo_path=$repo_path
-  echo -n "--> Updating $repo_path..."
+  echo -n "--> Updating $repo_path... "
   if git -C $full_repo_path pull --ff-only >/dev/null 2>&1; then
     color_echo "32" "OK"
   else

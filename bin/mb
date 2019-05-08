@@ -19,9 +19,18 @@ authenticate_identity() {
 update_repo() {
   repo_path="$1"
   eval full_repo_path=$repo_path
-  echo -n "--> Updating $repo_path... "
+  echo -n "--> Pulling $repo_path... "
   if git -C $full_repo_path pull --ff-only >/dev/null 2>&1; then
     color_echo "32" "OK"
+    echo -n "--> Checking status for $repo_path... "
+    if [ -z "$(git status --porcelain)" ]; then
+      color_echo "32" "OK"
+    else
+      color_echo "31" "BAD"
+      cd $full_repo_path
+      git status
+      exit
+    fi
   else
     color_echo "31" "BAD"
     cd $full_repo_path

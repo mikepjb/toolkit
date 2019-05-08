@@ -44,7 +44,7 @@ main() {
   sudo pacman -Syu
 
   echo -e '--> Syncing email inbox... '
-  mutt -F ~/.mutt/mikepjb.muttrc
+  mbsync -a
 }
 
 main

@@ -1,0 +1,55 @@
+#!/bin/sh -e
+
+color_echo() {
+  color="\033[0;$1m"
+  nc="\033[0m"
+  echo -e "${color}$2${nc}"
+}
+
+authenticate_identity() {
+  echo -n '--> Checking we have an authenticated identity with ssh-agent... '
+  if ! ssh-add -L >/dev/null; then # if there are no authenticated identities
+    ssh-add ~/.ssh/id_rsa # include the default rsa keypair
+    color_echo "32" "OK"
+  else
+    color_echo "32" "OK"
+  fi
+}
+
+update_repo() {
+  repo_path="$1"
+  eval full_repo_path=$repo_path
+  echo -n "--> Updating $repo_path..."
+  if git -C $full_repo_path pull --ff-only >/dev/null 2>&1; then
+    color_echo "32" "OK"
+  else
+    color_echo "31" "BAD"
+    cd $full_repo_path
+    git status
+    exit 1
+  fi
+}
+
+main() {
+  echo 'Updating system'
+  authenticate_identity
+  update_repo "~/toolkit/"
+
+  echo -n '--> Updating notes... '
+  update_repo "~/notes/"
+
+  echo -n '--> Updating system configuration... '
+  update_repo "~/src/arch-configuration/"
+
+  # TODO instead of pacman Syu - run chrooted_setup function
+  echo -n '--> Updating system packages... '
+  sudo pacman -Syu
+
+  echo -n '--> Syncing email inbox... '
+  mutt -F ~/.mutt/mikepjb.muttrc
+}
+
+main
+
+# STRETCH -- save - run at the end of the day to detect changes and cd into the
+# first altered directory

@@ -22,7 +22,8 @@ let s:col = {
       \ 'green': 10,
       \ 'grey': 8,
       \ 'diffred': 5,
-      \ 'red': 1
+      \ 'red': 1,
+      \ 'dark_green': 2
       \ }
 
 function! s:setHighlight(name, fg, bg, display)
@@ -58,12 +59,12 @@ call s:setHighlight('Delimiter', s:col['dark'], s:col['bg'], 'NONE')
 call s:setHighlight('MatchParen', s:col['fg'], s:col['dark'], 'NONE')
 call s:setHighlight('Operator', s:col['fg'], s:col['bg'], 'NONE')
 " For git?!?
-call s:setHighlight('diffAdded', s:col['fg'], s:col['bg'], 'NONE')
-call s:setHighlight('diffChange', s:col['fg'], s:col['bg'], 'NONE')
-call s:setHighlight('diffRemoved', s:col['fg'], s:col['bg'], 'NONE')
-call s:setHighlight('diffDelete', s:col['fg'], s:col['bg'], 'NONE')
+call s:setHighlight('diffAdded', s:col['dark_green'], s:col['bg'], 'NONE')
+call s:setHighlight('diffChange', s:col['grey'], s:col['bg'], 'NONE')
+call s:setHighlight('diffRemoved', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('diffDelete', s:col['red'], s:col['bg'], 'NONE')
 " For :diffthis & vim -d file1 file2
-call s:setHighlight('DiffAdd', s:col['fg'], s:col['green'], 'NONE')
+call s:setHighlight('DiffAdd', s:col['fg'], s:col['dark_green'], 'NONE')
 call s:setHighlight('DiffChange', s:col['fg'], s:col['grey'], 'NONE')
 call s:setHighlight('DiffText', s:col['fg'], s:col['bg'], 'NONE')
 call s:setHighlight('DiffDelete', s:col['fg'], s:col['diffred'], 'NONE')
@@ -104,12 +105,20 @@ call s:setHighlight('markdownH2', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('vimMapModKey', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('vimNotation', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('vimContinue', s:col['red'], s:col['bg'], 'NONE')
+
 call s:setHighlight('helpSpecial', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('helpNotVi', s:col['red'], s:col['bg'], 'NONE')
+
+call s:setHighlight('gitcommitBranch', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('shOption', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('shCommandSub', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('shCommandSubBQ', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('shCommandSub', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('shParen', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('shCtrlSeq', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('shSpecial', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('htmlEvent', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('htmlSpecialChar', s:col['red'], s:col['bg'], 'NONE')

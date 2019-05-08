@@ -35,17 +35,15 @@ main() {
   authenticate_identity
   update_repo "~/toolkit/"
 
-  echo -n '--> Updating notes... '
   update_repo "~/notes/"
 
-  echo -n '--> Updating system configuration... '
   update_repo "~/src/arch-configuration/"
 
   # TODO instead of pacman Syu - run chrooted_setup function
-  echo -n '--> Updating system packages... '
+  echo -e '--> Updating system packages... '
   sudo pacman -Syu
 
-  echo -n '--> Syncing email inbox... '
+  echo -e '--> Syncing email inbox... '
   mutt -F ~/.mutt/mikepjb.muttrc
 }
 

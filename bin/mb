@@ -25,13 +25,13 @@ update_repo() {
     echo -n "--> Checking status for $repo_path... "
     if [ -z "$(git -C $full_repo_path status --porcelain)" ]; then
       color_echo "32" "OK"
-      echo -n "--> Checking for unpushed commits in $repo_path... "
-      if [ -z "$(git -C $full_repo_path cherry)" ]; then
-        color_echo "31" "BAD"
-        exit 1
-      else
-        color_echo "32" "OK"
-      fi
+      # echo -n "--> Checking for unpushed commits in $repo_path... "
+      # if [ -z "$(git -C $full_repo_path cherry)" ]; then
+      #   color_echo "31" "BAD"
+      #   exit 1
+      # else
+      #   color_echo "32" "OK"
+      # fi
     else
       color_echo "31" "BAD"
       cd $full_repo_path

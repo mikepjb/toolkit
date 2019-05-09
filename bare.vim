@@ -87,6 +87,7 @@ call s:setHighlight('clojureMeta', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('clojureVarArg', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('goEscapeC', s:col['red'], s:col['bg'], 'NONE')
+call s:setHighlight('goEscapeOctal', s:col['red'], s:col['bg'], 'NONE')
 
 call s:setHighlight('rubyRegexp', s:col['red'], s:col['bg'], 'NONE')
 call s:setHighlight('rubyRegexpAnchor', s:col['red'], s:col['bg'], 'NONE')

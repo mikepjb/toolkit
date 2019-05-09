@@ -76,8 +76,8 @@
  fill-column 80
  css-indent-offset 2
  js-indent-level 2
- pop-up-windows nil ;; do not open new buffers by default
- display-buffer-function 'buffer-policy
+ ;; pop-up-windows nil ;; do not open new buffers by default
+ ;; display-buffer-function 'buffer-policy
  package-enable-at-startup nil)
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
@@ -161,19 +161,19 @@
   (next-line 1)
   (yank))
 
-(defun buffer-policy (buf not-this-window)
-  (if (and (not pop-up-frames)
-           (one-window-p)
-           (or not-this-window
-               (not (eq (window-buffer (selected-window)) buf)))
-           (> (frame-height) 70))
-      (split-window-vertically))
-  ;; Note: Some modules set `pop-up-windows' to t before calling `display-buffer'
-  (let ((display-buffer-function nil)
-        (pop-up-windows nil))
-    (display-buffer buf not-this-window))
-  ;; (balance-windows) ;; does not seem to trigger here.
-  )
+;; (defun buffer-policy (buf not-this-window)
+;;   (if (and (not pop-up-frames)
+;;            (one-window-p)
+;;            (or not-this-window
+;;                (not (eq (window-buffer (selected-window)) buf)))
+;;            (> (frame-height) 70))
+;;       (split-window-vertically))
+;;   ;; Note: Some modules set `pop-up-windows' to t before calling `display-buffer'
+;;   (let ((display-buffer-function nil)
+;;         (pop-up-windows nil))
+;;     (display-buffer buf not-this-window))
+;;   ;; (balance-windows) ;; does not seem to trigger here.
+;;   )
 
 (dolist
     (binding

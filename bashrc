@@ -88,4 +88,18 @@ git_state() {
     fi
 }
 
-PROMPT_COMMAND='PS1="\W($(git_state)) \$ "'
+color_echo() {
+  color="\033[0;$1m"
+  nc="\033[0m"
+  echo -e "${color}$2${nc}"
+}
+
+notify_jobs() {
+  if [ $(jobs | wc -l) -eq 0 ]; then
+    color_echo "30" "$"
+  else
+    color_echo "31" "$"
+  fi
+}
+
+PROMPT_COMMAND='PS1="\W($(git_state)) $(notify_jobs) "'

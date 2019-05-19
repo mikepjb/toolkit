@@ -39,40 +39,79 @@ xterm*VT100.Translations: #override \
                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
 
-*xterm*background: #eeeeee
-*xterm*foreground: #444444
-*xterm*cursorColor: #444444
+! Fluoresce Theme
+*.foreground:   #fcfcfa
+*.background:   #2d2a2e
+*.cursorColor:  #fcfcfa
 
-! Black/grey
-*xterm*color0: #1d1e1a
-*xterm*color8: #7c7c7c
+! black
+*.color0:       #221f22
+*.color8:       #cac6cc
 
-! Red
-*xterm*color1: #800000
-*xterm*color9: #f44336
-! *xterm*color9: #e91e63
+! red
+*.color1:       #ff6188
+*.color9:       #ff89a6
 
-! Green
-*xterm*color2: #365d2e
-*xterm*color10: #a8c960
+! green
+*.color2:       #a9dc76
+*.color10:      #c5e0a9
 
-! Yellow
-*xterm*color3: #cf8f2e
-*xterm*color11: #cfb42e
+! yellow
+*.color3:       #fc9867
+*.color11:      #ffd866
 
-! Blue
-*xterm*color4: #486ab4
-*xterm*color12: #4884a9
+! blue
+*.color4:       #78dce8
+*.color12:      #c9edf1
 
-! Magenta
-*xterm*color5: #9933ff ! purple
-*xterm*color13: #8b1e8b
+! magenta
+*.color5:       #ab9df2
+*.color13:      #b294bb
 
-! Cyan
-*xterm*color6: #486ab4
-*xterm*color14: #486ab4
+! cyan
+*.color6:       #78e8cf
+*.color14:      #c4f9ed
 
-! White
-*xterm*color7: #eeeeee
-*xterm*color15: #eeeeee
+! white
+*.color7:       #c3c1c3
+*.color15:      #f8f8f2
 
+! 8 - is also vim ruler
+
+! ! Bare Theme
+! *xterm*background: #eeeeee
+! *xterm*foreground: #444444
+! *xterm*cursorColor: #444444
+!
+! ! Black/grey
+! *xterm*color0: #1d1e1a
+! *xterm*color8: #7c7c7c
+!
+! ! Red
+! *xterm*color1: #800000
+! *xterm*color9: #f44336
+! ! *xterm*color9: #e91e63
+!
+! ! Green
+! *xterm*color2: #365d2e
+! *xterm*color10: #a8c960
+!
+! ! Yellow
+! *xterm*color3: #cf8f2e
+! *xterm*color11: #cfb42e
+!
+! ! Blue
+! *xterm*color4: #486ab4
+! *xterm*color12: #4884a9
+!
+! ! Magenta
+! *xterm*color5: #9933ff ! purple
+! *xterm*color13: #8b1e8b
+!
+! ! Cyan
+! *xterm*color6: #486ab4
+! *xterm*color14: #486ab4
+!
+! ! White
+! *xterm*color7: #eeeeee
+! *xterm*color15: #eeeeee

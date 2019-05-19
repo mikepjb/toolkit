@@ -19,6 +19,9 @@ set noswapfile nobackup nowritebackup
 set clipboard=unnamedplus
 set ignorecase smartcase
 set incsearch
+set nu
+set cul
+set mouse=a
 set list
 let &listchars = "tab:\u21e5\u00b7,trail:\u2423"
 set wildmenu
@@ -26,9 +29,13 @@ set nojoinspaces
 set laststatus=1
 set autoread
 set gdefault
-set nohlsearch
+set hlsearch
 set t_ti= t_te=
 set isk+=-
+" Normally, Vim messes with iskeyword when you open a shell file. This can
+" leak out, polluting other file types even after a 'set ft=' change. This
+" variable prevents the iskeyword change so it can't hurt anyone.
+let g:sh_noisk=1
 set completeopt -=preview
 set omnifunc=Suggest
 runtime macros/matchit.vim
@@ -44,7 +51,7 @@ function! Suggest(findstart, base)
   endif
 endfunction
 
-colorscheme bare
+colorscheme lumo
 
 let mapleader= ' '
 map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
@@ -82,6 +89,15 @@ endfunc
 
 nnoremap <leader>f :call Pick("find * -type f", ":e")<cr>
 
+function! SelectaBuffer()
+  let bufnrs = filter(range(1, bufnr("$")), 'buflisted(v:val)')
+  let buffers = map(bufnrs, 'bufname(v:val)')
+  call Pick('echo "' . join(buffers, "\n") . '"', ":b")
+endfunction
+
+" Fuzzy select a buffer. Open the selected buffer with :b.
+nnoremap <leader>b :call SelectaBuffer()<cr>
+
 command! -nargs=? -range Align <line1>,<line2>call AlignSection('<args>')
 vnoremap <silent> <Leader>a :Align<CR>
 function! AlignSection(regex) range
@@ -110,12 +126,6 @@ endfunction
 
 " align: '<,'>!sed $'s/::/\001::/' | column -ets $'\001'
 
-command! Load call LoadClojureFile()
-function! LoadClojureFile()
-  update
-  !hurl "(load-file \"%:p\")"
-endfunction
-
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading
   nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -126,17 +136,6 @@ endif
 
 command! TrimWhitespace :%s/\s\+$//e
 command! PrettifyJSON :%!python -m json.tool
-
-function! Format()
-  let out = system("goimports -w " . expand("%"))
-  if strlen(out) != 0
-    echo out
-  endif
-  mkview
-  execute ":silent e!"
-  silent loadview
-endfunction
-command! Format call Format()
 
 function! MarkdownEnvironment()
   func! Foldexpr_markdown(lnum)
@@ -223,12 +222,38 @@ function! GodefUnderCursor()
     exec "e +" . source_location[1] . " " . source_location[0]
 endfunction
 
+function! GoFmt()
+  let out = system("goimports -w " . expand("%"))
+  if strlen(out) != 0
+    echo out
+  endif
+  mkview
+  execute ":silent e!"
+  silent loadview
+endfunction
+
 augroup golang
-  au! BufWritePost *.go :call Format()
+  au! BufWritePost *.go :call GoFmt()
+  " ! shouldn't be used on Syntax.. why? it works tho..
+  au Syntax go syn match goAssign /:\?=/
+  au Syntax go syn match goDeclaration /<func\>/ nextgroup=goFunction skipwhite skipnl
+  au Syntax go syn match goFunction /\w\+\ze(/
   au! Filetype go :call GolangEnvironment()
-  au! Filetype go :nnoremap gf :call GodefUnderCursor()<cr>
+  " au! Filetype go nnoremap gd :call GodefUnderCursor()<cr>
+  nnoremap gd :call GodefUnderCursor()<cr>
+  au! Filetype go let &makeprg = '('
+        \.  'golint ' . expand('%') . ' ; '
+        \. 'go test ./... -v ; '
+        \. 'go vet ; '
+        \. 'go build -o /tmp/' . system('echo -n $(uuidgen)')
+        \. ')'
   au! BufNewFile,BufRead *.go setlocal nolist
 augroup END
+" go test ./... -v
+
+" automatically close/open quickfix when empty/holding info
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
 " Leave the return key alone when in command line windows, since it's used
 " to run commands there.
@@ -260,7 +285,7 @@ function! RunTestFile(...)
   elseif &filetype == 'scheme'
     exec ":!csi -s %"
   elseif &filetype == 'go'
-    exec ":!go test ./... -v"
+    make
   else
     if in_test_file
       call SetTestFile(command_suffix)

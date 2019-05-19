@@ -9,6 +9,7 @@ done
 
 mkdir -p $HOME/.vim/colors
 ln -sfv $BASE/bare.vim ~/.vim/colors/bare.vim
+ln -sfv $BASE/lumo.vim ~/.vim/colors/lumo.vim
 ln -sfv $BASE/en.utf-8.add ~/.vim/en.utf-8.add
 
 mkdir -p $HOME/.config/nvim/colors
@@ -20,6 +21,10 @@ ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
 
 mkdir -p $HOME/.config/nvim/autoload
 ln -sfv $BASE/autoload.vim ~/.config/nvim/autoload/autoload.vim
+
+LOCATION="$HOME/.config/Code - OSS/User"
+# mkdir -p $LOCATION # creating split name folders
+ln -sfv $BASE/code-editor-config/* "$LOCATION"
 
 [ -L ~/.mutt ] && unlink ~/.mutt
 ln -sfv $BASE/mutt ~/.mutt

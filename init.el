@@ -30,7 +30,6 @@
 (setq debug-on-error t)
 (setq inhibit-splash-screen t)
 
-
 (electric-pair-mode 1)
 (show-paren-mode 1)
 (ido-mode 1)
@@ -181,6 +180,8 @@
        ("M-O" . (lambda () (interactive) (other-window -1)))
        ("M-g" . mark-paragraph)
        ("M-D" . duplicate-line)
+       ("M-e" . flycheck-next-error)
+       ("M-L" . flycheck-list-errors)
        ("C-c g" . magit)
        ("C-c l" . magit-log-current)
        ("C-c P" . magit-pull-from-upstream)
@@ -296,6 +297,23 @@
 (use-package inf-ruby :ensure t)
 
 (load-theme 'bare t)
+
+(use-package go-mode
+  :ensure t
+  :init (add-hook 'before-save-hook 'gofmt-before-save))
+(use-package go-rename :ensure t)
+
+(add-hook 'code-mode-hook (lambda () (linum-mode 1)))
+
+(use-package flycheck
+  :ensure t
+  :init (add-hook 'after-init-hook #'global-flycheck-mode))
+
+(dolist
+    (mode-hook
+     '(ruby-mode-hook go-mode-hook))
+  (add-hook mode-hook
+            (lambda () (run-hooks 'code-mode-hook))))
 
 (if (eq system-type 'darwin)
     (let ((path-from-shell

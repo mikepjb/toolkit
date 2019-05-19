@@ -39,14 +39,14 @@ xterm*VT100.Translations: #override \
                 Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
                 Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
 
-! Fluoresce Theme
+! Lumo Theme
 *.foreground:   #fcfcfa
 *.background:   #2d2a2e
 *.cursorColor:  #fcfcfa
 
 ! black
 *.color0:       #221f22
-*.color8:       #cac6cc
+*.color8:       #383539
 
 ! red
 *.color1:       #ff6188

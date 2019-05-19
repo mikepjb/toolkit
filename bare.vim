@@ -1,5 +1,5 @@
 " Bare
-" Author:       Michael Bruce <http://michaelbruce.online/>
+" Author:       Michael Bruce <http://michaelbruce.co/>
 " vim:set ts=2 sts=2 sw=2 expandtab:
 
 set background=dark

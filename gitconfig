@@ -35,6 +35,7 @@
   re = reset HEAD
   rehard = reset HEAD --hard
   total = rev-list --all --count
+  recent = diff --name-only HEAD
   ra = \
     log --abbrev-commit \
     --pretty=format:'%<(7)%C(yellow)%h %Cgreen%<(15)"(%cr)" %C(bold cyan)%<(17)<%an>%C(red)%d %Creset %s'

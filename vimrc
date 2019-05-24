@@ -284,7 +284,7 @@ function! RunTestFile(...)
     exec ":Load"
   elseif &filetype == 'scheme'
     exec ":!csi -s %"
-  elseif &filetype == 'go'
+  elseif &filetype == 'go' || &filetype == 'javascript'
     make
   else
     if in_test_file

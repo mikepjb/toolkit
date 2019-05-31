@@ -20,7 +20,6 @@ export GO111MODULE=on # allow go modules in GOPATH
 export XDG_CONFIG_HOME=$HOME/.config
 export PAGER='less -S'
 export SSH_AUTH_SOCK=$HOME/.ssh/ssh-agent.socket
-export _JAVA_AWT_WM_NONREPARENTING=1
 
 if [ -z "$PATH_EXPANDED" ]; then
     # IFS stands for internal field seperator

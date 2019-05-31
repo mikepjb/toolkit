@@ -1,0 +1,59 @@
+#!/bin/bash -e
+# Note: we use bash not sh for two reasons:
+# 1. $EUID to detect root user
+# 2. Arrays are convenient.
+# vim: ft=sh
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root (because we are installing in /opt)"
+  exit
+fi
+
+cd $(dirname $BASH_SOURCE)
+BASE=$(pwd)
+
+idea_directories=(
+.GoLand2019.1
+.IdeaIC2018.3
+)
+
+goland_ver=2019.1.2
+intellij_ver=2019.1.3
+
+goland_tar="goland-${goland_ver}.tar.gz"
+
+extract_idea() {
+  idea_name=$1
+  tar_name=$2
+  exec_name=$3
+  exec_link=$4
+  echo "extracting ${tar_name} to /opt/${idea_name}"
+  umask 002 # extracted files have 755 permissions
+  mkdir -p /opt/${idea_name}
+  tar -zxf /tmp/${tar_name} \
+    -C /opt/${idea_name} \
+    --strip-components=1
+  ln -sfv /opt/${idea_name}/bin/${exec_name} /usr/local/bin/${exec_link}
+}
+
+install_ideas() {
+  if [ ! -f /tmp/${goland_tar} ] && [ ! -d /opt/goland ]; then
+    echo 'downloading goland'
+    wget -O /tmp/${goland_tar} https://download.jetbrains.com/go/${goland_tar}
+  fi
+
+  if [ ! -d /opt/goland ]; then
+    extract_idea "goland" $goland_tar "goland.sh" "goland"
+  fi
+
+  if [ ! -f /tmp/ideaIC-${intellij_ver}.tar.gz ] && [ ! -d /opt/intellij-community ]; then
+    echo 'downloading intellij-community'
+    wget -O /tmp/ideaIC-${intellij_ver}.tar.gz https://download.jetbrains.com/idea/ideaIC-${intellij_ver}.tar.gz
+  fi
+
+  if [ ! -d /opt/intellij-community ]; then
+    extract_idea "intellij-community" "ideaIC-${intellij_ver}" "idea.sh" "intellij"
+  fi
+}
+
+install_ideas

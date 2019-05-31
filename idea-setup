@@ -4,17 +4,12 @@
 # 2. Arrays are convenient.
 # vim: ft=sh
 
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run as root (because we are installing in /opt)"
-  exit
-fi
-
 cd $(dirname $BASH_SOURCE)
 BASE=$(pwd)
 
 idea_directories=(
 .GoLand2019.1
-.IdeaIC2018.3
+.IdeaIC2019.1
 )
 
 goland_ver=2019.1.2
@@ -56,4 +51,19 @@ install_ideas() {
   fi
 }
 
-install_ideas
+link_options() {
+  # for idea_directories
+  for idea_dir in "${idea_directories[@]}"; do
+    ln -sfv $BASE/idea-options/* "$HOME/$idea_dir/config/options"
+  done
+}
+
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root to install (because we are installing in /opt)"
+  echo "==> Linking configuration files to IDEAs"
+  link_options
+else
+  echo "==> Logged in as root, proceeding to install IDEAs"
+  install_ideas
+fi
+

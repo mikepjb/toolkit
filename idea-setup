@@ -54,6 +54,7 @@ install_ideas() {
 link_options() {
   # for idea_directories
   for idea_dir in "${idea_directories[@]}"; do
+    mkdir -p "$HOME/$idea_dir/config/options"
     ln -sfv $BASE/idea-options/*.xml "$HOME/$idea_dir/config/options"
     ln -sfv $BASE/idea-options/disabled_plugins.txt "$HOME/$idea_dir/config"
   done

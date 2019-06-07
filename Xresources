@@ -45,8 +45,8 @@ xterm*VT100.Translations: #override \
 *.cursorColor:  #fcfcfa
 
 ! black
-*.color0:       #221f22
-*.color8:       #383539
+*.color0:       #383539
+*.color8:       #989599
 
 ! red
 *.color1:       #ff6188

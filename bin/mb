@@ -53,14 +53,13 @@ main() {
 
   update_repo "~/notes/"
 
-  # update_repo "~/src/arch-configuration/"
+  update_repo "~/src/sysconf/"
 
-  # TODO instead of pacman Syu - run chrooted_setup function
-  echo -e '--> Updating system packages... '
-  sudo pacman -Syu
+  # go install sysconf...
+  # sysconf -update
 
-  echo -e '--> Syncing email inbox... '
-  mbsync -a
+  # echo -e '--> Syncing email inbox... '
+  # mbsync -a
 }
 
 main

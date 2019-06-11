@@ -17,7 +17,8 @@ if [ `xdpyinfo | awk '/dimensions/{print $2}'` = '3840x2160' ]; then
 fi
 
 if [ `uname -n` = "mikepjb-desktop" ]; then
-  xcalib -d :0 $HOME/src/arch-configuration/dell_u2515h.icc
+  # xcalib -d :0 $HOME/src/arch-configuration/dell_u2515h.icc
+  # TODO xcalib is in AUR, what alternatives do we have?
 fi
 
 if [ `uname -n` = "mikepjb-london" ]; then

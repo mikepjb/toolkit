@@ -39,9 +39,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     export PATH_EXPANDED=1
 fi
 
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby 2.5.1
+c=/usr/local/share/chruby/chruby.sh; [[ -f $c ]] && source $c
 
 alias pacfiles="pacman -Ql" # list files associated with a package
 alias nvm="unalias nvm && [ -s "$NVM_DIR/nvm.sh" ] && \. \"$NVM_DIR/nvm.sh\""

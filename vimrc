@@ -222,6 +222,24 @@ function! GodefUnderCursor()
     exec "e +" . source_location[1] . " " . source_location[0]
 endfunction
 
+function! GuruUnderCursor(command)
+    let pos = getpos(".")[1:2]
+    if &encoding == 'utf-8'
+        let offs = line2byte(pos[0]) + pos[1] - 2
+    else
+        let c = pos[1]
+        let buf = line('.') == 1 ? "" : (join(getline(1, pos[0] - 1), "\n") . "\n")
+        let buf .= c == 1 ? "" : getline(pos[0])[:c-2]
+        let offs = len(iconv(buf, &encoding, "utf-8"))
+    endif
+    " echo offs
+    let source_location = 
+          \split(system("guru -scope '...' " . a:command . " ". expand("%:p") . ":#" . offs), ":")
+    echo source_location
+
+    " exec "e +" . source_location[1] . " " . source_location[0]
+endfunction
+
 function! GoFmt()
   let out = system("goimports -w " . expand("%"))
   if strlen(out) != 0

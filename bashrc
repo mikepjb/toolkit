@@ -19,6 +19,8 @@ export GOPATH=$HOME
 export GO111MODULE=on # allow go modules in GOPATH
 export XDG_CONFIG_HOME=$HOME/.config
 export PAGER='less -S'
+export NVM_DIR="$HOME/.config/nvm"
+export NVM_SOURCE='/usr/share/nvm' # AUR nvm package
 export SSH_AUTH_SOCK=$HOME/.ssh/ssh-agent.socket
 
 if [ -z "$PATH_EXPANDED" ]; then
@@ -42,7 +44,7 @@ fi
 c=/usr/local/share/chruby/chruby.sh; [[ -f $c ]] && source $c
 
 alias pacfiles="pacman -Ql" # list files associated with a package
-alias nvm="unalias nvm && [ -s "$NVM_DIR/nvm.sh" ] && \. \"$NVM_DIR/nvm.sh\""
+alias nvm="unalias nvm && [ -s "$NVM_SOURCE/nvm.sh" ] && \. \"$NVM_SOURCE/nvm.sh\""
 alias git-root='git rev-parse --show-toplevel || echo "."'
 alias tags='ctags -f $(git-root)/.git/tags -R $(git-root)'
 alias gr='cd $(git-root)'

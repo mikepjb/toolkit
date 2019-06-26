@@ -13,7 +13,8 @@ LANG="en_GB.UTF-8"
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
 if [ `uname -n` = "mikepjb-mercury" ]; then
-  xrdb -merge <<< 'Xft.dpi: 180'
+  # xrdb -merge <<< 'Xft.dpi: 180'
+  xrandr --output eDP-1 --mode 1920x1080
 fi
 # if [ `xdpyinfo | awk '/dimensions/{print $2}'` = '3840x2160' ]; then
 #   xrdb -merge <<< 'xterm*faceName: xft:inconsolata:size=18'

@@ -302,6 +302,7 @@
   :ensure t
   :init (add-hook 'before-save-hook 'gofmt-before-save))
 (use-package go-rename :ensure t)
+(use-package go-guru :ensure t)
 
 (add-hook 'code-mode-hook (lambda () (linum-mode 1)))
 

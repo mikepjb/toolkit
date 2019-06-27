@@ -63,6 +63,7 @@ alias ag='echo "use ripgrep fool!"'
 alias rg='rg -M 120'
 alias pm='mutt -F ~/.mutt/mikepjb.muttrc'
 alias sm='mbsync -a'
+alias xclip='xclip -sel clip'
 
 # data related
 alias jv="jq -C | less -R"

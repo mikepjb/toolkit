@@ -1,3 +1,5 @@
 .DS_Store
 mutt/.mail
 mutt/mailbox/
+go.mod
+go.sum

@@ -13,7 +13,7 @@ echo "$external_name"
 # unknown for now
 
 if [ $no_devices = "1" ]; then
-  xrandr --output eDP-1 --primary --auto
+  xrandr --output eDP-1 --primary --mode 1920x1080
 else
   xrandr --output $external_name --primary --auto
 fi

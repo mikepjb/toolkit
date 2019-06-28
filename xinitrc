@@ -15,6 +15,12 @@ LANG="en_GB.UTF-8"
 if [ `uname -n` = "mikepjb-mercury" ]; then
   # xrdb -merge <<< 'Xft.dpi: 180'
   xrandr --output eDP-1 --mode 1920x1080
+  # TODO ideally we scale on the external monitor but --scale fails silently
+  # when using displaylink
+  # scales 4k down to 1440p (mirror is good but main screen is blurred slightly)
+  # use this when connected
+  # xrandr --output eDP-1 --mode 3840x2160 --scale 0.6666x0.6666
+
 fi
 # if [ `xdpyinfo | awk '/dimensions/{print $2}'` = '3840x2160' ]; then
 #   xrdb -merge <<< 'xterm*faceName: xft:inconsolata:size=18'

@@ -5,24 +5,13 @@ XTerm*termName: xterm-256color
 ! Disable alternate screen
 XTerm*titeInhibit: true
 
-! True: specify that jump scrolling should be used. When receiving
-! allow multiple lines per refresh
-URxvt*jumpScroll: True
-URxvt*skipScroll: True
-
 Xft.dpi: 70
 XTerm*renderFont: True
 xterm*faceName: xft:inconsolata:size=14
-xURxvt.letterSpace: -1
-! Set window title string, the default title is the command-line
-URxvt*title: mikepjb
-! True: enable the scrollbar [default]; option -sb. False: disable
-URxvt*scrollBar: false
-! Specifies number of lines (pixel height) to insert between each row
-URxvt*lineSpace: 0
 ! Set the key to be interpreted as the Meta key to: alt, meta, hyper,
 XTerm*eightBitInput:   false
 XTerm*eightBitOutput:  true
+XTerm*altSendsEscape: true
 XTerm*metaSendsEscape: true
 
 ! Fix for Ctrl+h calling backspace

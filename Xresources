@@ -23,7 +23,7 @@ URxvt*lineSpace: 0
 ! Set the key to be interpreted as the Meta key to: alt, meta, hyper,
 XTerm*eightBitInput:   false
 XTerm*eightBitOutput:  true
-XTerm*metaSendsEscape: True
+XTerm*metaSendsEscape: true
 
 ! Fix for Ctrl+h calling backspace
 

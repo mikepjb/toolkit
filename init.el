@@ -2,17 +2,8 @@
 ;; allow C-w company-mode delete backward word...
 ;; prevent C-w from unbalancing parens in paredit-mode...
 ;; search under cursor...
-;; replace all origin-0 etc with black (descriptive variables)
-;; NO temp #. files please!
-
-;; Use Cases:
-;; 1. Postgres - sql-postgres
-;; 2. Mongo?
-
-;; Useful Commands:
 ;; C-u C-x = (describes font-lock under cursor)
 
-(setq package-enable-at-startup nil)
 (package-initialize)
 
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
@@ -44,15 +35,6 @@
 (defun display-startup-echo-area-message ()
   (message (seq-random-elt welcome-messages)))
 
-(defvar frame-config
-  '((width . 180)
-    (height . 70)
-    (vertical-scroll-bars . nil)))
-
-(setq
- initial-frame-alist frame-config
- default-frame-alist frame-config)
-
 (set-frame-font "Inconsolata-14")
 
 (setq-default
@@ -68,7 +50,7 @@
  ido-auto-merge-work-directories-length -1
  case-fold-search t
  dired-listing-switches "-alh"
- custom-theme-load-path (list "~/toolkit")
+ custom-theme-load-path (list "~/toolkit/lib/")
  custom-file (make-temp-file "")
  ns-use-native-fullscreen nil
  auto-fill-function nil ;; do not wrap lines
@@ -77,8 +59,10 @@
  js-indent-level 2
  ;; pop-up-windows nil ;; do not open new buffers by default
  ;; display-buffer-function 'buffer-policy
- package-enable-at-startup nil)
+ ;;package-enable-at-startup nil
+ )
 
+(setq backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
@@ -296,21 +280,22 @@
           (add-hook 'haskell-mode 'turn-on-haskell-indentation)))
 (use-package inf-ruby :ensure t)
 
-(load-theme 'bare t)
+;; (load-theme 'bare t)
+(load-theme 'dark t)
 
 (use-package go-mode
   :ensure t
   :init (add-hook 'before-save-hook 'gofmt-before-save))
 (use-package go-rename :ensure t)
 (use-package go-guru :ensure t)
-(use-package flymake :ensure t)
-(use-package flymake-go :ensure t)
+;; (use-package flymake :ensure t)
+;; (use-package flymake-go :ensure t)
 
 (add-hook 'code-mode-hook (lambda () (linum-mode 1)))
 
-(use-package flycheck
-  :ensure t
-  :init (add-hook 'after-init-hook #'global-flycheck-mode))
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (dolist
     (mode-hook

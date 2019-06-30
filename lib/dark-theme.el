@@ -1,4 +1,4 @@
-(deftheme bare "Code illuminated.")
+(deftheme dark "Code illuminated.")
 
 (let ((class '((class color) (min-colors 89)))
       (origin-1 "#1d1e1a")
@@ -15,20 +15,20 @@
       (aqua-5 "#00ffff")
       (daffodil-5 "#ffff66")
       (lavender-5 "#e6e6ff")
-      (bare-light-grey "#eeeeee")
-      (bare-grey "#444444")
-      (bare-black "#1b1d1e")
-      (bare-white "#eeeeee")
-      (bare-yellow "#cf8f2e")
-      (bare-blue "#486ab4")
-      (bare-green "#365d2e")
-      (bare-magenta "#e13dfc")
-      (bare-purple "#8b008b")
-      (bare-region "#dcb9b9"))
+      (dark-light-grey "#eeeeee")
+      (dark-grey "#444444")
+      (dark-black "#1b1d1e")
+      (dark-white "#eeeeee")
+      (dark-yellow "#cf8f2e")
+      (dark-blue "#486ab4")
+      (dark-green "#365d2e")
+      (dark-magenta "#e13dfc")
+      (dark-purple "#8b008b")
+      (dark-region "#dcb9b9"))
 
   ;; view font-lock under cursor with C-u C-x =
   (custom-theme-set-faces
-   'bare
+   'dark
    `(default ((t (:foreground ,origin-10 :background ,origin-1))))
    `(cursor ((t (:background ,aqua-5))))
    `(region ((t (:background ,origin-9))))
@@ -65,20 +65,20 @@
    `(company-preview ((t (:foreground ,origin-9 :background ,origin-2))))
    `(company-preview-common ((t (:foreground ,origin-9 :background ,origin-2))))
    (custom-theme-set-variables
-    'bare
+    'dark
     `(ansi-color-names-vector
-      [,bare-black
-       ,bare-magenta ;; red
-       ,bare-green
-       ,bare-yellow ;; yellow
-       ,bare-blue
-       ,bare-magenta
-       ,bare-blue ;; cyan
-       ,bare-white]))
+      [,dark-black
+       ,dark-magenta ;; red
+       ,dark-green
+       ,dark-yellow ;; yellow
+       ,dark-blue
+       ,dark-magenta
+       ,dark-blue ;; cyan
+       ,dark-white]))
    `(minibuffer-prompt ((,class (:foreground ,origin-10))))
    ))
 
 ;; parens?
 ;; rainbow parens?
 
-(provide-theme 'bare)
+(provide-theme 'dark)

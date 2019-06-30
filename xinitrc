@@ -39,6 +39,6 @@ fi
 xmodmap ~/.Xmodmap
 
 xset r rate 200 25
-# exec bspwm
-# exec fluxbox
+
+emacsclient --daemon &
 exec openbox-session

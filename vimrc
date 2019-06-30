@@ -75,6 +75,7 @@ map <C-q> :quit<CR>
 imap <C-c> <esc>
 imap <C-t> <></><Esc>5h"gdiw"gp3l"gpT>i
 vmap <C-t> :'<,'>!column -t<cr>
+nnoremap gb :!git blame %<cr>
 
 func! Pick(input_cmd, vim_cmd)
   try
@@ -267,7 +268,6 @@ augroup golang
         \. ')'
   au! BufNewFile,BufRead *.go setlocal nolist
 augroup END
-" go test ./... -v
 
 " automatically close/open quickfix when empty/holding info
 autocmd QuickFixCmdPost [^l]* nested cwindow

@@ -60,4 +60,4 @@ setup_go_tools() {
   go get -u github.com/dougm/goflymake # compiler checking in emacs
 }
 
-setup_go_tools
+# setup_go_tools

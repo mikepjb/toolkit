@@ -4,7 +4,7 @@ shopt -s nocaseglob #case insensitive completion
 [[ $- =~ i ]] && stty -ixoff -ixon # Disable CTRL-S and CTRL-Q
 
 if [ "$TERM" != "dumb" ]; then
-  bind '"\C-g":" vim $(find ~/notes/* -type f | pick)\n"'
+  bind '"\C-g":" e $(find ~/notes/* -type f | pick)\n"'
   bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| pick)\n"'
 fi
 
@@ -22,6 +22,7 @@ export PAGER='less -S'
 export NVM_DIR="$HOME/.config/nvm"
 export NVM_SOURCE='/usr/share/nvm' # AUR nvm package
 export SSH_AUTH_SOCK=$HOME/.ssh/ssh-agent.socket
+export ALTERNATE_EDITOR="" # emacs will start in daemon if not running
 
 if [ -z "$PATH_EXPANDED" ]; then
     # IFS stands for internal field seperator
@@ -64,6 +65,8 @@ alias rg='rg -M 120'
 alias pm='mutt -F ~/.mutt/mikepjb.muttrc'
 alias sm='mbsync -a'
 alias xclip='xclip -sel clip'
+alias kill-emacs='emacsclient --eval "(kill-emacs)"'
+alias e='emacsclient -nw'
 
 # data related
 alias jv="jq -C | less -R"

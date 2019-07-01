@@ -6,6 +6,7 @@
 
 (electric-pair-mode t)
 (show-paren-mode t)
+(savehist-mode t) ;; save minibuffer commands between sessions
 
 (ido-mode t)
 
@@ -32,11 +33,28 @@
 (use-package flymake :ensure t)
 (use-package flymake-go :ensure t)
 (use-package magit :ensure t)
+(use-package projectile :ensure t)
+(use-package yaml-mode :ensure t)
+(use-package flycheck-yamllint :ensure t)
+(use-package flymake-yaml :ensure t)
+(use-package protobuf-mode :ensure t)
 
+(add-hook 'code-mode-hook
+	  (lambda ()
+	    (linum-mode t)
+	    (hl-line-mode t)))
+
+(dolist
+    (mode-hook
+     '(ruby-mode-hook
+       go-mode-hook
+       emacs-lisp-mode-hook))
+  (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))
 
 (setq-default
  vc-follow-symlinks t
  column-number-mode t
+ ido-enable-flex-matching t
  custom-theme-load-path (list "~/.emacs.d/lib/")
  backup-directory-alist `(("." . "~/.emacs.d/saves"))
  custom-file (make-temp-file ""))
@@ -51,10 +69,26 @@
       (kill-region (region-beginning) (region-end))
     (backward-kill-word 1)))
 
+(defun git-root ()
+  (let ((response (shell-command-to-string
+                   "echo -ne $(git rev-parse --show-toplevel || echo \".\")")))
+    (if (string-match-p (regexp-quote "fatal") response) "." response)))
+
 (defun async-from-root ()
   (interactive)
   (let ((default-directory (git-root)))
     (call-interactively 'async-shell-command)))
+
+(defun find-notes ()
+  (interactive)
+  (let ((default-directory "~/notes/"))
+    (ido-find-file)))
+
+(defun comment-line-or-region ()
+  (interactive)
+  (if mark-active
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-line 1)))
 
 (dolist
     (binding
@@ -72,6 +106,7 @@
        ("M-/" . comment-line-or-region)
        ("M-&" . async-from-root)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+       ("C-c n" . find-notes)
        ("M-RET" . toggle-frame-fullscreen)))
   (global-set-key (kbd (car binding)) (cdr binding)))
 

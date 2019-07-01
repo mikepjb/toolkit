@@ -60,7 +60,7 @@
    `(default ((t (:foreground ,foreground :background ,background))))
    `(cursor ((t (:background ,cursor-color))))
    `(region ((t (:background ,black))))
-   `(highlight ((t (:background ,green)))) ;; what is this for?
+   `(highlight ((t (:background ,black))))
    `(font-lock-builtin-face ((t (:foreground ,green))))
    `(font-lock-keyword-face ((t (:foreground ,red))))
    `(font-lock-type-face ((t (:foreground ,blue))))
@@ -82,7 +82,7 @@
    `(ido-subdir ((t (:foreground ,blue))))
    `(ido-indicator ((t (:foreground ,bright-yellow))))
    
-   `(match ((t (:background ,bright-yellow))))
+   `(match ((t (:foreground ,black :background ,bright-yellow)))) ;; used in ripgrep
    `(compilation-info ((t (:foreground ,origin-10))))
    `(rainbow-delimiters-depth-1-face ((t (:foreground ,aqua-5))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground ,aqua-4))))

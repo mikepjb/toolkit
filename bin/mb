@@ -1,5 +1,14 @@
 #!/bin/sh -e
 
+test_internet_connection() {
+    if ping -c 1 8.8.8.8 >/dev/null; then
+        echo 'Successfully pinged Google DNS, we are connected to the internet!'
+    else
+        echo 'No internet connection available'
+        exit 1
+    fi
+}
+
 color_echo() {
   color="\033[0;$1m"
   nc="\033[0m"
@@ -49,6 +58,7 @@ update_repo() {
 main() {
   echo 'Updating system'
   authenticate_identity
+  test_internet_connection
   update_repo "~/toolkit/"
 
   update_repo "~/notes/"

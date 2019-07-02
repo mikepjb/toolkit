@@ -59,7 +59,10 @@
 
 (use-package flycheck)
 (use-package ripgrep)
-(use-package go-mode :init (add-hook 'before-save-hook 'gofmt-before-save))
+(use-package go-mode
+  :init (progn
+	  (setq gofmt-command "goimports")
+	  (add-hook 'before-save-hook 'gofmt-before-save)))
 (use-package go-rename)
 (use-package go-guru)
 (use-package flymake)

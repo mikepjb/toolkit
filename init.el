@@ -73,7 +73,7 @@
 (use-package flycheck-yamllint)
 (use-package flymake-yaml)
 (use-package protobuf-mode)
-(use-package diminish)
+;; (use-package diminish)
 (use-package paredit
   :init
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
@@ -94,6 +94,7 @@
     (mode-hook
      '(ruby-mode-hook
        go-mode-hook
+       proto-mode-hook
        emacs-lisp-mode-hook
        yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))

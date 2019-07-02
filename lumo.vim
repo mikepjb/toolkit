@@ -41,7 +41,7 @@ let s:highlights = [
       \['Preproc', 'red', 'none', 'none'],
       \['Statement', 'red', 'none', 'none'],
       \['Type', 'blue', 'none', 'italic'],
-      \['Comment', 'white', 'none', 'italic'],
+      \['Comment', 'black', 'white', 'italic'],
       \['TODO', 'yellow', 'none', 'italic'],
       \['String', 'yellow-light', 'none', 'none'],
       \['Quote', 'yellow', 'none', 'none'],

@@ -6,6 +6,8 @@
 ;; There is a 'code-mode-hook' to add minor modes like linum to your code
 ;; editing buffers.
 
+;; The tools for working with Go require godef and gocode to be installed.
+
 ;;; Code:
 
 ;; To start, we adjust the garbage collection param
@@ -57,23 +59,37 @@
 
 (package-setup)
 
-(use-package flycheck)
+(use-package flycheck :config (global-flycheck-mode))
 (use-package ripgrep)
+;; (use-package auto-complete)
+;; (use-package go-autocomplete)
+
+(defun mikepjb:go-mode-hook ()
+  "Personal configuration for go-mode."
+  ;; (auto-complete-mode 1)
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark))
+
 (use-package go-mode
   :init (progn
 	  (setq gofmt-command "goimports")
-	  (add-hook 'before-save-hook 'gofmt-before-save)))
+	  ;; (with-eval-after-load 'go-mode ;; gocode issue 325
+	  ;;   (require 'go-autocomplete))
+	  (add-hook 'go-mode-hook 'mikepjb:go-mode-hook)))
+
 (use-package go-rename)
 (use-package go-guru)
 (use-package flymake)
 (use-package flymake-go)
-(use-package magit)
-(use-package projectile)
 (use-package yaml-mode)
 (use-package flycheck-yamllint)
 (use-package flymake-yaml)
 (use-package protobuf-mode)
-;; (use-package diminish)
+
+(use-package diminish :ensure t)
+(diminish 'eldoc-mode 'ivy-mode)
+
 (use-package paredit
   :init
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
@@ -85,10 +101,151 @@
     (if (and paredit-mode (equal (substring str -1) (or ")" "]" "}")))
 	(progn (backward-delete-char 1) (forward-char)))))
 
+;; Recentf comes with Emacs but it should always be enabled.
+
+(use-package recentf
+  :init (recentf-mode t)
+  :config
+  (add-to-list 'recentf-exclude "\\.emacs.d")
+(add-to-list 'recentf-exclude ".+tmp......\\.org"))
+
+(use-package ivy
+  :ensure t
+  :init
+  (ivy-mode 1)
+  (unbind-key "S-SPC" ivy-minibuffer-map)
+  (setq ivy-height 30
+        ivy-use-virtual-buffers t
+        ivy-use-selectable-prompt t)
+  (defun swiper-at-point ()
+    (interactive)
+    (swiper (thing-at-point 'word)))
+  :bind (("C-x b"   . ivy-switch-buffer)
+         ("C-c C-r" . ivy-resume)
+         ("C-c s"   . swiper-at-point)
+         ("C-s"     . swiper)
+	 )
+  :diminish)
+
+;; ivy-rich makes Ivy look a little bit more like Helm.
+
+(use-package ivy-rich
+  :after counsel
+  :custom
+  (ivy-virtual-abbreviate 'full
+   ivy-rich-switch-buffer-align-virtual-buffer t
+   ivy-rich-path-style 'abbrev)
+  :init
+  (ivy-rich-mode))
+
+(use-package gnu-elpa-keyring-update)
+
+;; Counsel applies Ivy-like behavior to other builtin features of
+;; emacs, e.g. search.
+
+(use-package counsel
+  :ensure t
+  :after ivy
+  :init
+  (counsel-mode 1)
+  :bind (("C-c ;" . counsel-M-x)
+         ("C-c U" . counsel-unicode-char)
+         ("C-c i" . counsel-imenu)
+         ("C-x f" . counsel-find-file)
+         ("C-c y" . counsel-yank-pop)
+	 ("C-c r" . counsel-recentf)
+         :map ivy-minibuffer-map
+         ("C-r" . counsel-minibuffer-history)
+	 ("C-w" . ivy-backward-delete-char))
+  :diminish)
+
+(use-package deadgrep
+  :bind (("C-c h" . deadgrep)))
+
 (add-hook 'code-mode-hook
 	  (lambda ()
 	    (linum-mode t)
 	    (hl-line-mode t)))
+
+(use-package projectile
+  :bind (("C-c f" . projectile-find-file))
+  :config
+  (setq projectile-enable-caching t
+        projectile-completion-system 'ivy)
+  :diminish)
+
+;; Counsel and projectile should work together.
+
+(use-package counsel-projectile
+  :bind (("C-c f" . counsel-projectile))
+  :init
+  (counsel-projectile-mode))
+
+;; Sort commands by recency in ivy windows.
+
+(use-package smex)
+
+;; Company is the best Emacs completion system.
+
+(use-package company
+  :bind (("C-." . company-complete))
+  :diminish company-mode
+  :custom
+  (company-dabbrev-downcase nil "Don't downcase returned candidates.")
+  (company-show-numbers t "Numbers are helpful.")
+  (company-tooltip-limit 20 "The more the merrier.")
+  (company-abort-manual-when-too-short t "Be less enthusiastic about completion.")
+  :config
+  (global-company-mode)
+
+  ;; use numbers 0-9 to select company completion candidates
+  (let ((map company-active-map))
+    (mapc (lambda (x) (define-key map (format "%d" x)
+                        `(lambda () (interactive) (company-complete-number ,x))))
+	  (number-sequence 0 9))))
+
+;; Magit is one of the best pieces of OSS I have ever used. It is truly esssential.
+
+(use-package magit
+  :bind (("C-c g" . magit-status))
+  :diminish magit-auto-revert-mode
+  :diminish auto-revert-mode
+  :custom
+  (magit-remote-set-if-missing t)
+  (magit-diff-refine-hunk t)
+  :config
+  (magit-auto-revert-mode t)
+
+  ;; Magit, and Emacs in general, has a nasty habit of prompting to save buffers
+  ;; that are identical to those on disk. This is an attempt at remedying that,
+  ;; one that I should probably attach to other functions like save-buffers-kill-emacs.
+  (advice-add 'magit-refresh :before #'maybe-unset-buffer-modified)
+  (advice-add 'magit-commit  :before #'maybe-unset-buffer-modified)
+  (setq magit-completing-read-function 'ivy-completing-read)
+  (add-to-list 'magit-no-confirm 'stage-all-changes))
+
+
+;; Haskell and Elisp are made a lot easier when delimiters are nicely color-coded.
+
+(use-package rainbow-delimiters
+  :disabled
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; I do all of my writing in either org-mode or markdown-mode.
+
+(use-package markdown-mode
+  :mode ("\\.md$" . gfm-mode)
+  :config
+  (when (executable-find "pandoc")
+    (setq markdown-command "pandoc -f markdown -t html")))
+
+;; Avy is better than ace-jump.
+(use-package avy
+  :defer ivy
+  :bind (("C-c l l" . avy-goto-line)
+         ("C-c l c" . avy-goto-char-timer)
+         ("C-c l w" . avy-goto-word-1)
+("C-'" . ivy-avy)))
 
 (dolist
     (mode-hook
@@ -130,6 +287,13 @@
       (comment-or-uncomment-region (region-beginning) (region-end))
     (comment-line 1)))
 
+(defun join-below ()
+  "Join line below or all lines for a given region."
+  (interactive)
+  (if mark-active
+      (replace-match "\n" "" nil (region-beginning) (region-end))
+        (progn (forward-line 1) (join-line))))
+
 (dolist
     (binding
      '(("M-o" . other-window)
@@ -139,13 +303,14 @@
        ("C-c P" . magit-pull-from-upstream)
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
-       ("C-;" . hippie-expand)
        ("M-G" . projectile-ripgrep)
        ("C-t" . projectile-find-file)
        ("M-k" . paredit-forward-barf-sexp)
        ("M-l" . paredit-forward-slurp-sexp)
+       ("M-j" . join-below)
        ("C-h" . delete-backward-char)
-       ("M-/" . comment-line-or-region)
+       ("M-/" . hippie-expand)
+       ("C-c /" . comment-line-or-region)
        ("M-&" . async-from-root)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
        ("C-c n" . find-notes)

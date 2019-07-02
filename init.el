@@ -94,7 +94,8 @@
     (mode-hook
      '(ruby-mode-hook
        go-mode-hook
-       emacs-lisp-mode-hook))
+       emacs-lisp-mode-hook
+       yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))
 
 (setq debug-on-error t)

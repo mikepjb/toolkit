@@ -80,12 +80,18 @@
 
 (use-package go-rename)
 (use-package go-guru)
-(use-package flymake)
+(use-package flymake :init (setq flymake-run-in-place nil))
 (use-package flymake-go)
 (use-package yaml-mode)
 (use-package flycheck-yamllint)
 (use-package flymake-yaml)
-(use-package protobuf-mode)
+(use-package protobuf-mode
+  :init
+  (defconst my-protobuf-style
+    '((c-basic-offset . 2)
+      (indent-tabs-mode . nil)))
+  (add-hook 'protobuf-mode-hook
+	    (lambda () (c-add-style "my-style" my-protobuf-style t))))
 
 (use-package diminish :ensure t)
 (diminish 'eldoc-mode 'ivy-mode)
@@ -251,7 +257,7 @@
     (mode-hook
      '(ruby-mode-hook
        go-mode-hook
-       proto-mode-hook
+       protobuf-mode-hook
        emacs-lisp-mode-hook
        yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))

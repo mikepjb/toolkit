@@ -85,6 +85,7 @@
 (use-package yaml-mode)
 (use-package flycheck-yamllint)
 (use-package flymake-yaml)
+;; (use-package rainbow-mode)
 (use-package protobuf-mode
   :init
   (defconst my-protobuf-style
@@ -154,7 +155,7 @@
   :after ivy
   :init
   (counsel-mode 1)
-  :bind (("C-c ;" . counsel-M-x)
+  :bind (("C-;" . counsel-M-x)
          ("C-c U" . counsel-unicode-char)
          ("C-c i" . counsel-imenu)
          ("C-x f" . counsel-find-file)
@@ -275,8 +276,10 @@
 (defun git-root ()
   "Return the root directory in git or current directory if not."
   (let ((response (shell-command-to-string
-                   "echo -ne $(git rev-parse --show-toplevel || echo \".\")")))
-    (if (string-match-p (regexp-quote "fatal") response) "." response)))
+                   "echo -ne $(git rev-parse --show-toplevel)")))
+    (if (string-match-p (regexp-quote "fatal") response)
+	default-directory
+      response)))
 
 (defun async-from-root ()
   "Run 'async-sheel-command' from your project root."

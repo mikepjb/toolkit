@@ -267,21 +267,25 @@
     (backward-kill-word 1)))
 
 (defun git-root ()
+  "Return the root directory in git or current directory if not."
   (let ((response (shell-command-to-string
                    "echo -ne $(git rev-parse --show-toplevel || echo \".\")")))
     (if (string-match-p (regexp-quote "fatal") response) "." response)))
 
 (defun async-from-root ()
+  "Run 'async-sheel-command' from your project root."
   (interactive)
   (let ((default-directory (git-root)))
     (call-interactively 'async-shell-command)))
 
 (defun find-notes ()
+  "Search for notes."
   (interactive)
   (let ((default-directory "~/notes/"))
     (ido-find-file)))
 
 (defun comment-line-or-region ()
+  "Comments the current line or region if active."
   (interactive)
   (if mark-active
       (comment-or-uncomment-region (region-beginning) (region-end))
@@ -294,11 +298,19 @@
       (replace-match "\n" "" nil (region-beginning) (region-end))
         (progn (forward-line 1) (join-line))))
 
+(defun maybe-unset-buffer-modified (&optional _)
+  "Clear modified bit on all unmodified buffers."
+  (interactive)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when (and buffer-file-name (buffer-modified-p) (current-buffer-matches-file-p))
+	(set-buffer-modified-p nil)))))
+
 (dolist
     (binding
      '(("M-o" . other-window)
        ("M-O" . (lambda () (interactive) (other-window -1)))
-       ("C-c g" . magit)
+       ("C-c g" . magit-status)
        ("C-c l" . magit-log-current)
        ("C-c P" . magit-pull-from-upstream)
        ("C-j" . newline)

@@ -32,7 +32,7 @@ if [ -z "$PATH_EXPANDED" ]; then
     ~/toolkit/bin
     $GOPATH/bin
     ~/.cargo/bin
-    ~/.nvm/versions/node/v11.2.0/bin
+    ~/.config/nvm/versions/node/v12.4.0/bin
     $HOME/.npm-global/bin
     /usr/local/bin
     $PATH

@@ -119,7 +119,5 @@
    `(minibuffer-prompt ((,class (:foreground ,origin-10))))
    ))
 
-;; parens?
-;; rainbow parens?
-
 (provide-theme 'lumo)
+;;; lumo-theme.el ends here

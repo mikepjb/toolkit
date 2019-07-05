@@ -1,3 +1,11 @@
+;;; lumo-theme --- Summary
+
+;;; Commentary:
+;;
+;; This is a theme based on Monokai with a few tweaks
+
+;;; Code:
+
 (deftheme lumo "Code illuminated.")
 
 (let ((class '((class color) (min-colors 89)))
@@ -100,14 +108,14 @@
    (custom-theme-set-variables
     'lumo
     `(ansi-color-names-vector
-      [,lumo-black
-       ,lumo-magenta ;; red
-       ,lumo-green
-       ,lumo-yellow ;; yellow
-       ,lumo-blue
-       ,lumo-magenta
-       ,lumo-blue ;; cyan
-       ,lumo-white]))
+      [,black
+       ,red
+       ,green
+       ,yellow
+       ,blue
+       ,magenta
+       ,blue
+       ,white]))
    `(minibuffer-prompt ((,class (:foreground ,origin-10))))
    ))
 

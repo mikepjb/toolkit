@@ -29,7 +29,7 @@
 
 (prefer-coding-system 'utf-8)
 
-(require 'cl)
+(require 'cl-lib)
 
 (menu-bar-mode -1)
 
@@ -51,6 +51,7 @@
 (if window-system (gui-setup))
 
 (defun package-setup ()
+  "Setup Emacs to use the melpa repository and use-package."
   (package-initialize)
   (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
   (unless (package-installed-p 'use-package)
@@ -124,6 +125,9 @@
   (setq ivy-height 30
         ivy-use-virtual-buffers t
         ivy-use-selectable-prompt t)
+  ;; (setq ivy-re-builders-alist
+  ;;     '((read-file-name-internal . ivy--regex-fuzzy)
+  ;;       (t . ivy--regex-plus)))
   (defun swiper-at-point ()
     (interactive)
     (swiper (thing-at-point 'word)))
@@ -175,7 +179,7 @@
 	    (hl-line-mode t)))
 
 (use-package projectile
-  :bind (("C-c f" . projectile-find-file))
+  :bind (("C-c p" . projectile-find-file))
   :config
   (setq projectile-enable-caching t
         projectile-completion-system 'ivy)
@@ -260,6 +264,7 @@
        go-mode-hook
        protobuf-mode-hook
        emacs-lisp-mode-hook
+       sh-mode-hook
        yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))
 
@@ -351,6 +356,30 @@
             (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)))
 
 (load-theme 'lumo t)
+
+;; The Doom Emacs themes look really good.
+
+;; (use-package doom-themes
+;;   :config
+;;   (load-theme 'doom-vibrant t)
+;;   (doom-themes-visual-bell-config)
+;;   (doom-themes-org-config)
+;;   (custom-theme-set-faces
+;;    'doom-vibrant
+;;    '(font-lock-doc-face ((t (:foreground "#D8D2C1"))))))
+
+;; (use-package winum
+;;   :config (winum-mode))
+
+;; (use-package doom-modeline
+;;   :config
+;;   (setq doom-modeline-height 22)
+;;   (doom-modeline-def-modeline
+;;     main
+;;    (workspace-number window-number bar evil-state matches " " buffer-info buffer-position  " " selection-info)
+;;    (global major-mode process vcs flycheck))
+;;   (doom-modeline-init))
+
 
 (provide 'init)
 ;;; init.el ends here

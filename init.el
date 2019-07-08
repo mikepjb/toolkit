@@ -70,6 +70,7 @@
   ;; (auto-complete-mode 1)
   (add-hook 'before-save-hook 'gofmt-before-save)
   (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-T") 'go-test-current-file)
   (local-set-key (kbd "M-*") 'pop-tag-mark))
 
 (use-package go-mode

@@ -83,6 +83,7 @@
 (use-package go-guru)
 (use-package flymake :init (setq flymake-run-in-place nil))
 (use-package flymake-go)
+(use-package gotest)
 (use-package yaml-mode)
 (use-package flycheck-yamllint)
 (use-package flymake-yaml)

@@ -4,8 +4,8 @@ shopt -s nocaseglob #case insensitive completion
 [[ $- =~ i ]] && stty -ixoff -ixon # Disable CTRL-S and CTRL-Q
 
 if [ "$TERM" != "dumb" ]; then
-  bind '"\C-g":" e $(find ~/notes/* -type f | pick)\n"'
-  bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| pick)\n"'
+  bind '"\C-g":" e $(find ~/notes/* -type f | fzf)\n"'
+  bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| fzf)\n"'
 fi
 
 export LANG=en_US.UTF-8
@@ -92,3 +92,5 @@ git_state() {
 }
 
 PROMPT_COMMAND='PS1="\W($(git_state)) $ "'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

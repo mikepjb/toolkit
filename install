@@ -18,6 +18,8 @@ ln -sfv $BASE/lumo.vim ~/.config/nvim/colors/lumo.vim
 mkdir -p $HOME/.config/nvim/autoload
 mkdir -p $HOME/.config/nvim/plugged
 
+sudo cp $(which nvim) /usr/local/bin/vi
+
 mkdir -p $HOME/.vim/autoload
 ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
 

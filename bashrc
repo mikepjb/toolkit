@@ -4,7 +4,7 @@ shopt -s nocaseglob #case insensitive completion
 [[ $- =~ i ]] && stty -ixoff -ixon # Disable CTRL-S and CTRL-Q
 
 if [ "$TERM" != "dumb" ]; then
-  bind '"\C-g":" e $(find ~/notes/* -type f | pick)\n"'
+  bind '"\C-g":" vi $(find ~/notes/* -type f | pick)\n"'
   bind '"\C-q":" cd ~/src/$(find ~/src/* -maxdepth 0 -printf \"%f\n\"| pick)\n"'
 fi
 

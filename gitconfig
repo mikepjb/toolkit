@@ -33,6 +33,7 @@
   cp = cherry-pick
   count = shortlog -sn
   uncommit = reset --soft HEAD~1
+  remerge = checkout -m # during a merge, start from conflict again for a file.
   re = reset HEAD
   rehard = reset HEAD --hard
   total = rev-list --all --count

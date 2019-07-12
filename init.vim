@@ -14,6 +14,12 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'mikepjb/vim-pair'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim' 
+Plug 'maxmellon/vim-jsx-pretty'
+
+Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -31,6 +37,8 @@ set ignorecase " case insentive search.
 set smartcase " case sensitive search when you use capitals.
 set mouse=a " enable mouse
 let g:ftplugin_sql_omni_key = '<Nop>' " ctrl+c is for escape, not completion.
+
+setglobal tags=./tags;
 
 let mapleader= ' '
 nnoremap Y y$
@@ -60,8 +68,22 @@ augroup go
   " remove all previous commands in this group
   au!
   let g:go_template_autocreate = 0 " do not pause ages creating a template.
-  let g:go_fmt_command = "goimports" " include imports on save.
   au Syntax go nnoremap gD :GoDecls<cr>
+  au Syntax go nnoremap gI :GoImports<cr>
 augroup end
+
+" augroup typescript
+"   au!
+"   au BufNewFile,BufRead *.ts setf typescript
+"   au BufNewFile,BufRead *.tsx setf typescript
+" augroup end
+
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading
+  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  command! -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Rg<SPACE>
+  nnoremap <leader>g :Rg<SPACE>
+endif
 
 colorscheme lumo

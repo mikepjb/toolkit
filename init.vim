@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'tpope/vim-fugitive'
 Plug 'mikepjb/vim-pair'
+Plug 'mikepjb/vim-fold', { 'for': ['css', 'markdown', 'javascript']}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'pangloss/vim-javascript'
@@ -45,6 +46,7 @@ nnoremap Y y$
 nnoremap <C-q> :quit<cr>
 nnoremap <leader>i :e ~/.config/nvim/init.vim<cr>
 nnoremap <leader>f :FZF<cr>
+nnoremap <leader>g :FZF ~/notes<cr>
 nnoremap <leader>b :Buffers<cr>
 imap <C-c> <esc>
 map <C-h> <C-w><C-h>
@@ -83,7 +85,6 @@ if executable('rg')
   nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
   command! -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
   nnoremap \ :Rg<SPACE>
-  nnoremap <leader>g :Rg<SPACE>
 endif
 
 colorscheme lumo

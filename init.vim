@@ -44,10 +44,11 @@ setglobal tags=./tags;
 let mapleader= ' '
 nnoremap Y y$
 nnoremap <C-q> :quit<cr>
-nnoremap <leader>i :e ~/.config/nvim/init.vim<cr>
+nnoremap <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>f :FZF<cr>
 nnoremap <leader>g :FZF ~/notes<cr>
-nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>i :e ~/.config/nvim/init.vim<cr>
 imap <C-c> <esc>
 map <C-h> <C-w><C-h>
 map <C-j> <C-w><C-j>

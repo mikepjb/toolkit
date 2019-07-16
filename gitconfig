@@ -12,6 +12,7 @@
 [push]
   default = matching
 [alias]
+  wipe = clean -xdf
   listall = ls-tree --full-tree -r HEAD
   br = branch
   st = status

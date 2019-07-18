@@ -55,6 +55,13 @@ map <C-j> <C-w><C-j>
 map <C-k> <C-w><C-k>
 map <C-l> <C-w><C-l>
 
+" easy-align supports regex with <C-x> from interactive mode
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " command line behaves like readline
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>

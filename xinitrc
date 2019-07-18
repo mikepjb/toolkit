@@ -40,5 +40,5 @@ xmodmap ~/.Xmodmap
 
 xset r rate 200 25
 
-emacsclient --daemon &
+# emacsclient --daemon &
 exec openbox-session

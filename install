@@ -58,3 +58,13 @@ setup_go_tools() {
 }
 
 # setup_go_tools
+
+install_hugo() {
+  if [ -d $HOME/src/hugo ]; then return; fi
+  cd $HOME/src
+  git clone https://github.com/gohugoio/hugo.git
+  cd hugo
+  go install
+}
+
+install_hugo

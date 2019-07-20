@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+remove_noise() {
+  egrep -v ".*(pb|pb.gw|_sql|packr|_list|_set).go" |\
+  egrep -v ".*(jpg|csv|svg)" |\
+  grep -v vendor |\
+  grep -v api_v1
+}
+
+git ls-files | remove_noise |\
+  while read f; do\
+    git blame --line-porcelain $f |\
+    grep '^author '; done |\
+    sort -f |\
+    uniq -ic |\
+    sort -n
+
+echo -ne 'total lines: '
+
+for file in $(git ls-files | remove_noise); do cat $file; done | wc -l

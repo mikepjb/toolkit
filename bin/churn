@@ -1,0 +1,41 @@
+#!/bin/sh -e
+
+if [ $# -eq 0 ]; then
+	echo 'no arguments supplied'
+	exit 1
+fi
+
+NAME="$1"
+
+echo " ===> Examining $PWD for $NAME"
+
+# Allow for generated code, image/data files & vendoring
+remove_noise() {
+  egrep -v ".*(pb|pb.gw|_sql|packr|_list|_set).go" |\
+  egrep -v ".*(jpg|csv|svg)" |\
+  grep -v vendor |\
+  grep -v api_v1
+}
+
+# There is a large (~1300 LOC) section of commented out code, this treats the code as removed.
+# afaik this is Rick as he is the only recorded committer in api/booking
+correct_for_booking_text() {
+	if [ $NAME = 'Rick' ]; then
+		totalLines=`
+		for bookingTxt in $(git ls-files | grep "api/booking/.*txt"); do
+			cat $bookingTxt;
+		done | wc -l`
+    echo "0	$totalLines	commented_out_booking_code"
+	fi
+}
+
+file_totals() {
+	git log --author="$NAME" --pretty=tformat: --numstat | remove_noise
+}
+
+sum_changes() {
+	gawk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s removed lines: %s total lines: %s\n", add, subs, loc }' -
+}
+
+total_with_correction=`file_totals; correct_for_booking_text`
+echo "$total_with_correction" | sum_changes

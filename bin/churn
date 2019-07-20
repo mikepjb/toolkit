@@ -12,7 +12,11 @@ echo " ===> Examining $PWD for $NAME"
 # Allow for generated code, image/data files & vendoring
 remove_noise() {
   egrep -v ".*(pb|pb.gw|_sql|packr|_list|_set).go" |\
-  egrep -v ".*(jpg|csv|svg)" |\
+  egrep -v ".*(jpg|csv|svg|snap|ttf|woff|png|ico)" |\
+  egrep -v "(package-lock.json|go.sum)" |\
+  grep -v ".DS_Store" |\
+  grep -v ".*mock.*ts" |\
+  grep -v ".idea" |\
   grep -v vendor |\
   grep -v api_v1
 }

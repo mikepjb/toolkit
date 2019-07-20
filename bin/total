@@ -2,19 +2,29 @@
 
 remove_noise() {
   egrep -v ".*(pb|pb.gw|_sql|packr|_list|_set).go" |\
-  egrep -v ".*(jpg|csv|svg)" |\
+  egrep -v ".*(jpg|csv|svg|snap|ttf|woff|png|ico)" |\
+  egrep -v "(package-lock.json|go.sum)" |\
+  grep -v ".DS_Store" |\
+  grep -v ".*mock.*ts" |\
+  grep -v ".idea" |\
   grep -v vendor |\
   grep -v api_v1
 }
 
+# totals 17382 vs 18035 calculated at the end - diff of 653
+# this reports fewer lines than the git total lines calculation does
 git ls-files | remove_noise |\
   while read f; do\
-    git blame --line-porcelain $f |\
+    git blame HEAD --line-porcelain $f |\
     grep '^author '; done |\
+    sed 's/Rick Beton/Rick/' |\
     sort -f |\
     uniq -ic |\
     sort -n
 
 echo -ne 'total lines: '
 
-for file in $(git ls-files | remove_noise); do cat $file; done | wc -l
+# count all lines that we have matched an author
+for file in $(git ls-files | remove_noise); do
+ git blame --line-porcelain $file | grep '^author '
+done | wc -l

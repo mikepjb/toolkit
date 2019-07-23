@@ -67,7 +67,7 @@
    'lumo
    `(default ((t (:foreground ,foreground :background ,background))))
    `(cursor ((t (:background ,cursor-color))))
-   `(region ((t (:background ,green))))
+   `(region ((t (:background ,black))))
    `(highlight ((t (:background ,black))))
    `(font-lock-builtin-face ((t (:foreground ,green))))
    `(font-lock-keyword-face ((t (:foreground ,red))))

@@ -43,6 +43,7 @@ setglobal tags=./tags;
 
 let mapleader= ' '
 nnoremap Y y$
+nnoremap gb :Gblame<cr>
 nnoremap <C-q> :quit<cr>
 nnoremap <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <leader>b :Buffers<cr>
@@ -82,6 +83,7 @@ augroup go
   let g:go_template_autocreate = 0 " do not pause ages creating a template.
   au Syntax go nnoremap gD :GoDecls<cr>
   au Syntax go nnoremap gI :GoImports<cr>
+  au Syntax go nnoremap gt :GoTest<cr>
 augroup end
 
 " augroup typescript

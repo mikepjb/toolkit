@@ -14,7 +14,7 @@
 [alias]
   wipe = clean -xdf
   listall = ls-tree --full-tree -r HEAD
-  br = branch
+  br = branch --sort=committerdate
   st = status
   ti = tag -a
   ci = commit --verbose

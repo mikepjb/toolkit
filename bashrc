@@ -67,6 +67,7 @@ alias sm='mbsync -a'
 alias xclip='xclip -sel clip'
 alias kill-emacs='emacsclient --eval "(kill-emacs)"'
 alias e='emacsclient -nw'
+alias net='sudo netstat -lnp'
 
 # data related
 alias jv="jq -C | less -R"

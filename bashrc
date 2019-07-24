@@ -1,3 +1,4 @@
+# -*- mode: sh -*-
 shopt -s histappend # Append to the history file
 shopt -s checkwinsize # Check the window size after each command
 shopt -s nocaseglob #case insensitive completion

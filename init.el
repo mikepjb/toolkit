@@ -27,6 +27,10 @@
  fill-column 80
  use-package-verbose)
 
+;; control minimum size of a new split.
+(setq split-height-threshold 1200)
+(setq split-width-threshold 2000)
+
 (prefer-coding-system 'utf-8)
 
 (require 'cl-lib)
@@ -36,6 +40,7 @@
 (electric-pair-mode t)
 (show-paren-mode t)
 (savehist-mode t) ;; save minibuffer commands between sessions
+(global-auto-revert-mode t) ;; always reread from disk
 
 (ido-mode t)
 

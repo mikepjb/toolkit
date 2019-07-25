@@ -257,13 +257,13 @@
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))
 
-;; Avy is better than ace-jump.
-(use-package avy
-  :defer ivy
-  :bind (("C-c l l" . avy-goto-line)
-         ("C-c l c" . avy-goto-char-timer)
-         ("C-c l w" . avy-goto-word-1)
-("C-'" . ivy-avy)))
+;; ;; Avy is better than ace-jump.
+;; (use-package avy
+;;   :defer ivy
+;;   :bind (("C-c l l" . avy-goto-line)
+;;          ("C-c l c" . avy-goto-char-timer)
+;;          ("C-c l w" . avy-goto-word-1)
+;; ("C-'" . ivy-avy)))
 
 (dolist
     (mode-hook
@@ -327,10 +327,36 @@
       (when (and buffer-file-name (buffer-modified-p) (current-buffer-matches-file-p))
 	(set-buffer-modified-p nil)))))
 
+(defun iceberg-postgres ()
+  "Start docker service if not running; start local postgres in docker-compose."
+  (interactive)
+  (let ((default-directory (git-root)))
+    (async-shell-command "cd ./scripts/local-postgres && docker-compose up -d")))
+
+;; There is an extant bug where magit-refresh prompts to save files that haven't
+;; been modified. We work around this with some defadvice over maybe-unset-buffer-modified. SO:
+;; https://emacs.stackexchange.com/questions/24011/make-emacs-diff-files-before-asking-to-save
+
+(autoload 'diff-no-select "diff")
+
+(defun current-buffer-matches-file-p ()
+  "Return t if the current buffer is identical to its associated file."
+  (when (and buffer-file-name (buffer-modified-p))
+    (diff-no-select buffer-file-name (current-buffer) nil 'noasync)
+    (with-current-buffer "*Diff*"
+      (and (search-forward-regexp "^Diff finished \(no differences\)\." (point-max) 'noerror) t))))
+
+(setq sql-postgres-login-params
+      '((user :default "postgres")
+        (database :default "postgres")
+        (server :default "localhost")
+        (port :default 5432)))
+
 (dolist
     (binding
      '(("M-o" . other-window)
        ("M-O" . (lambda () (interactive) (other-window -1)))
+       ("C-6" . mode-line-other-buffer)
        ("C-c g" . magit-status)
        ("C-c l" . magit-log-current)
        ("C-c P" . magit-pull-from-upstream)

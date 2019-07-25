@@ -55,6 +55,7 @@ setup_go_tools() {
   go get -u golang.org/x/mobile/cmd/gomobile
   go get -u github.com/gohugoio/hugo
   go get -u github.com/dougm/goflymake # compiler checking in emacs
+  go get -u github.com/kisielk/errcheck
 }
 
 # setup_go_tools

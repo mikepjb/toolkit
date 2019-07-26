@@ -57,8 +57,9 @@
 
 (defun package-setup ()
   "Setup Emacs to use the melpa repository and use-package."
-  (package-initialize)
+  (require 'package)
   (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/") t)
+  (package-initialize)
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package)))

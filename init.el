@@ -266,12 +266,39 @@
 ;;          ("C-c l w" . avy-goto-word-1)
 ;; ("C-'" . ivy-avy)))
 
+(use-package typescript-mode)
+
+(use-package tide
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
+
+(use-package web-mode
+  :bind (("C-c ]" . emmet-next-edit-point)
+         ("C-c [" . emmet-prev-edit-point)
+         ("C-c o b" . browse-url-of-file))
+  :mode
+  (("\\.js\\'" . web-mode)
+   ("\\.html?\\'" . web-mode)
+   ("\\.tsx\\'" . web-mode)
+   ("\\.jsx$" . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2)
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+
 (dolist
     (mode-hook
      '(ruby-mode-hook
        go-mode-hook
        protobuf-mode-hook
        emacs-lisp-mode-hook
+       typescript-mode-hook
        sh-mode-hook
        yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))

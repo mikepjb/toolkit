@@ -7,6 +7,12 @@
 ;; editing buffers.
 
 ;; The tools for working with Go require godef and gocode to be installed.
+;; Resolve Bad Request: (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
+;;; Use:
+;;
+;; Opening a file with super-user rights:
+;; /su::/etc/hostname or /sudo::/etc/hostname
 
 ;;; Code:
 
@@ -25,7 +31,10 @@
  use-package-always-ensure t
  load-prefer-newer t
  fill-column 80
+ compilation-ask-about-save nil
  use-package-verbose)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; control minimum size of a new split.
 (setq split-height-threshold 1200)
@@ -105,6 +114,29 @@
 
 (use-package diminish :ensure t)
 (diminish 'eldoc-mode 'ivy-mode)
+
+(use-package cider
+  :init (progn
+          (add-hook 'cider-repl-mode-hook 'paredit-mode)
+          (setq
+           cider-jdk-src-paths
+           '("/usr/lib/jvm/java-10-openjdk/src.zip"
+             "~/src/clojure-1.10.0-sources/"))
+          (set-variable 'cider-default-cljs-repl 'figwheel)
+          ;; (set-variable 'cider-figwheel-main-default-options ":dev")
+          ;; (set-variable
+          ;;  'cider-lein-parameters
+          ;;  (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\""
+          ;;          " -- repl :headless :host localhost"))
+	  ))
+
+(use-package clojure-mode
+  :mode
+  (("\\.edn\\'" . clojure-mode)))
+
+(use-package flycheck-clojure
+  :init (add-hook 'after-init-hook 'global-flycheck-mode)
+  :config (use-package flycheck :config (flycheck-clojure-setup)))
 
 (use-package paredit
   :init
@@ -266,7 +298,8 @@
 ;;          ("C-c l w" . avy-goto-word-1)
 ;; ("C-'" . ivy-avy)))
 
-(use-package typescript-mode)
+(use-package typescript-mode
+  :hook ((typescript-mode . tide-setup)))
 
 (use-package tide
   :after (typescript-mode company flycheck)
@@ -300,6 +333,7 @@
        emacs-lisp-mode-hook
        typescript-mode-hook
        sh-mode-hook
+       markdown-mode-hook
        yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))
 
@@ -380,10 +414,16 @@
         (server :default "localhost")
         (port :default 5432)))
 
+(defun clojure-repl ()
+  "Start a leiningen REPL."
+  (interactive)
+  (run-lisp "lein repl"))
+
 (dolist
     (binding
      '(("M-o" . other-window)
        ("M-O" . (lambda () (interactive) (other-window -1)))
+       ("M-T" . cider-test-run-test)
        ("C-6" . mode-line-other-buffer)
        ("C-c g" . magit-status)
        ("C-c l" . magit-log-current)

@@ -3,6 +3,11 @@
 ;;; Commentary:
 ;;
 ;; This is a theme based on Monokai with a few tweaks
+;;
+;; To discover the font used to color a particular entity in emac:
+;; View font-lock under cursor with C-u C-x =
+;; Look for 'face' under 'There are text properties here:'
+
 
 ;;; Code:
 
@@ -62,7 +67,6 @@
       (lumo-purple "#8b008b")
       (lumo-region "#dcb9b9"))
 
-  ;; view font-lock under cursor with C-u C-x =
   (custom-theme-set-faces
    'lumo
    `(default ((t (:foreground ,foreground :background ,background))))
@@ -89,6 +93,11 @@
    `(ido-only-match ((t (:foreground ,green))))
    `(ido-subdir ((t (:foreground ,blue))))
    `(ido-indicator ((t (:foreground ,bright-yellow))))
+
+   `(clojure-keyword-face ((t (:foreground ,bright-yellow))))
+
+   `(markdown-inline-code-face ((t (:foreground ,bright-yellow))))
+   `(markdown-code-face ((t (:foreground ,bright-yellow))))
    
    `(match ((t (:foreground ,black :background ,bright-yellow)))) ;; used in ripgrep
    `(compilation-info ((t (:foreground ,origin-10))))

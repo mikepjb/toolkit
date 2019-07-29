@@ -98,6 +98,15 @@
 
    `(markdown-inline-code-face ((t (:foreground ,bright-yellow))))
    `(markdown-code-face ((t (:foreground ,bright-yellow))))
+
+   `(magit-diffstat-added ((t (:foreground ,green))))
+   `(magit-diffstat-removed ((t (:foreground ,red))))
+   `(magit-diff-added ((t (:foreground ,green))))
+   `(magit-diff-removed ((t (:foreground ,red))))
+   `(magit-diff-added-highlight ((t (:foreground ,green))))
+   `(magit-diff-removed-highlight ((t (:foreground ,red))))
+
+   ;; magit-diff-added-highlight
    
    `(match ((t (:foreground ,black :background ,bright-yellow)))) ;; used in ripgrep
    `(compilation-info ((t (:foreground ,origin-10))))

@@ -408,11 +408,19 @@
     (with-current-buffer "*Diff*"
       (and (search-forward-regexp "^Diff finished \(no differences\)\." (point-max) 'noerror) t))))
 
+(defvar sql-postgres-login-params)
 (setq sql-postgres-login-params
       '((user :default "postgres")
-        (database :default "postgres")
-        (server :default "localhost")
-        (port :default 5432)))
+	(database :default "postgres")
+	(server :default "localhost")
+	(password :default "psql")
+	(port :default 5432)))
+
+(add-hook 'sql-interactive-mode-hook
+          (lambda ()
+	    (set-default 'truncate-lines t)))
+
+;; (defalias 'sql-get-login 'ignore) ;; do not confirm connection details
 
 (defun clojure-repl ()
   "Start a leiningen REPL."

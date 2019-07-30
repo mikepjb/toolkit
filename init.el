@@ -9,6 +9,8 @@
 ;; The tools for working with Go require godef and gocode to be installed.
 ;; Resolve Bad Request: (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
+;; Additionally, project specific configuration can be placed in a .dir-locals.el.
+
 ;;; Use:
 ;;
 ;; Opening a file with super-user rights:
@@ -123,6 +125,7 @@
            '("/usr/lib/jvm/java-10-openjdk/src.zip"
              "~/src/clojure-1.10.0-sources/"))
           (set-variable 'cider-default-cljs-repl 'figwheel)
+	  (set-variable 'cider-clojure-cli-global-options "-A:build-dev")
           ;; (set-variable 'cider-figwheel-main-default-options ":dev")
           ;; (set-variable
           ;;  'cider-lein-parameters

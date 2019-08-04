@@ -55,6 +55,14 @@
 
 (ido-mode t)
 
+(defvar welcome-messages
+  '("I used to live by a code."
+    "What is broken can be reforged."
+    "Shoot for the moon. Even if you miss it you will land among the stars."))
+
+(defun display-startup-echo-area-message ()
+  (message (seq-random-elt welcome-messages)))
+
 (defun gui-setup ()
   "Disable otiose GUI settings, 'fringe-mode' ruins performance."
   (tool-bar-mode -1)

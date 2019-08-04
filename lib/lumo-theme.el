@@ -94,7 +94,7 @@
    `(ido-subdir ((t (:foreground ,blue))))
    `(ido-indicator ((t (:foreground ,bright-yellow))))
 
-   `(clojure-keyword-face ((t (:foreground ,bright-yellow))))
+   `(clojure-keyword-face ((t (:foreground ,red))))
 
    `(markdown-inline-code-face ((t (:foreground ,bright-yellow))))
    `(markdown-code-face ((t (:foreground ,bright-yellow))))

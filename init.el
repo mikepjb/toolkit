@@ -132,9 +132,11 @@
            cider-jdk-src-paths
            '("/usr/lib/jvm/java-10-openjdk/src.zip"
              "~/src/clojure-1.10.0-sources/"))
-          (set-variable 'cider-default-cljs-repl 'figwheel)
-	  (set-variable 'cider-clojure-cli-global-options "-A:build-dev")
-          ;; (set-variable 'cider-figwheel-main-default-options ":dev")
+          (set-variable 'cider-default-cljs-repl 'figwheel-main)
+	  (set-variable 'cider-session-name-template "%j:%r:%p")
+	  (set-variable 'nrepl-repl-buffer-name-template "%j:%r:%p")
+	  ;; (set-variable 'cider-clojure-cli-global-options "-A:build-dev")
+          ;; (set-variable 'cider-figwheel-main-default-options "dev")
           ;; (set-variable
           ;;  'cider-lein-parameters
           ;;  (concat "update-in :jvm-opts conj \"\\\"-Xmx5g\\\"\""
@@ -343,6 +345,8 @@
        protobuf-mode-hook
        emacs-lisp-mode-hook
        typescript-mode-hook
+       clojure-mode-hook
+       clojurescript-mode-hook
        sh-mode-hook
        markdown-mode-hook
        yaml-mode-hook))
@@ -451,8 +455,8 @@
        ("C-w" . kill-backward-or-region)
        ("M-G" . projectile-ripgrep)
        ("C-t" . projectile-find-file)
-       ;; ("M-k" . paredit-forward-barf-sexp)
-       ;; ("M-l" . paredit-forward-slurp-sexp)
+       ("M-k" . paredit-forward-barf-sexp)
+       ("M-l" . paredit-forward-slurp-sexp)
        ("M-j" . join-below)
        ("C-h" . delete-backward-char)
        ("M-/" . hippie-expand)

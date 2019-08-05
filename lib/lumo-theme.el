@@ -80,6 +80,7 @@
    `(font-lock-string-face ((t (:foreground ,bright-yellow))))
    `(font-lock-comment-face ((t (:foreground ,bright-black))))
    `(font-lock-constant-face ((t (:foreground ,magenta))))
+   `(font-lock-variable-name-face ((t (:foreground ,bright-white))))
    
    `(comint-highlight-prompt ((t (:foreground ,green))))
    
@@ -95,6 +96,8 @@
    `(ido-indicator ((t (:foreground ,bright-yellow))))
 
    `(clojure-keyword-face ((t (:foreground ,red))))
+
+   `(sh-quoted-exec ((t (:foreground ,bright-yellow))))
 
    `(markdown-inline-code-face ((t (:foreground ,bright-yellow))))
    `(markdown-code-face ((t (:foreground ,bright-yellow))))

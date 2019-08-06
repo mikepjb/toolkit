@@ -12,6 +12,7 @@
 [push]
   default = matching
 [alias]
+  push-new = push -u origin HEAD
   wipe = clean -xdf
   listall = ls-tree --full-tree -r HEAD
   br = branch --sort=committerdate

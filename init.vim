@@ -12,6 +12,7 @@ call EnsureManager()
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'mikepjb/vim-pair'
 Plug 'mikepjb/vim-fold', { 'for': ['css', 'markdown', 'javascript']}
 

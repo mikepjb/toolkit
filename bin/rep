@@ -1,0 +1,16 @@
+#!/bin/sh -e
+# rep: global renaming script
+
+file_pattern="$1"
+find_text="$2"
+replace_text="$3"
+
+if [ $# -eq 0 ]; then
+  echo 'no arguments supplied'
+elif [ $# -eq 1 ]; then
+  find . -name "$file_pattern"
+elif [ $# -eq 2 ]; then
+  find . -name "$file_pattern"| xargs grep -l "$find_text"
+elif [ $# -eq 3 ]; then
+  find . -name "$file_pattern" | xargs grep -l "$find_text" | xargs sed -i "s@$find_text@$replace_text@g"
+fi

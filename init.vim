@@ -47,6 +47,7 @@ setglobal tags=./tags;
 
 let mapleader= ' '
 nnoremap Y y$
+nnoremap Q @q
 nnoremap gb :Gblame<cr>
 nnoremap <C-q> :quit<cr>
 nnoremap <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>

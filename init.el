@@ -299,6 +299,7 @@
 
 (use-package markdown-mode
   :mode ("\\.md$" . gfm-mode)
+  :bind (("C-j" . markdown-enter-key))
   :config
   (when (executable-find "pandoc")
     (setq markdown-command "pandoc -f markdown -t html")))

@@ -17,7 +17,6 @@ git ls-files | remove_noise |\
   while read f; do\
     git blame HEAD --line-porcelain $f |\
     grep '^author '; done |\
-    sed 's/Rick Beton/Rick/' |\
     sort -f |\
     uniq -ic |\
     sort -n

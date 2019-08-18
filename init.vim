@@ -105,3 +105,8 @@ if executable('rg')
 endif
 
 colorscheme lumo
+
+augroup clojure
+  au Syntax clojure nmap <buffer>  gd <Plug>FireplaceDjump
+augroup end
+

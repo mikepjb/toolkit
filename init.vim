@@ -99,7 +99,7 @@ augroup end
 
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading
-  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+  nnoremap L :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
   command! -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
   nnoremap \ :Rg<SPACE>
 endif

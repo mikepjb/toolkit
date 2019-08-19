@@ -18,7 +18,8 @@ Plug 'mikepjb/vim-fold', { 'for': ['css', 'markdown', 'javascript']}
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'tpope/vim-fireplace', { 'for': ['clojure']}
+" forked for now
+Plug 'mikepjb/vim-fireplace', { 'for': ['clojure']}
 
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim' 
@@ -109,4 +110,3 @@ colorscheme lumo
 augroup clojure
   au Syntax clojure nmap <buffer>  gd <Plug>FireplaceDjump
 augroup end
-

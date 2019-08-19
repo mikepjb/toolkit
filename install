@@ -23,6 +23,9 @@ sudo cp $(which nvim) /usr/local/bin/vi
 mkdir -p $HOME/.vim/autoload
 ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
 
+mkdir -p $HOME/.config/clojure
+ln -sfv $BASE/deps.edn $HOME/.config/clojure/deps.edn
+
 [ -L ~/.mutt ] && unlink ~/.mutt
 ln -sfv $BASE/mutt ~/.mutt
 
@@ -69,4 +72,4 @@ install_hugo() {
   go install
 }
 
-install_hugo
+# install_hugo

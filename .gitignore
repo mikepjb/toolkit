@@ -3,3 +3,5 @@ mutt/.mail
 mutt/mailbox/
 go.mod
 go.sum
+.cpcache
+.rebel_readline_history

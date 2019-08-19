@@ -18,8 +18,7 @@ Plug 'mikepjb/vim-fold', { 'for': ['css', 'markdown', 'javascript']}
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" forked for now
-Plug 'mikepjb/vim-fireplace', { 'for': ['clojure']}
+Plug 'tpope/vim-fireplace', { 'for': ['clojure']}
 
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim' 

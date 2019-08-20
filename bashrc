@@ -93,4 +93,9 @@ git_state() {
     fi
 }
 
-PROMPT_COMMAND='PS1="\W($(git_state)) $ "'
+jobs_marker() {
+  local n=$(jobs | wc -l)
+  ((n)) && echo -n '&' || echo -n '$'
+}
+
+PROMPT_COMMAND='PS1="\W($(git_state)) $(jobs_marker) "'

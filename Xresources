@@ -3,7 +3,7 @@ XTerm*geometry: 160x50
 XTerm*termName: xterm-256color
 
 ! Disable alternate screen
-XTerm*titeInhibit: true
+XTerm*titeInhibit: false
 
 Xft.dpi: 70
 XTerm*renderFont: True

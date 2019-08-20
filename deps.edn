@@ -1,2 +1,34 @@
-{:aliases {:rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
-                   :main-opts ["-m" "rebel-readline.main"]}}}
+{:aliases
+ {;; pull in specific versions of Clojure
+  :1.9 {:override-deps {org.clojure/clojure {:mvn/version "1.9.0"}}}
+  :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.0"}}}
+  :1.10.1 {:override-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
+
+  :test {:extra-paths ["test" "src/test/clojure"]
+         :extra-deps {org.clojure/test.check {:mvn/version "RELEASE"}}}
+
+  ;; linters
+  :kondo {:extra-deps {clj-kondo {:mvn/version "2019.07.31-alpha"}}
+          :main-opts ["-m" "clj-kondo.main" "--lint" "src"]}
+  :eastwood {:extra-deps {jonase/eastwood {:mvn/version "RELEASE"}}
+             :main-opts ["-m" "eastwood.lint" "{:source-paths,[\"src\"],:test-paths,[\"test\"]}"]}
+
+  ;; benchmarkers
+  :bench {:extra-deps {criterium {:mvn/version "RELEASE"}}}
+  :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
+
+  ;; REPLs
+  :nrepl {:extra-deps {nrepl {:mvn/version "RELEASE"}}
+          :main-opts ["-m" "nrepl.cmdline"]}
+ 
+  :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
+          :main-opts ["-m" "rebel-readline.main"]}
+
+  ;; Create new projects
+  ;; clj -A:new app co.michaelbruce/nutrack
+  ;; supports app/lib/template types, can also be a url@sha or local path
+  :new {:extra-deps {seancorfield/clj-new
+                      {:mvn/version "0.7.7"}}
+         :main-opts ["-m" "clj-new.create"]}
+
+ }}

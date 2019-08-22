@@ -68,10 +68,9 @@ main() {
 
   update_repo "~/notes/"
 
-  update_repo "~/src/sysconf/"
-
-  # go install sysconf...
-  # sysconf -update
+  update_repo "~/src/citadel/"
+  cd ~/src/citadel
+  clj -m citadel.core ~/toolkit/system.edn
 
   # echo -e '--> Syncing email inbox... '
   # mbsync -a

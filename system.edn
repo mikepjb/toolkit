@@ -1,0 +1,4 @@
+{:deps
+ {ripgrep {}
+  telegram-desktop {}
+  openjdk8-src {:comment "for Clojure source jumping"}}}

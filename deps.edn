@@ -18,8 +18,10 @@
   :measure {:extra-deps {com.clojure-goes-fast/clj-memory-meter {:mvn/version "RELEASE"}}}
 
   ;; REPLs
-  :nrepl {:extra-deps {nrepl {:mvn/version "RELEASE"}}
-          :main-opts ["-m" "nrepl.cmdline"]}
+  :nrepl {:extra-deps {nrepl {:mvn/version "RELEASE"}
+                       cider/cider-nrepl {:mvn/version "0.21.1"}}
+          :main-opts ["-m" "nrepl.cmdline"
+                      "--middleware" "[cider.nrepl/cider-middleware]"]}
  
   :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "RELEASE"}}
           :main-opts ["-m" "rebel-readline.main"]}

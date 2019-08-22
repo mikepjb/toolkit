@@ -69,6 +69,7 @@ alias xclip='xclip -sel clip'
 alias kill-emacs='emacsclient --eval "(kill-emacs)"'
 alias e='emacsclient -nw'
 alias net='sudo netstat -lnp'
+alias tk='cd ~/toolkit'
 
 # data related
 alias jv="jq -C | less -R"

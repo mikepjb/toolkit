@@ -81,6 +81,7 @@ inoremap <C-d> <Delete>
 inoremap <C-l> <space>=><space>
 
 command! PrettifyJSON :%!python -m json.tool
+command! TrimWhitespace :%s/\s\+$//e
 
 augroup go
   " remove all previous commands in this group

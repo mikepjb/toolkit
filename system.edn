@@ -1,10 +1,7 @@
 {:deps
- {ripgrep {}
-  openjdk8-src {:comment "for Clojure source jumping"}
-  go {}
-
-  ;; platform tools
+ {;; platform tools
   aws-cli {}
+  youtube-dl {}
 
   ;; editor deps
   neovim {}
@@ -15,12 +12,21 @@
   mercurial {}
   make {}
   cmake {}
+  tigervnc {} ;; for remote pairing
   zerotier-one {} ;; vpn for remote pairing
   postgresql {}
   redis {}
   gimp {}
   npm {}
   jq {}
+  ctags {}
+  virtualbox {}
+  ghostscript {}
+  tmux {}
+  htop {}
+  ripgrep {}
+  openjdk8-src {:comment "for Clojure source jumping"}
+  go {}
   ;; nvm ;; AUR not supported
 
   ;; social
@@ -45,8 +51,11 @@
   ponymix {}
   readline {}
   vlc {}
+  pavucontrol {}
 
   ;; system - the sort of thing I expect to be defaults in citadel in future
+  xterm {}
+  sudo {}
   linux {}
   linux-headers {}
   xorg-xmessage {}

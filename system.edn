@@ -46,7 +46,7 @@
   readline {}
   vlc {}
 
-  ;; system
+  ;; system - the sort of thing I expect to be defaults in citadel in future
   linux {}
   linux-headers {}
   xorg-xmessage {}

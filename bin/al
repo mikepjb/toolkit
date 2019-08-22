@@ -1,0 +1,17 @@
+#!/bin/sh -e
+#
+# al - aws log
+
+group="$1"
+
+last_stream_info=`aws logs describe-log-streams --log-group-name $group --order-by LastEventTime --descending --limit 5`
+
+last_n_names=`echo $last_stream_info | jq ".logStreams | .[] | .logStreamName" -r`
+
+ordered_names=`echo $last_n_names | tr ' ' '\n' | tac | xargs`
+
+for name in $last_n_names; do
+  json_log=`aws logs get-log-events --log-group-name $group --log-stream-name $name`
+
+  echo $json_log | jq ".events | .[] | .message" -r
+done

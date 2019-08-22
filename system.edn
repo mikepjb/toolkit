@@ -1,4 +1,67 @@
 {:deps
  {ripgrep {}
+  openjdk8-src {:comment "for Clojure source jumping"}
+  go {}
+
+  ;; platform tools
+  aws-cli {}
+
+  ;; editor deps
+  neovim {}
+  vim {}
+
+  ;; development fundamentals
+  git {}
+  mercurial {}
+  make {}
+  cmake {}
+  zerotier-one {} ;; vpn for remote pairing
+  postgresql {}
+  redis {}
+  gimp {}
+  npm {}
+  jq {}
+  ;; nvm ;; AUR not supported
+
+  ;; social
   telegram-desktop {}
-  openjdk8-src {:comment "for Clojure source jumping"}}}
+  keybase-gui {}
+
+  ;; fundamentals
+  firefox {}
+  chromium {}
+  evince {} ;; pdf viewer
+  feh {} ;; image viewer
+  pacgraph {} ;; probably required by citadel in future for transient deps
+  ttf-inconsolata {}
+  ttf-dejavu {}
+  xclip {}
+  acpi {}
+  rsync {}
+  unzip {}
+  zip {}
+  unrar {}
+  scrot {}
+  ponymix {}
+  readline {}
+  vlc {}
+
+  ;; system
+  linux {}
+  linux-headers {}
+  xorg-xmessage {}
+  xorg-fonts-75dpi {}
+  xorg-fonts-100dpi {}
+  xorg-xbacklight {}
+  xorg-xev {}
+  xorg-xkbevd {}
+  xorg-xkbutils {}
+  xorg-xrandr {}
+  xorg-server-xvfb {}
+  xorg-xinput {}
+  xf86-video-vesa {} ;; generic backup driver
+  nvidia {}
+  slock {}
+  xautolock {}
+  }
+ }

@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "bashrc": "shellscript"
-    },
-    "go.useLanguageServer": true,
-    "workbench.colorTheme": "Monokai Pro"
-}

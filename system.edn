@@ -6,6 +6,7 @@
   ;; editor deps
   neovim {}
   vim {}
+  emacs {}
 
   ;; development fundamentals
   git {}

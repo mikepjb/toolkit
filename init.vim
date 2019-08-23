@@ -81,6 +81,7 @@ inoremap <C-d> <Delete>
 inoremap <C-l> <space>=><space>
 
 command! PrettifyJSON :%!python -m json.tool
+command! PrettifyXML  :%!xmllint --format -
 command! TrimWhitespace :%s/\s\+$//e
 command! ClearPrefixWhitespace :%s/^\s\+//g
 

@@ -20,6 +20,7 @@
   gimp {}
   npm {}
   jq {}
+  libxml2 {:comment "contains xmllint for pretty printing"}
   ctags {}
   virtualbox {}
   ghostscript {}

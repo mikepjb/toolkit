@@ -1,0 +1,12 @@
+#!/bin/sh -e
+#_(
+exec clojure "$0" "$@"
+)
+;; vim: set ft=clojure:
+(require '[clojure.java.shell :refer [sh]])
+(println "package-size")
+
+;; sh hangs..
+(sh "ls")
+;; (sh "git" "ls-files")
+;; (shutdown-agents)

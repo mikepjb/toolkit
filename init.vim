@@ -85,6 +85,17 @@ command! PrettifyXML  :%!xmllint --format -
 command! TrimWhitespace :%s/\s\+$//e
 command! ClearPrefixWhitespace :%s/^\s\+//g
 
+func! GoErrInline()
+  let wordUnderCursor = expand("<cword>")
+  exec "normal! ^"
+  if wordUnderCursor == "if"
+    exec "normal! k^"
+  elseif wordUnderCursor != "err"
+    echom "no err conditional found nearby, doing nothing."
+  endif
+  exec "normal! \"gD\"zdd^W\"gPa; "
+endfunc
+
 augroup go
   " remove all previous commands in this group
   au!
@@ -92,6 +103,7 @@ augroup go
   au Syntax go nnoremap gD :GoDecls<cr>
   au Syntax go nnoremap gI :GoImports<cr>
   au Syntax go nnoremap gt :GoTest<cr>
+  au Syntax go nnoremap M :call GoErrInline()<cr>
 augroup end
 
 " augroup typescript

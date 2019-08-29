@@ -33,4 +33,5 @@
                       {:mvn/version "0.7.7"}}
          :main-opts ["-m" "clj-new.create"]}
 
+  ;; clojure -Sdeps '{:deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git" :sha "dccf2134bcf03726a9465d2b9997c42e5cd91bff"}}}' -m mach.pack.alpha.inject '2769a6224bfb938e777906ea311b3daf7d2220f5'
  }}

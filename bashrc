@@ -70,6 +70,7 @@ alias kill-emacs='emacsclient --eval "(kill-emacs)"'
 alias e='emacsclient -nw'
 alias net='sudo netstat -lnp'
 alias tk='cd ~/toolkit'
+alias ds='systemctl start docker'
 
 # data related
 alias jv="jq -C | less -R"

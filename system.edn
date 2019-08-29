@@ -29,6 +29,7 @@
   ripgrep {}
   openjdk8-src {:comment "for Clojure source jumping"}
   go {}
+  docker {}
   ;; nvm ;; AUR not supported
 
   ;; social

@@ -61,6 +61,7 @@
     "Shoot for the moon. Even if you miss it you will land among the stars."))
 
 (defun display-startup-echo-area-message ()
+  "Select a random string to present at startup."
   (message (seq-random-elt welcome-messages)))
 
 (defun gui-setup ()

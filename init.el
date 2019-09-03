@@ -15,6 +15,8 @@
 ;;
 ;; Opening a file with super-user rights:
 ;; /su::/etc/hostname or /sudo::/etc/hostname
+;;
+;; goto-line -> M-g M-g
 
 ;;; Code:
 

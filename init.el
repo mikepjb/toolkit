@@ -439,6 +439,15 @@
 
 ;; (defalias 'sql-get-login 'ignore) ;; do not confirm connection details
 
+(defun duplicate-line ()
+  "Duplicate the current line."
+  (interactive)
+  (copy-region-as-kill (line-beginning-position) (line-end-position))
+  (end-of-line)
+  (newline)
+  (beginning-of-line)
+  (yank))
+
 (defun clojure-repl ()
   "Start a leiningen REPL."
   (interactive)
@@ -455,6 +464,7 @@
        ("C-c P" . magit-pull-from-upstream)
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
+       ("M-D" . duplicate-line)
        ("M-G" . projectile-ripgrep)
        ("C-t" . projectile-find-file)
        ("M-k" . paredit-forward-barf-sexp)

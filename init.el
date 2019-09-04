@@ -120,7 +120,7 @@
 (use-package protobuf-mode
   :init
   (defconst my-protobuf-style
-    '((c-basic-offset . 2)
+    '((c-basic-offset . 4)
       (indent-tabs-mode . nil)))
   (add-hook 'protobuf-mode-hook
 	    (lambda () (c-add-style "my-style" my-protobuf-style t))))
@@ -181,9 +181,9 @@
   (setq ivy-height 30
         ivy-use-virtual-buffers t
         ivy-use-selectable-prompt t)
-  ;; (setq ivy-re-builders-alist
-  ;;     '((read-file-name-internal . ivy--regex-fuzzy)
-  ;;       (t . ivy--regex-plus)))
+  (setq ivy-re-builders-alist
+	'((read-file-name-internal . ivy--regex-fuzzy)
+          (t . ivy--regex-fuzzy)))
   (defun swiper-at-point ()
     (interactive)
     (swiper (thing-at-point 'word)))

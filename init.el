@@ -17,6 +17,8 @@
 ;; /su::/etc/hostname or /sudo::/etc/hostname
 ;;
 ;; goto-line -> M-g M-g
+;; align on whitespace (generic) -> C-u M-x align-regexp RET SPC RET RET RET y
+;; align columns (defined as 2 or more spaces) \(\s-\{2,\} \)
 
 ;;; Code:
 
@@ -190,7 +192,7 @@
   :bind (("C-x b"   . ivy-switch-buffer)
          ("C-c C-r" . ivy-resume)
          ("C-c s"   . swiper-at-point)
-         ("C-s"     . swiper)
+         ("C-w"     . ivy-backward-kill-word)
 	 )
   :diminish)
 
@@ -223,7 +225,7 @@
 	 ("C-c r" . counsel-recentf)
          :map ivy-minibuffer-map
          ("C-r" . counsel-minibuffer-history)
-	 ("C-w" . ivy-backward-delete-char))
+	 ("C-w" . ivy-backward-kill-word))
   :diminish)
 
 (use-package deadgrep
@@ -438,6 +440,10 @@
 (add-hook 'sql-interactive-mode-hook
           (lambda ()
 	    (set-default 'truncate-lines t)))
+
+(add-hook 'sql-mode-hook
+	  (lambda ()
+	    (setq-local tab-width 2)))
 
 ;; (defalias 'sql-get-login 'ignore) ;; do not confirm connection details
 

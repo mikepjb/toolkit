@@ -19,6 +19,7 @@
 ;; goto-line -> M-g M-g
 ;; align on whitespace (generic) -> C-u M-x align-regexp RET SPC RET RET RET y
 ;; align columns (defined as 2 or more spaces) \(\s-\{2,\} \)
+;; evaluate org-babel code block -> C-c C-v C-e
 
 ;;; Code:
 
@@ -355,6 +356,7 @@
        clojurescript-mode-hook
        sh-mode-hook
        markdown-mode-hook
+       sql-mode-hook
        yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))
 

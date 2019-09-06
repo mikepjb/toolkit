@@ -75,11 +75,12 @@
    `(highlight ((t (:background ,black))))
    `(font-lock-builtin-face ((t (:foreground ,green))))
    `(font-lock-keyword-face ((t (:foreground ,red))))
-   `(font-lock-type-face ((t (:foreground ,blue))))
+   `(font-lock-type-face ((t (:foreground ,foreground))))
    `(font-lock-function-name-face ((t (:foreground ,green))))
    `(font-lock-string-face ((t (:foreground ,bright-yellow))))
    `(font-lock-comment-face ((t (:foreground ,bright-black))))
-   `(font-lock-constant-face ((t (:foreground ,magenta))))
+   `(font-lock-constant-face ((t (:foreground ,red))))
+
    `(font-lock-variable-name-face ((t (:foreground ,bright-white))))
    
    `(comint-highlight-prompt ((t (:foreground ,green))))

@@ -11,10 +11,25 @@
      :out  (.toString process.stdout)
      :err  (.toString process.stderr)}))
 
-(defn log-streams
+(defn parse-json [n]
+  (js->clj (JSON.parse n) :keywordize-keys true))
+
+(defn describe-log-streams
   "Returns a list of log streams in Amazon CloudWatch given a group-name."
   [group-name]
-  (js->clj
-   (JSON.parse
+  (:logStreams
+   (parse-json
     (:out
-     (sh "aws" "logs" "describe-log-streams" "--log-group-name" group-name "--limit" "5"))) :keywordize-keys true))
+     (sh "aws" "logs" "describe-log-streams" "--log-group-name" group-name "--limit" "5")))))
+
+(defn log-stream
+  "Returns the logs, given a group-name and stream-name."
+  [group-name stream-name]
+  (-> (sh "aws" "logs" "get-log-events" "--log-group-name" group-name "--log-stream-name" stream-name)
+      :out
+      parse-json
+      :events))
+
+(comment
+  (def example-stream (log-stream "iceberg" (:logStreamName (second results))))
+  (doseq [l (map :message example-stream)] (println l)))

@@ -8,11 +8,13 @@
   [cmd & args]
   (let [process (child-process/spawnSync cmd (clj->js args))]
     {:exit process.status
-     :out  (js->clj (split (.toString process.stdout) #"\n"))
-     :err  (js->clj (split (.toString process.stderr) #"\n"))}))
+     :out  (.toString process.stdout)
+     :err  (.toString process.stderr)}))
 
-;; (defn proc-test []
-;;   (child-process/exec
-;;    "cat ~/.bashrc"
-;;    (defn [js-err out err]))
-;;   {:out (.stdout)})
+(defn log-streams
+  "Returns a list of log streams in Amazon CloudWatch given a group-name."
+  [group-name]
+  (clj->js
+   (js/JSON.parse
+    (:out
+     (sh "aws" "logs" "describe-log-streams" "--log-group-name" group-name "--limit" "5")))))

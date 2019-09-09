@@ -14,7 +14,7 @@
 (defn log-streams
   "Returns a list of log streams in Amazon CloudWatch given a group-name."
   [group-name]
-  (clj->js
-   (js/JSON.parse
+  (js->clj
+   (JSON.parse
     (:out
-     (sh "aws" "logs" "describe-log-streams" "--log-group-name" group-name "--limit" "5")))))
+     (sh "aws" "logs" "describe-log-streams" "--log-group-name" group-name "--limit" "5"))) :keywordize-keys true))

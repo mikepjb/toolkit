@@ -20,7 +20,11 @@
   (:logStreams
    (parse-json
     (:out
-     (sh "aws" "logs" "describe-log-streams" "--log-group-name" group-name "--limit" "5")))))
+     (sh "aws" "logs" "describe-log-streams"
+         "--log-group-name" group-name
+         "--order-by" "LastEventTime"
+         "--descending"
+         "--limit" "25")))))
 
 (defn log-stream
   "Returns the logs, given a group-name and stream-name."
@@ -31,5 +35,8 @@
       :events))
 
 (comment
+  (def log-streams (describe-log-streams "iceberg"))
   (def example-stream (log-stream "iceberg" (:logStreamName (second results))))
-  (doseq [l (map :message example-stream)] (println l)))
+  (doseq [l (map :message example-stream)] (println l))
+  (require 'cljs.pprint)
+  (cljs.pprint/pprint (map :message (log-stream "iceberg" (:logStreamName (first log-streams))))))

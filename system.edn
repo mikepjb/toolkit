@@ -31,6 +31,7 @@
   go {}
   docker {}
   ;; nvm ;; AUR not supported
+  ;; mssql-tools ;;  sqlcmd - AUR not supported
 
   ;; social
   telegram-desktop {}

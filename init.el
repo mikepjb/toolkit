@@ -431,13 +431,23 @@
     (with-current-buffer "*Diff*"
       (and (search-forward-regexp "^Diff finished \(no differences\)\." (point-max) 'noerror) t))))
 
-(defvar sql-postgres-login-params)
-(setq sql-postgres-login-params
-      '((user :default "postgres")
-	(database :default "postgres")
-	(server :default "localhost")
-	(password :default "psql")
-	(port :default 5432)))
+(defvar sql-ms-program "sqlcmd")
+(defcustom sql-ms-options '("-w" "30000" "-y" "79" "-s" "|" "-k")
+  "List of additional options for `sql-ms-program'."
+  :type '(repeat string)
+  :version "22.1"
+  :group 'SQL)
+(use-package sql
+  :config
+  (sql-set-product-feature 'ms :prompt-regexp "^[0-9]*>") ; existing line
+  (sql-set-product-feature 'ms :prompt-cont-regexp "^[0-9]*>")) ; new line
+
+(defvar sql-postgres-login-params
+  '((user :default "postgres")
+    (database :default "postgres")
+    (server :default "localhost")
+    (password :default "psql")
+    (port :default 5432)))
 
 (add-hook 'sql-interactive-mode-hook
           (lambda ()

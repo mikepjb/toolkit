@@ -80,6 +80,11 @@
 
 (if window-system (gui-setup))
 
+(defun sync ()
+  "Update my toolkit, notes repos and run citadel (to update system packages)."
+  (interactive)
+  (async-shell-command "mb"))
+
 (defun package-setup ()
   "Setup Emacs to use the melpa repository and use-package."
   (require 'package)
@@ -478,6 +483,7 @@
      '(("M-o" . other-window)
        ("M-O" . (lambda () (interactive) (other-window -1)))
        ("M-T" . cider-test-run-test)
+       ("M-U" . sync)
        ("C-6" . mode-line-other-buffer)
        ("C-c g" . magit-status)
        ("C-c l" . magit-log-current)

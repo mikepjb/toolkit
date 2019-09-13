@@ -13,12 +13,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dadbod', { 'for': 'sql' }
 Plug 'mikepjb/vim-pair'
-Plug 'mikepjb/vim-fold', { 'for': ['css', 'markdown', 'javascript']}
+Plug 'mikepjb/vim-fold', { 'for': ['css', 'markdown', 'javascript'] }
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'tpope/vim-fireplace', { 'for': ['clojure']}
+Plug 'tpope/vim-fireplace', { 'for': ['clojure'] }
 
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim' 

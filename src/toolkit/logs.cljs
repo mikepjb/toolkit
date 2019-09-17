@@ -1,7 +1,7 @@
 (ns toolkit.logs
   "Collects logs using the AWS cli"
   (:require ["child_process" :as child-process] ;; load node library
-            [clojure.string :refer [split]])) 
+            [clojure.string :refer [split]]))
 
 (defn sh
   "Shell wrapper around child-process, belongs in it's own namespace."

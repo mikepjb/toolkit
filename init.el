@@ -16,6 +16,9 @@
 ;; Opening a file with super-user rights:
 ;; /su::/etc/hostname or /sudo::/etc/hostname
 ;;
+;; Cleaning buffers:
+;; C-x C-b, k to mark and x to execute (remove buffers)
+;;
 ;; goto-line -> M-g M-g
 ;; align on whitespace (generic) -> C-u M-x align-regexp RET SPC RET RET RET y
 ;; align columns (defined as 2 or more spaces) \(\s-\{2,\} \)

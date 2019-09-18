@@ -353,6 +353,9 @@
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
+(use-package polymode)
+(use-package poly-markdown)
+
 (dolist
     (mode-hook
      '(ruby-mode-hook

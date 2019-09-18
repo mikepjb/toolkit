@@ -265,22 +265,22 @@
 
 ;; Company is the best Emacs completion system.
 
-(use-package company
-  :bind (("C-." . company-complete))
-  :diminish company-mode
-  :custom
-  (company-dabbrev-downcase nil "Don't downcase returned candidates.")
-  (company-show-numbers t "Numbers are helpful.")
-  (company-tooltip-limit 20 "The more the merrier.")
-  (company-abort-manual-when-too-short t "Be less enthusiastic about completion.")
-  :config
-  (global-company-mode)
+;; (use-package company
+;;   :bind (("C-." . company-complete))
+;;   :diminish company-mode
+;;   :custom
+;;   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
+;;   (company-show-numbers t "Numbers are helpful.")
+;;   (company-tooltip-limit 20 "The more the merrier.")
+;;   (company-abort-manual-when-too-short t "Be less enthusiastic about completion.")
+;;   :config
+;;   (global-company-mode)
 
-  ;; use numbers 0-9 to select company completion candidates
-  (let ((map company-active-map))
-    (mapc (lambda (x) (define-key map (format "%d" x)
-                        `(lambda () (interactive) (company-complete-number ,x))))
-	  (number-sequence 0 9))))
+;;   ;; use numbers 0-9 to select company completion candidates
+;;   (let ((map company-active-map))
+;;     (mapc (lambda (x) (define-key map (format "%d" x)
+;;                         `(lambda () (interactive) (company-complete-number ,x))))
+;; 	  (number-sequence 0 9))))
 
 ;; Magit is one of the best pieces of OSS I have ever used. It is truly esssential.
 
@@ -353,7 +353,8 @@
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
-(use-package polymode)
+(use-package polymode
+  :init (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
 (use-package poly-markdown)
 
 (dolist

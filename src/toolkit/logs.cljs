@@ -27,16 +27,24 @@
          "--limit" "25")))))
 
 (defn log-stream
-  "Returns the logs, given a group-name and stream-name."
+  "Returns the logs, given a group-name and name-prefix."
   [group-name stream-name]
   (-> (sh "aws" "logs" "get-log-events" "--log-group-name" group-name "--log-stream-name" stream-name)
       :out
       parse-json
       :events))
 
+(defn all-streams-by-latest
+  "Return last n logs for all streams by name as a list, ordered by most recent"
+  [n group-name name-prefix]
+  (let [stream-names (map :logStreamName (describe-log-streams group-name))
+        streams (map (fn [s] (log-stream group-name s)) stream-names)]
+    (take-last n streams))
+  )
+
 (comment
   (def log-streams (describe-log-streams "iceberg"))
-  (def example-stream (log-stream "iceberg" (:logStreamName (second results))))
-  (doseq [l (map :message example-stream)] (println l))
+  ;; (doseq [l (map :message example-stream)] (println l))
   (require 'cljs.pprint)
-  (cljs.pprint/pprint (map :message (log-stream "iceberg" (:logStreamName (first log-streams))))))
+  (cljs.pprint/pprint (map :message (log-stream "iceberg" (:logStreamName (first log-streams)))))
+  )

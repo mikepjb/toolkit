@@ -102,6 +102,7 @@
 
    `(markdown-inline-code-face ((t (:foreground ,bright-yellow))))
    `(markdown-code-face ((t (:foreground ,bright-yellow))))
+   `(markdown-italic-face ((t (:slant italic))))
 
    `(magit-diffstat-added ((t (:foreground ,green))))
    `(magit-diffstat-removed ((t (:foreground ,red))))

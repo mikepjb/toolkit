@@ -44,6 +44,7 @@
   feh {} ;; image viewer
   pacgraph {} ;; probably required by citadel in future for transient deps
   ttf-inconsolata {}
+  ttf-hack {}
   ttf-dejavu {}
   xclip {}
   acpi {}

@@ -32,6 +32,8 @@
   docker {}
   ;; nvm ;; AUR not supported
   ;; mssql-tools ;;  sqlcmd - AUR not supported
+  ;; python ?
+  ;; python-pip ?
 
   ;; social
   telegram-desktop {}

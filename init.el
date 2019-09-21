@@ -369,6 +369,7 @@
        sh-mode-hook
        markdown-mode-hook
        sql-mode-hook
+       css-mode-hook
        yaml-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))
 
@@ -491,6 +492,7 @@
        ("M-O" . (lambda () (interactive) (other-window -1)))
        ("M-T" . cider-test-run-test)
        ("M-U" . sync)
+       ("M-z" . zap-up-to-char)
        ("C-6" . mode-line-other-buffer)
        ("C-c g" . magit-status)
        ("C-c l" . magit-log-current)

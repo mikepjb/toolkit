@@ -147,8 +147,8 @@
            '("/usr/lib/jvm/java-10-openjdk/src.zip"
              "~/src/clojure-1.10.0-sources/"))
           ;; (set-variable 'cider-default-cljs-repl 'figwheel-main)
-	  (set-variable 'cider-session-name-template "%j:%r:%p")
-	  (set-variable 'nrepl-repl-buffer-name-template "%j:%r:%p")
+	  ;; (set-variable 'cider-session-name-template "%j:%r:%p")
+	  ;; (set-variable 'nrepl-repl-buffer-name-template "%j:%r:%p")
 	  ;; (set-variable 'cider-clojure-cli-global-options "-A:build-dev")
           ;; (set-variable 'cider-figwheel-main-default-options "dev")
           ;; (set-variable

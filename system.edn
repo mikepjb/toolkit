@@ -41,6 +41,8 @@
   keybase-gui {}
 
   ;; fundamentals
+  noto-sans
+  noto-sans-extra
   firefox {}
   chromium {}
   evince {} ;; pdf viewer
@@ -62,6 +64,8 @@
   pavucontrol {}
 
   ;; system - the sort of thing I expect to be defaults in citadel in future
+  thunar {}
+  tumbler {} ;; used to automatically create thumbnails in thunar.
   xterm {}
   sudo {}
   linux {}

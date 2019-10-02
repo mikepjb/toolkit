@@ -97,6 +97,28 @@
     (package-refresh-contents)
     (package-install 'use-package)))
 
+(defun remove-quotes (s)
+  "Remove single and double quotes from the edges of a string, S."
+  (string-trim (string-trim s "\"" "\"") "'" "'"))
+
+(defun read-env ()
+  "Read environment variables defined in the current sh buffer into Emacs."
+  (interactive)
+  (if (equal major-mode 'sh-mode)
+      (save-excursion
+	(goto-char (point-min))
+	(while (not (eobp))
+	  (let ((current-line (substring
+			       (thing-at-point 'line t) 0 -1)))
+	    (if (string-match-p "=" current-line)
+		(let ((name (car (split-string current-line "=")))
+		      (value ;; (remove-quotes)
+		       (remove-quotes (car (last (split-string current-line "="))))))
+		  (message (concat "Setting " name " to " value))
+		  (setenv name value))))
+	  (forward-line 1)))
+    (message "read-env only works in sh-mode.")))
+
 (package-setup)
 
 (use-package flycheck :config (global-flycheck-mode))

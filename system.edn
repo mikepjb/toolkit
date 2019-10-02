@@ -31,6 +31,7 @@
   go {}
   docker {}
   smbclient {} ;; samba client
+  terraform {}
   ;; nvm ;; AUR not supported
   ;; mssql-tools ;;  sqlcmd - AUR not supported
   ;; python ?

@@ -100,6 +100,8 @@
 
    `(sh-quoted-exec ((t (:foreground ,bright-yellow))))
 
+   `(go-test--error-face ((t (:foreground ,red))))
+
    `(markdown-inline-code-face ((t (:foreground ,bright-yellow))))
    `(markdown-code-face ((t (:foreground ,bright-yellow))))
    `(markdown-italic-face ((t (:slant italic))))

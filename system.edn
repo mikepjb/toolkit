@@ -41,8 +41,8 @@
   keybase-gui {}
 
   ;; fundamentals
-  noto-sans
-  noto-sans-extra
+  noto-fonts
+  noto-fonts-extra
   firefox {}
   chromium {}
   evince {} ;; pdf viewer

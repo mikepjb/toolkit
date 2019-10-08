@@ -388,6 +388,7 @@
        clojure-mode-hook
        clojurescript-mode-hook
        sh-mode-hook
+       python-mode-hook
        markdown-mode-hook
        sql-mode-hook
        css-mode-hook

@@ -27,7 +27,10 @@
   tmux {}
   htop {}
   ripgrep {}
+  jdk8-openjdk {}
+  jdk10-openjdk {}
   openjdk8-src {:comment "for Clojure source jumping"}
+  openjdk10-src {:comment "for Clojure source jumping"}
   go {}
   docker {}
   smbclient {} ;; samba client

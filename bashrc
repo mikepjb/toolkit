@@ -100,4 +100,18 @@ jobs_marker() {
   ((n)) && echo -n '&' || echo -n '$'
 }
 
+reping() {
+  count=${1:-1}
+  if ping -c 1 1.1.1.1 >/dev/null; then
+    echo 'Successfully pinged Cloudflare DNS, we are connected to the internet!'
+  else
+    if [ $count = "10" ]; then
+      echo 'Tried 10 times, exiting...'
+      exit 1
+    fi
+    sleep 1
+    reping
+  fi
+}
+
 PROMPT_COMMAND='PS1="\W($(git_state)) $(jobs_marker) "'

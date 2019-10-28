@@ -519,6 +519,7 @@
        ("C-c g" . magit-status)
        ("C-c l" . magit-log-current)
        ("C-c P" . magit-pull-from-upstream)
+       ("C-x p" . list-processes)
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
        ("M-D" . duplicate-line)

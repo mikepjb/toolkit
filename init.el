@@ -18,6 +18,7 @@
 ;;
 ;; Cleaning buffers:
 ;; C-x C-b, k to mark and x to execute (remove buffers)
+;; Vertical insertion: Mark region -> C-x r t <string> <ret>
 ;;
 ;; goto-line -> M-g M-g
 ;; align on whitespace (generic) -> C-u M-x align-regexp RET SPC RET RET RET y
@@ -79,7 +80,7 @@
   (tooltip-mode -1)
   (fringe-mode -1)
   (ignore-errors
-    (set-frame-font "Inconsolata-14")))
+    (set-frame-font "xos4 Terminus-12")))
 
 (if window-system (gui-setup))
 
@@ -392,7 +393,8 @@
        markdown-mode-hook
        sql-mode-hook
        css-mode-hook
-       yaml-mode-hook))
+       yaml-mode-hook
+       conf-mode-hook))
   (add-hook mode-hook (lambda () (run-hooks 'code-mode-hook))))
 
 (setq debug-on-error t)

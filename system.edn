@@ -48,11 +48,13 @@
   noto-fonts
   noto-fonts-extra
   firefox {}
+  thunderbird {}
   chromium {}
   evince {} ;; pdf viewer
   feh {} ;; image viewer
   pacgraph {} ;; probably required by citadel in future for transient deps
   ttf-inconsolata {}
+  ttf-font-awesome {} ;; used to display icon glyphs
   ttf-hack {}
   ttf-dejavu {}
   xclip {}
@@ -68,6 +70,14 @@
   pavucontrol {}
 
   ;; system - the sort of thing I expect to be defaults in citadel in future
+  i3-gaps {}
+  i3lock {}
+  i3status {}
+  i3blocks {}
+  ;; i3blocks-contrib {:aur true}
+  sysstat {} ;; used by i3blocks
+  terminus-font {}
+  dmenu {}
   thunar {}
   tumbler {} ;; used to automatically create thumbnails in thunar.
   xterm {}

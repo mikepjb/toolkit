@@ -31,6 +31,8 @@ ln -sfv $BASE/mutt ~/.mutt
 
 mkdir -p ~/.mutt/mailbox/personal
 
+ln -sfv $BASE/compton.conf ~/.config/compton.conf
+
 symlink_emacs_configuration() {
     mkdir -p ~/.emacs.d
     ln -sfv $BASE/init.el ~/.emacs.d/init.el

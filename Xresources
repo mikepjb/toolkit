@@ -7,7 +7,7 @@ XTerm*titeInhibit: false
 
 Xft.dpi: 70
 XTerm*renderFont: True
-xterm*faceName: xft:inconsolata:size=14
+xterm*faceName: xft:xos4 terminus:size=12
 ! Set the key to be interpreted as the Meta key to: alt, meta, hyper,
 XTerm*eightBitInput:   false
 XTerm*eightBitOutput:  true

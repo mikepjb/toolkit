@@ -1,0 +1,48 @@
+[
+    {
+	"border": "none",
+	"floating": "auto_off",
+	"layout": "splitv",
+	"percent": 0.4,
+	"type": "con",
+	"nodes": [
+	    {
+		"border": "none",
+		"current_border_width": 0,
+		"floating": "auto_off",
+		"percent": 0.4,
+		"swallows": [
+		    {
+			"class": "^(E|e)macs$"
+		    },
+		    {
+			"class": "^(X|x)term$"
+		    }
+		],
+		"type": "con"
+	    }
+	]
+    },
+
+    {
+	"border": "none",
+	"floating": "auto_off",
+	"layout": "splitv",
+	"percent": 0.4,
+	"type": "con",
+	"nodes": [
+	    {
+		"border": "none",
+		"current_border_width": 0,
+		"floating": "auto_off",
+		"percent": 0.4,
+		"swallows": [
+		    {
+			"class": "^(E|e)macs$"
+		    }
+		],
+		"type": "con"
+	    }
+	]
+    }
+]

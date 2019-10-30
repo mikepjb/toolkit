@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+current_value=`light -Gs "sysfs/leds/dell::kbd_backlight"`
+
+if [[ "$current_value" == "50" ]]; then
+    light -Ss "sysfs/leds/dell::kbd_backlight" 100
+elif [[ "$current_value" == "100" ]]; then
+    light -Ss "sysfs/leds/dell::kbd_backlight" 0
+else
+    light -Ss "sysfs/leds/dell::kbd_backlight" 50
+
+fi

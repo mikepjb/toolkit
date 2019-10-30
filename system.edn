@@ -98,5 +98,6 @@
   nvidia {}
   slock {}
   xautolock {}
+  light {}
   }
  }

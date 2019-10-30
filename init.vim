@@ -37,7 +37,7 @@ set hidden " allow backgrounding buffers without saving.
 set shiftwidth=2
 set tabstop=2
 set gdefault " search/replace works across the entire line by default.
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set expandtab smarttab
 set ignorecase " case insentive search.
 set smartcase " case sensitive search when you use capitals.

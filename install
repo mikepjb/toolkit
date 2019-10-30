@@ -18,7 +18,7 @@ ln -sfv $BASE/lumo.vim ~/.config/nvim/colors/lumo.vim
 mkdir -p $HOME/.config/nvim/autoload
 mkdir -p $HOME/.config/nvim/plugged
 
-sudo cp $(which nvim) /usr/local/bin/vi
+sudo cp $(which vim) /usr/local/bin/vi
 
 mkdir -p $HOME/.vim/autoload
 ln -sfv $BASE/autoload.vim ~/.vim/autoload/autoload.vim
@@ -32,6 +32,7 @@ ln -sfv $BASE/mutt ~/.mutt
 mkdir -p ~/.mutt/mailbox/personal
 
 ln -sfv $BASE/compton.conf ~/.config/compton.conf
+ln -sfv $BASE/i3config ~/.config/i3/config
 
 symlink_emacs_configuration() {
     mkdir -p ~/.emacs.d

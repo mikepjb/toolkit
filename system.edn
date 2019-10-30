@@ -11,8 +11,6 @@
   ;; development fundamentals
   git {}
   mercurial {}
-  make {}
-  cmake {}
   tigervnc {} ;; for remote pairing
   zerotier-one {} ;; vpn for remote pairing
   postgresql {}
@@ -42,6 +40,7 @@
 
   ;; social
   telegram-desktop {}
+  ;; slack-desktop {} ;; AUR..
   keybase-gui {}
 
   ;; fundamentals
@@ -52,20 +51,12 @@
   chromium {}
   evince {} ;; pdf viewer
   feh {} ;; image viewer
-  pacgraph {} ;; probably required by citadel in future for transient deps
   ttf-inconsolata {}
   ttf-font-awesome {} ;; used to display icon glyphs
   ttf-hack {}
   ttf-dejavu {}
-  xclip {}
-  acpi {}
-  rsync {}
-  unzip {}
-  zip {}
-  unrar {}
   scrot {}
   ponymix {}
-  readline {}
   vlc {}
   pavucontrol {}
 
@@ -80,24 +71,13 @@
   dmenu {}
   thunar {}
   tumbler {} ;; used to automatically create thumbnails in thunar.
-  xterm {}
-  sudo {}
   linux {}
-  linux-headers {}
-  xorg-xmessage {}
-  xorg-fonts-75dpi {}
-  xorg-fonts-100dpi {}
-  xorg-xbacklight {}
-  xorg-xev {}
-  xorg-xkbevd {}
-  xorg-xkbutils {}
-  xorg-xrandr {}
-  xorg-server-xvfb {}
-  xorg-xinput {}
-  xf86-video-vesa {} ;; generic backup driver
-  nvidia {}
-  slock {}
-  xautolock {}
-  light {}
+  linux-headers {}}
+ :config
+ {:kernel :lts
+  :vconsole {:keymap :uk :font :ter-228b}
+  :time {:zone "Europe/London" :ntp true}
+  :locale :GB
+  ;; :hostname "" ;; can you use code?
   }
- }
+ :sync {:mikepjb/toolkit "./install"}}

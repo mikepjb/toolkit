@@ -45,6 +45,9 @@
  compilation-ask-about-save nil
  use-package-verbose)
 
+ ;; make is not the only way; allows us to define compile commands per project.
+(make-variable-buffer-local 'compile-command)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; control minimum size of a new split.
@@ -118,6 +121,11 @@
 		  (setenv name value))))
 	  (forward-line 1)))
     (message "read-env only works in sh-mode.")))
+
+(defun compile-in-project-root ()
+  (interactive)
+  (let ((default-directory (git-root)))
+    (call-interactively #'compile)))
 
 (package-setup)
 
@@ -521,6 +529,7 @@
        ("C-c g" . magit-status)
        ("C-c l" . magit-log-current)
        ("C-c P" . magit-pull-from-upstream)
+       ("C-c b" . compile-in-project-root)
        ("C-x p" . list-processes)
        ("C-j" . newline)
        ("C-w" . kill-backward-or-region)
@@ -535,6 +544,7 @@
        ("C-c /" . comment-line-or-region)
        ("M-&" . async-from-root)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+       ("C-c m" . (lambda () (interactive) (find-file "~/toolkit/system.edn")))
        ("C-c n" . find-notes)
        ("M-RET" . toggle-frame-fullscreen)))
   (global-set-key (kbd (car binding)) (cdr binding)))

@@ -2,18 +2,23 @@
 # Detect whether an external display is connected and if so, turn off the
 # laptop screen (eDP-1) and use the external only.
 
-device_info=`xrandr | grep " connected"`
-no_devices=`echo "$device_info" | wc -l` # quote variable to preserve newlines
-device_names=`echo "$device_info" | cut -d ' ' -f 1`
-external_name=`echo "$device_names" | grep -v eDP-1 | tr -d '\n'`
+xrdb -merge <<< 'Xft.dpi: 144'
+xrandr --output DP-2 --auto --same-as eDP-1
+i3-msg restart
 
-echo "$external_name"
-
-# display is very slow when disabling eDP-1, likely displaylink related but
-# unknown for now
-
-if [ $no_devices = "1" ]; then
-  xrandr --output eDP-1 --primary --mode 1920x1080
-else
-  xrandr --output $external_name --primary --auto
-fi
+# Original script
+# device_info=`xrandr | grep " connected"`
+# no_devices=`echo "$device_info" | wc -l` # quote variable to preserve newlines
+# device_names=`echo "$device_info" | cut -d ' ' -f 1`
+# external_name=`echo "$device_names" | grep -v eDP-1 | tr -d '\n'`
+#
+# echo "$external_name"
+#
+# # display is very slow when disabling eDP-1, likely displaylink related but
+# # unknown for now
+#
+# if [ $no_devices = "1" ]; then
+#   xrandr --output eDP-1 --primary --mode 1920x1080
+# else
+#   xrandr --output $external_name --primary --auto
+# fi

@@ -230,7 +230,6 @@
     (swiper (thing-at-point 'word)))
   :bind (("C-x b"   . ivy-switch-buffer)
          ("C-c C-r" . ivy-resume)
-         ("C-c s"   . swiper-at-point)
          ("C-w"     . ivy-backward-kill-word)
 	 )
   :diminish)
@@ -396,6 +395,8 @@
        typescript-mode-hook
        clojure-mode-hook
        clojurescript-mode-hook
+       java-mode-hook
+       c-mode-hook
        sh-mode-hook
        python-mode-hook
        markdown-mode-hook
@@ -545,6 +546,7 @@
        ("M-&" . async-from-root)
        ("C-c i" . (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
        ("C-c m" . (lambda () (interactive) (find-file "~/toolkit/system.edn")))
+       ("C-c s" . isearch-forward-symbol-at-point)
        ("C-c n" . find-notes)
        ("M-RET" . toggle-frame-fullscreen)))
   (global-set-key (kbd (car binding)) (cdr binding)))

@@ -48,6 +48,7 @@ for_window [class="^(G|g)imp$" window_role="dock"] resize set width 20 ppt, move
 for_window [class="^(G|g)imp$" window_role="toolbox"] resize set width 20 ppt, move left
 
 assign [class="^(T|t)hunderbird$"] $ws3
+assign [class="^(S|s)lack$"] $ws3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -206,6 +207,10 @@ bindsym Mod1+shift+l exec i3lock
 bindsym Mod1+shift+n exec xterm
 bindsym Mod1+shift+b exec firefox
 bindsym Mod1+shift+p exec emacs
+
+# For syncing an external display
+bindsym Mod1+shift+s exec screen-sync
+bindsym Mod1+Shift+e exit
 
 set $foreground		#fcfcfa
 set $background		#2d2a2e

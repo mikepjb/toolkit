@@ -22,9 +22,12 @@ if [ `uname -n` = "mikepjb-mercury" ]; then
   # xrandr --output eDP-1 --mode 3840x2160 --scale 0.6666x0.6666
 
 fi
-# if [ `xdpyinfo | awk '/dimensions/{print $2}'` = '3840x2160' ]; then
-#   xrdb -merge <<< 'xterm*faceName: xft:inconsolata:size=18'
-# fi
+
+if [ `xdpyinfo | awk '/dimensions/{print $2}'` = '3840x2160' ]; then
+  xrdb -merge <<< 'Xft.dpi: 144'
+  # xrandr --output DP-2 --same-as eDP-1
+fi
+
 # 
 # if [ `uname -n` = "mikepjb-desktop" ]; then
 #   # xcalib -d :0 $HOME/src/arch-configuration/dell_u2515h.icc

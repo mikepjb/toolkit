@@ -10,6 +10,8 @@
 
   ;; development fundamentals
   git {}
+  git-crypt {}
+  maven {}
   mercurial {}
   tigervnc {} ;; for remote pairing
   zerotier-one {} ;; vpn for remote pairing
@@ -25,27 +27,31 @@
   tmux {}
   htop {}
   ripgrep {}
+  clojure {}
+  rlwrap {} ;; required to use clj cli tool.
   jdk8-openjdk {}
   jdk10-openjdk {}
   openjdk8-src {:comment "for Clojure source jumping"}
   openjdk10-src {:comment "for Clojure source jumping"}
   go {}
+  fzf {}
+  hugo {} ;; blog generation tool
   docker {}
   smbclient {} ;; samba client
   terraform {}
-  ;; nvm ;; AUR not supported
+  nvm {:aur/url "https://aur.archlinux.org/nvm.git"}
   ;; mssql-tools ;;  sqlcmd - AUR not supported
   ;; python ?
   ;; python-pip ?
 
   ;; social
   telegram-desktop {}
-  ;; slack-desktop {} ;; AUR..
+  slack-desktop {:aur/url "https://aur.archlinux.org/slack-desktop.git"}
   keybase-gui {}
 
   ;; fundamentals
-  noto-fonts
-  noto-fonts-extra
+  noto-fonts {}
+  noto-fonts-extra {}
   firefox {}
   thunderbird {}
   chromium {}
@@ -65,7 +71,8 @@
   i3lock {}
   i3status {}
   i3blocks {}
-  ;; i3blocks-contrib {:aur true}
+  compton {}
+  i3blocks-contrib {:aur/url "https://aur.archlinux.org/i3blocks-contrib.git"}
   sysstat {} ;; used by i3blocks
   terminus-font {}
   dmenu {}
